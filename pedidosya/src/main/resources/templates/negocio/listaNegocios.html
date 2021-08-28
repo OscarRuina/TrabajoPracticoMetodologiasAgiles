@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=div, initial-scale=1.0">
+    <title>Lista de Negocios por Zona/Localidad</title>
+</head>
+<body>
+    <div>Negocios</div>
+    <!-- th:if si la lista esta vacia no se muestra -->
+    <div th:if="${listaLocalidad !=null and !listaLocalidad.empty}">
+        <table border="1">
+            <tbody>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Direccion</th>
+                    <th>Localidad</th>
+                </tr>
+                <tr th:each="entidad : ${listaLocalidad}">
+                    <td th:text="${entidad.nombre}"></td>
+                    <td th:text="${entidad.direccion}"></td>
+                    <td th:text="${entidad.localidad}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div th:if="${listaLocalidad == null or listaLocalidad.empty}">
+        Lista de Negocios vacia.
+    </div>  
+</body>
+</html>
