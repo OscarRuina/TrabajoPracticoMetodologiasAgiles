@@ -11,9 +11,17 @@
 7. Pricing
 8. Contact
 --------------------------------------------- */
+/*
 body{
   background: url(../images/background.jpg) no-repeat center center fixed; /*Arreglar*/
-  background-size: cover;
+  /*background-size: cover;
+}*/
+
+.abs-center {
+  display: inline;
+  align-items: center;
+  justify-content: center;
+  min-height: 50vh;
 }
 
 html {font-family: 'Open Sans', sans-serif;}
