@@ -25,6 +25,12 @@ public class ProductoController {
         return ViewRouteHelper.LISTATIPOCOMIDA;
     }
 
-    
+    @GetMapping("productosALL")
+    public String porductosALL(Model model) {
+        
+        model.addAttribute("listaTipo", producto.getAll());
+        
+        return ViewRouteHelper.LISTATIPOCOMIDA;
+    }
     
 }
