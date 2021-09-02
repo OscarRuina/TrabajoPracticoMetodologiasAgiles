@@ -16,15 +16,9 @@ create table `producto`(
   `descripcion` varchar(50),
   `tipo` varchar(50),
   `precio` float(20),
-  primary key(`id`)
-) engine = InnoDB auto_increment = 1 default charset = latin1;
-
-create table `productoxNegocio`(
+  primary key(`id`),
   `idNegocio` int(11) not null,
-  `idProducto` int(11) not null,
-  FOREIGN KEY (idNegocio) REFERENCES negocio(id),
-	FOREIGN KEY (idProducto) REFERENCES producto(id),
-	PRIMARY KEY (idNegocio, idProducto)
+  FOREIGN KEY (idNegocio) REFERENCES negocio(id)
 ) engine = InnoDB auto_increment = 1 default charset = latin1;
 
 insert into `negocio` values (1,'nombre1','direccion1','banfield');
@@ -39,18 +33,11 @@ insert into `negocio` values (9,'nombre9','direccion9','lomas');
 insert into `negocio` values (10,'nombre10','direccion10','lomas');
 
 
-insert into `producto` values (1,'hamburguesa simple','hamburguesa con queso','hamburguesa', 180.50);
-insert into `producto` values (2,'hamburguesa completa','hamburguesa con queso, huevo, lechuga, tomate','hamburguesa', 250.00);
-insert into `producto` values (3,'hamburguesa doble inglesa','hamburguesa con estilo ingles y doble de carne','hamburguesa', 500.00);
-insert into `producto` values (4,'sandwich de milanesa (carne)','sandwich de milanesa con queso, lechuga y tomate','sandwich', 350.50);
-insert into `producto` values (5,'sandwich de jamon y queso','un sandwich','sandwich', 255.50);
-insert into `producto` values (6,'sandwich de milanesa (pollo)','lo mismo que de carne pero de pollo','sandwich', 300.00);
-insert into `producto` values (7,'cono de helado','helado de vainilla','helado', 100.00);
+insert into `producto` values (1,'hamburguesa simple','hamburguesa con queso','hamburguesa', 180.50,1);
+insert into `producto` values (2,'hamburguesa completa','hamburguesa con queso, huevo, lechuga, tomate','hamburguesa', 250.00,2);
+insert into `producto` values (3,'hamburguesa doble inglesa','hamburguesa con estilo ingles y doble de carne','hamburguesa', 500.00,3);
+insert into `producto` values (4,'sandwich de milanesa (carne)','sandwich de milanesa con queso, lechuga y tomate','sandwich', 350.50,4);
+insert into `producto` values (5,'sandwich de jamon y queso','un sandwich','sandwich', 255.50,5);
+insert into `producto` values (6,'sandwich de milanesa (pollo)','lo mismo que de carne pero de pollo','sandwich', 300.00,6);
+insert into `producto` values (7,'cono de helado','helado de vainilla','helado', 100.00,7);
 
-insert into `productoxNegocio` values (1,1);
-insert into `productoxNegocio` values (2,2);
-insert into `productoxNegocio` values (3,3);
-insert into `productoxNegocio` values (4,4);
-insert into `productoxNegocio` values (5,5);
-insert into `productoxNegocio` values (6,6);
-insert into `productoxNegocio` values (7,7);
