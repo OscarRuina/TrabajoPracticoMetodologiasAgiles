@@ -36,7 +36,7 @@
                 <a class="nav-link" href="/#about"><i class="fas fa-building"></i> About</a>
               </li>-->
               <li class="nav-item">
-                <a class="nav-link" href="/formulario"><i class="fas fa-building"></i> Registrar tu Negocio</a>
+                <a class="nav-link" th:href="@{/irAlFormulario}"><i class="fas fa-building"></i> Registrar tu Negocio</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="/"><i class="fas fa-home"></i> Login</a>
@@ -56,7 +56,7 @@
 				<p class="lead">Ingrese sus datos</p>
 			
 				<div class="col-md-7 col-lg-8 ">
-					<h4 class="mb-3">Billing address</h4>
+					<h4 class="mb-3">Negocio</h4>
 
 					<div class="row g-3">
 						<div class="col-sm-6">
@@ -66,10 +66,16 @@
 						</div>
 					</div>
 
-					<div class="col-12">
+					<div class="col-3">
 						<label for="address" class="form-label">Direccion</label>
-						<input type="text" class="form-control" id="address" placeholder="Calle falsa 123" required>
-						<div class="invalid-feedback">Please enter your shipping address.</div>
+						<input type="text" class="form-control" id="address" placeholder="address" required>
+						<div class="invalid-feedback">Please enter your address.</div>
+					</div>
+
+                    <div class="col-3">
+						<label for="address" class="form-label">Ciudad</label>
+						<input type="text" class="form-control" id="address" placeholder="city" required>
+						<div class="invalid-feedback">Please enter your city.</div>
 					</div>
 				</div>
 				<br>
