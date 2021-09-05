@@ -41,7 +41,7 @@
     <!-- NAVBAR -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container p-2">
-          <a class="navbar-brand" href="/">PedidoYa</a>
+          <a class="navbar-brand" href="/">PedidoAhora</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -60,39 +60,38 @@
     <!-- END NAVBAR --> 
 
     <!-- Start Banner Hero -->
-
-
                 <div class="py-5 row d-flex align-items-center">
                     <div class="banner-content col-lg-8 col-8 offset-2 m-lg-auto text-left py-5 pb-5">
-                        <h1 class="banner-heading h1 text-secondary display-3 mb-0 pb-5 mx-0 px-0 light-300 typo-space-line">
-                            Restaurantes al <strong>alcance</strong> de un <strong>click</strong> </h1>
-                                    <div align="center">
-                                        <p class="banner-body text-muted py-3 mx-0 px-0"> Ingrese localidad</p>
-                                        <form th:action="@{/negociosPorZona}" method="GET">
-                                            <div class= "col-md-3">
-                                                <input type="Ingresar Zona" class="form-control" name="localidad">
-                                                <br>
-                                                <button class="w-10 btn btn-primary btn-lg" type="submit">Buscar</button>
-                                            </div>
-                                        </form>
-                                    </div>
+                        <div align="center">
+                            <h1 class="banner-heading h1 text-light display-3 mb-0 pb-5 mx-0 px-0 light-300 typo-space-line">
+                                Restaurantes al <strong>alcance</strong> de un <strong>click</strong> </h1>
+                                    
+                                    <p class="banner-body text-light py-3 mx-0 px-0"> Ingrese localidad</p>
+                                    <form th:action="@{/negociosPorZona}" method="GET">
+                                        <div class= "col-md-3">
+                                            <input type="Ingresar Zona" class="form-control" name="localidad">
+                                            <br>
+                                            <button class="w-10 btn btn-primary btn-lg" type="submit">Buscar</button>
+                                        </div>
+                                    </form>
                             </div>
-                            
-                    </div>
-                    <div align="center">
-                        <p class="banner-body text-muted py-3 mx-0 px-0"> Ingrese tipo de Comida</p>
-                            <form th:action="@{/productosPorTipo}" method="GET">
-                                <div class= "col-md-3">
-                                    <input type="Ingresar Tipo de comida" class="form-control" name="tipo">
-                                    <br>
-                                    <button class="w-10 btn btn-primary btn-lg" type="submit">Buscar</button>
-                                </div>
-                            </form>
-                    </div>
-                    <div align="center">
-                        <a th:href="@{/productosALL}">ver todos los productos</a>
                     </div>
                 </div>
+
+                <div align="center">
+                    <p class="banner-body text-light py-3 mx-0 px-0"> Ingrese tipo de Comida</p>
+                        <form th:action="@{/productosPorTipo}" method="GET">
+                            <div class= "col-md-3">
+                                <input type="Ingresar Tipo de comida" class="form-control" name="tipo">
+                                <br>
+                                <button class="w-10 btn btn-primary btn-lg" type="submit">Buscar</button>
+                            </div>
+                        </form>
+                </div>
+                <div align="center">
+                    <a class="banner-body text-light py-3 mx-0 px-0" th:href="@{/productosALL}">ver todos los productos</a>
+                </div>
+            </div>
 
     <!-- End Banner Hero -->
 
@@ -110,14 +109,14 @@
 
 
     <!-- Start Footer -->
-    <footer class="bg-info pt-4">
+    <footer class="bg-primary pt-4">
         <div class="container">
             <div class="row py-4">
 
                 <div class="col-lg-3 col-12 align-left">
                     <a class="navbar-brand" href="index.html">
                         <i class='bx bx-buildings bx-sm text-light'></i>
-                        <span class="text-light h5">Pedido-</span><span class="text-light h5 semi-bold-600">Ya</span>
+                        <span class="text-light h5">Pedido-</span><span class="text-light h5 semi-bold-600">Ahora</span>
                     </a>
                     <p class="text-light my-lg-4 my-2">
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit,
@@ -232,7 +231,7 @@
                 <div class="row pt-2">
                     <div class="col-lg-6 col-sm-12">
                         <p class="text-lg-start text-center text-light light-300">
-                            © Copyright 2021 Pedido-Ya. Todos los derechos reservados.
+                            © Copyright 2021 Pedido-Ahora. Todos los derechos reservados.
                         </p>
                     </div>
                     <div class="col-lg-6 col-sm-12">
