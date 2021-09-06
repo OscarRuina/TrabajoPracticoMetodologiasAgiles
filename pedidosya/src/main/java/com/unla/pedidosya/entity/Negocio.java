@@ -1,10 +1,15 @@
 package com.unla.pedidosya.entity;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -24,6 +29,9 @@ public class Negocio {
 
     @Column(name = "localidad")
     private String localidad;
+
+    @OneToMany(fetch = FetchType.LAZY , mappedBy = "negocio" , cascade = {CascadeType.PERSIST , CascadeType.MERGE , CascadeType.DETACH , CascadeType.REFRESH})
+    private List<Producto> productos;
 
     public Negocio() {}
 
@@ -63,6 +71,14 @@ public class Negocio {
 
     public void setLocalidad(String localidad) {
         this.localidad = localidad;
+    }
+    
+    public List<Producto> getProductos() {
+        return productos;
+    }
+
+    public void setProductos(List<Producto> productos) {
+        this.productos = productos;
     }
 
     @Override
