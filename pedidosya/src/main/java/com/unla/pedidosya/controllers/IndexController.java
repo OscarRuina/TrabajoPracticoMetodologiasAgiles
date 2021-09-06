@@ -13,9 +13,4 @@ public class IndexController {
         return ViewRouteHelper.INDEX;
     }
 
-    @GetMapping("irAlFormulario")
-    public String irAlFormulario(){
-        return ViewRouteHelper.FORMULARIO;
-    }
-    
 }

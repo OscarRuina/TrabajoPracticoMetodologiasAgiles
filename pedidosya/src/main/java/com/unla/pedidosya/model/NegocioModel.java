@@ -1,11 +1,14 @@
 package com.unla.pedidosya.model;
 
+import java.util.List;
+
 public class NegocioModel {
     
     private long idNegocio;
     private String nombre;
     private String direccion;
     private String localidad;
+    private List<ProductoModel> productos;
 
     public NegocioModel(){}
 
@@ -47,5 +50,15 @@ public class NegocioModel {
     public void setLocalidad(String localidad) {
         this.localidad = localidad;
     }
+
+    public List<ProductoModel> getProductos() {
+        return productos;
+    }
+
+    public void setProductos(List<ProductoModel> productos) {
+        this.productos = productos;
+    }
+
+    
 
 }

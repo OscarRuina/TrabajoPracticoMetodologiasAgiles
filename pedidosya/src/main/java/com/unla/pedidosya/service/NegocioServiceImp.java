@@ -10,6 +10,7 @@ import com.unla.pedidosya.repository.INegocioRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class NegocioServiceImp implements INegocioService{
@@ -20,6 +21,7 @@ public class NegocioServiceImp implements INegocioService{
     @Autowired
     private NegocioConverter converter;
     
+    @Transactional(readOnly = true)
     public List<NegocioModel> getAll(){
         List<NegocioModel> lista = new ArrayList<NegocioModel>();
         for(Negocio n : negocio.findAll()){
@@ -31,6 +33,7 @@ public class NegocioServiceImp implements INegocioService{
 
 
     //metodo para filtrar por localidad los negocios
+    @Transactional(readOnly = true)
     public List<NegocioModel> listaNegocioPorZona(String localidad) {
         List<NegocioModel> negocios = new ArrayList<NegocioModel>();
         for(Negocio n : negocio.findByLocalidad(localidad)){
@@ -39,6 +42,12 @@ public class NegocioServiceImp implements INegocioService{
         
         }
         return negocios;
+    }
+
+    @Transactional
+    public NegocioModel insertOrUpdate(NegocioModel model){
+        negocio.save(converter.modelToEntity(model));
+        return model;
     }
     
 }

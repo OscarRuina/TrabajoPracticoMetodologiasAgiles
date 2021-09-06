@@ -57,30 +57,31 @@
 			
 				<div class="col-md-7 col-lg-8 ">
 					<h4 class="mb-3">Negocio</h4>
+                    <form th:action="@{altaNegocio}" th:object=${negocio} method="POST">
+                        <div class="row g-3">
+                            <div class="col-sm-6">
+                                <label for="firstName" class="form-label">Nombre</label>
+                                <input type="text" th:field="*{nombre}" class="form-control" id="firstName" placeholder="" value="" required>
+                                <div class="invalid-feedback">Valid first name is required.</div>
+                            </div>
+                        </div>
 
-					<div class="row g-3">
-						<div class="col-sm-6">
-							<label for="firstName" class="form-label">Nombre</label>
-							<input type="text" class="form-control" id="firstName" placeholder="" value="" required>
-							<div class="invalid-feedback">Valid first name is required.</div>
-						</div>
-					</div>
+                        <div class="col-3">
+                            <label for="address" class="form-label">Direccion</label>
+                            <input type="text" th:field="*{direccion}" class="form-control" id="address" placeholder="address" required>
+                            <div class="invalid-feedback">Please enter your address.</div>
+                        </div>
 
-					<div class="col-3">
-						<label for="address" class="form-label">Direccion</label>
-						<input type="text" class="form-control" id="address" placeholder="address" required>
-						<div class="invalid-feedback">Please enter your address.</div>
-					</div>
-
-                    <div class="col-3">
-						<label for="address" class="form-label">Ciudad</label>
-						<input type="text" class="form-control" id="address" placeholder="city" required>
-						<div class="invalid-feedback">Please enter your city.</div>
-					</div>
-				</div>
-				<br>
-				<button class="w-10 btn btn-primary btn-lg" type="submit">Continuar</button>
-				<br>
+                        <div class="col-3">
+                            <label for="address" class="form-label">Ciudad</label>
+                            <input type="text" th:field="*{localidad}" class="form-control" id="address" placeholder="city" required>
+                            <div class="invalid-feedback">Please enter your city.</div>
+                        </div>
+                        <br>
+                        <button class="w-10 btn btn-primary btn-lg" type="submit">Continuar</button>
+                    </form>
+                </div>
+                <br>
 			</div>
 		</div>
 

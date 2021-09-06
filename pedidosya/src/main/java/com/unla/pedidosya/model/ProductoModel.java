@@ -7,6 +7,7 @@ public class ProductoModel {
     private String descripcion;
     private String tipo;
     private float precio;
+    private NegocioModel negocio;
 
     public ProductoModel(){}
 
@@ -56,6 +57,14 @@ public class ProductoModel {
 
     public void setPrecio(float precio) {
         this.precio = precio;
+    }
+
+    public NegocioModel getNegocio() {
+        return negocio;
+    }
+
+    public void setNegocio(NegocioModel negocio) {
+        this.negocio = negocio;
     }
 
 }
