@@ -49,5 +49,11 @@ public class NegocioServiceImp implements INegocioService{
         negocio.save(converter.modelToEntity(model));
         return model;
     }
-    
+
+    @Transactional(readOnly = true)
+    public NegocioModel encontrar(NegocioModel model){
+        return converter.entityToModel(negocio.findById(model.getIdNegocio()).orElse(null));
+    }
+
+
 }

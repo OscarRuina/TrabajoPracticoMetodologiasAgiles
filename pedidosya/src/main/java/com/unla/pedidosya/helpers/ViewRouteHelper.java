@@ -9,6 +9,7 @@ public class ViewRouteHelper {
     public final static String LISTAZONA = "negocio/listaNegocios";
     public final static String FORMULARIO = "negocio/formulario";
     public final static String ALTANEGOCIO = "negocio/alta";
+    public final static String INFO = "negocio/informacion";
 
     //producto
     public final static String LISTATIPOCOMIDA = "producto/listaProductos";

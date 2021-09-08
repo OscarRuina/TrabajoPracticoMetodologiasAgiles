@@ -40,5 +40,12 @@ public class NegocioController {
         negocio.insertOrUpdate(model);
         return ViewRouteHelper.ALTANEGOCIO;
     }
+
+    @GetMapping("/informacion/{idNegocio}")
+    public String informacion(NegocioModel n, Model model){
+        n = negocio.encontrar(n);
+        model.addAttribute("entidad", n);
+        return ViewRouteHelper.INFO; 
+    }
     
 }
