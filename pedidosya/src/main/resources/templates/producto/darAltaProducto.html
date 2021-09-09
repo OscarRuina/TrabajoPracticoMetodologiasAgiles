@@ -49,7 +49,7 @@
                             <label for="negocio" class="form-label">negocio</label>
                             <select th:field="*{negocio}" required>
                                 <th:block th:each="negocio : ${listaNegocios}">
-                                    <option th:text="${negocio.nombre}" value="${negocio.idNegocio}"></option>
+                                    <option th:text="${negocio.nombre}" th:value="${negocio}"></option>
                                 </th:block>
                             </select>
                         </div>

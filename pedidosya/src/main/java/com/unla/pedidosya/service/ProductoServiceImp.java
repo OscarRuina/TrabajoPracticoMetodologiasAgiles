@@ -61,9 +61,10 @@ public class ProductoServiceImp implements IProductoService{
 
 
     //esta mal
+    /*
     @Transactional(readOnly = true)
     public ProductoModel encontrar(ProductoModel model){
         return converter.entityToModel(producto.findById(model.getNegocio().getIdNegocio()).orElse(null));
-    }
+    }*/
     
 }
