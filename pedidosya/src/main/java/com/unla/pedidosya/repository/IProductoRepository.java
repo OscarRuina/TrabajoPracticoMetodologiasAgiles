@@ -14,7 +14,13 @@ import org.springframework.stereotype.Repository;
 public interface IProductoRepository extends JpaRepository<Producto,Serializable> {
     
     // para buscar strings usar like + el formato %:atributo%
+    //Traer productos por tipo
     @Query(value = "select * from Producto p where p.tipo like %:tipo%",nativeQuery = true)
     public List<Producto> findByTipo(@Param("tipo")String tipo);
+
+    // para buscar strings usar like + el formato %:atributo%
+    //Traer productos por Negocio
+    @Query(value = "select * from Producto p where p.idNegocio like %:idNegocio%",nativeQuery = true)
+    public List<Producto> findByidNegocio(@Param("idNegocio")long idNegocio);
 
 }

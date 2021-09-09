@@ -3,6 +3,7 @@ package com.unla.pedidosya.converter;
 import com.unla.pedidosya.entity.Producto;
 import com.unla.pedidosya.model.ProductoModel;
 
+
 import org.springframework.stereotype.Component;
 
 @Component("productoConverter")
@@ -13,7 +14,12 @@ public class ProductoConverter {
     }
 
     public Producto modelToEntity(ProductoModel p){
-        return new Producto(p.getNombre(), p.getDescripcion(), p.getTipo(), p.getPrecio());
+        return new Producto();
     }
+/*
+    public Producto modelToEntity(ProductoModel p){
+        return new Producto(p.getNombre(), p.getDescripcion(), p.getTipo(), p.getPrecio());
+    }*/
+    
     
 }

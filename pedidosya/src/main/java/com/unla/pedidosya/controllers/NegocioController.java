@@ -3,6 +3,7 @@ package com.unla.pedidosya.controllers;
 import com.unla.pedidosya.helpers.ViewRouteHelper;
 import com.unla.pedidosya.model.NegocioModel;
 import com.unla.pedidosya.service.NegocioServiceImp;
+import com.unla.pedidosya.service.ProductoServiceImp;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,7 @@ public class NegocioController {
 
     @Autowired
     private NegocioServiceImp negocio;
+    private ProductoServiceImp producto;
 
     @GetMapping("negociosPorZona")
     public String negociosPorZona(String localidad, Model model) {
@@ -45,6 +47,13 @@ public class NegocioController {
     public String informacion(NegocioModel n, Model model){
         n = negocio.encontrar(n);
         model.addAttribute("entidad", n);
+        if(n != null){
+            model.addAttribute("listaProductosXNegocio", producto.listaProductosPorIdNegocio(n.getIdNegocio()));
+        }
+        else{
+            model.addAttribute("listaProductosXNegocio", null);
+        }
+        
         return ViewRouteHelper.INFO; 
     }
     
