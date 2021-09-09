@@ -16,7 +16,7 @@ public class Producto {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "idProducto")
     private long idProducto;
 
     @Column(name = "nombre")
@@ -28,8 +28,9 @@ public class Producto {
     @Column(name = "tipo")
     private String tipo;
 
+    
     @Column(name = "precio")
-    private float precio;
+    private double precio;
 
     @ManyToOne(cascade = {CascadeType.PERSIST , CascadeType.MERGE , CascadeType.DETACH , CascadeType.REFRESH})
 	@JoinColumn(name = "idNegocio")
@@ -37,7 +38,7 @@ public class Producto {
 
     public Producto() {}
 
-    public Producto(String nombre, String descripcion, String tipo, float precio) {
+    public Producto(String nombre, String descripcion, String tipo, double precio) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.tipo = tipo;
@@ -76,7 +77,7 @@ public class Producto {
         this.tipo = tipo;
     }
 
-    public float getPrecio() {
+    public double getPrecio() {
         return precio;
     }
 

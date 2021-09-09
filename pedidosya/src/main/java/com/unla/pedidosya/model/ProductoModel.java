@@ -6,12 +6,12 @@ public class ProductoModel {
     private String nombre;
     private String descripcion;
     private String tipo;
-    private float precio;
+    private double precio;
     private NegocioModel negocio;
 
     public ProductoModel(){}
 
-    public ProductoModel(long idProducto, String nombre, String descripcion, String tipo, float precio) {
+    public ProductoModel(long idProducto, String nombre, String descripcion, String tipo, double precio) {
         this.idProducto = idProducto;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -51,7 +51,7 @@ public class ProductoModel {
         this.tipo = tipo;
     }
 
-    public float getPrecio() {
+    public double getPrecio() {
         return precio;
     }
 

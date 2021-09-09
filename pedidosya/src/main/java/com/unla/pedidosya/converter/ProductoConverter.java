@@ -14,12 +14,7 @@ public class ProductoConverter {
     }
 
     public Producto modelToEntity(ProductoModel p){
-        return new Producto();
-    }
-/*
-    public Producto modelToEntity(ProductoModel p){
         return new Producto(p.getNombre(), p.getDescripcion(), p.getTipo(), p.getPrecio());
-    }*/
-    
+    }
     
 }

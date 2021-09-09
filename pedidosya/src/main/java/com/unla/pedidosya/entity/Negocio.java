@@ -1,6 +1,6 @@
 package com.unla.pedidosya.entity;
 
-import java.util.List;
+import java.util.*;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -18,7 +18,7 @@ public class Negocio {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "idNegocio")
     private long idNegocio;
 
     @Column(name = "nombre")
@@ -79,6 +79,14 @@ public class Negocio {
 
     public void setProductos(List<Producto> productos) {
         this.productos = productos;
+    }
+
+    public void agregarProductos(Producto p){
+        if(productos==null){
+            new ArrayList<>();
+        }
+        productos.add(p);
+        p.setNegocio(this);
     }
 
     @Override
