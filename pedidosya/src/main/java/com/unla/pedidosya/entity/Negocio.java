@@ -18,16 +18,16 @@ public class Negocio {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "idNegocio")
     private long idNegocio;
 
-    @Column(name = "nombre")
+    @Column(name = "nombre",length = 50,nullable = false)
     private String nombre;
 
-    @Column(name = "direccion")
+    @Column(name = "direccion",length = 50,nullable = false)
     private String direccion;
 
-    @Column(name = "localidad")
+    @Column(name = "localidad",length = 50,nullable = false)
     private String localidad;
 
     @OneToMany(fetch = FetchType.LAZY , mappedBy = "negocio" , cascade = {CascadeType.PERSIST , CascadeType.MERGE , CascadeType.DETACH , CascadeType.REFRESH})

@@ -1,6 +1,5 @@
 package com.unla.pedidosya.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.unla.pedidosya.converter.NegocioConverter;
@@ -22,31 +21,20 @@ public class NegocioServiceImp implements INegocioService{
     private NegocioConverter converter;
     
     @Transactional(readOnly = true)
-    public List<NegocioModel> getAll(){
-        List<NegocioModel> lista = new ArrayList<NegocioModel>();
-        for(Negocio n : negocio.findAll()){
-            //uso la clase converter para pasar de una entidad de la base de datos a un modelo
-            lista.add(converter.entityToModel(n));
-        }
-        return lista;
+    public List<Negocio> getAll(){
+        return negocio.findAll();
     }
 
 
     //metodo para filtrar por localidad los negocios
     @Transactional(readOnly = true)
-    public List<NegocioModel> listaNegocioPorZona(String localidad) {
-        List<NegocioModel> negocios = new ArrayList<NegocioModel>();
-        for(Negocio n : negocio.findByLocalidad(localidad)){
-            
-            negocios.add(converter.entityToModel(n));
-        
-        }
-        return negocios;
+    public List<Negocio> listaNegocioPorZona(String localidad) {
+        return negocio.findByLocalidad(localidad);
     }
 
     @Transactional
-    public NegocioModel insertOrUpdate(NegocioModel model){
-        negocio.save(converter.modelToEntity(model));
+    public Negocio insertOrUpdate(Negocio model){
+        negocio.save(model);
         return model;
     }
 

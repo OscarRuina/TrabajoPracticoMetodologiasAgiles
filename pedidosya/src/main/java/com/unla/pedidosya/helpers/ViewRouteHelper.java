@@ -13,5 +13,7 @@ public class ViewRouteHelper {
 
     //producto
     public final static String LISTATIPOCOMIDA = "producto/listaProductos";
+    public final static String FORMULARIOPRODUCTO = "producto/formulario";
+    public final static String ALTAPRODUCTO = "producto/alta";
     
 }

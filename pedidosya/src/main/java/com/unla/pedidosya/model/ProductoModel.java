@@ -18,6 +18,16 @@ public class ProductoModel {
         this.tipo = tipo;
         this.precio = precio;
     }
+    
+    public ProductoModel(long idProducto, String nombre, String descripcion, String tipo, float precio,
+            NegocioModel negocio) {
+        this.idProducto = idProducto;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.tipo = tipo;
+        this.precio = precio;
+        this.negocio = negocio;
+    }
 
     public long getIdProducto() {
         return idProducto;
