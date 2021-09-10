@@ -16,23 +16,23 @@ public class Producto {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "idProducto")
     private long idProducto;
 
-    @Column(name = "nombre")
+    @Column(name = "nombre",length = 50,nullable = false)
     private String nombre;
 
-    @Column(name = "descripcion")
+    @Column(name = "descripcion",length = 100,nullable = false)
     private String descripcion;
 
-    @Column(name = "tipo")
+    @Column(name = "tipo",length = 50,nullable = false)
     private String tipo;
 
-    @Column(name = "precio")
+    @Column(name = "precio",nullable = false)
     private float precio;
 
     @ManyToOne(cascade = {CascadeType.PERSIST , CascadeType.MERGE , CascadeType.DETACH , CascadeType.REFRESH})
-	@JoinColumn(name = "idNegocio")
+	@JoinColumn(name = "idNegocio",nullable = false)
     private Negocio negocio;
 
     public Producto() {}
@@ -42,6 +42,14 @@ public class Producto {
         this.descripcion = descripcion;
         this.tipo = tipo;
         this.precio = precio;
+    }
+    
+    public Producto(String nombre, String descripcion, String tipo, float precio, Negocio negocio) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.tipo = tipo;
+        this.precio = precio;
+        this.negocio = negocio;
     }
 
     public long getIdProducto() {

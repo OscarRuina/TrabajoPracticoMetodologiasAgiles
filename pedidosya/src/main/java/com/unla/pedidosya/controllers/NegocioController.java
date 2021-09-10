@@ -1,5 +1,6 @@
 package com.unla.pedidosya.controllers;
 
+import com.unla.pedidosya.entity.Negocio;
 import com.unla.pedidosya.helpers.ViewRouteHelper;
 import com.unla.pedidosya.model.NegocioModel;
 import com.unla.pedidosya.service.NegocioServiceImp;
@@ -30,13 +31,13 @@ public class NegocioController {
 
     @GetMapping("irAlFormulario")
     public String irAlFormulario(Model model){
-        NegocioModel n = new NegocioModel();
+        Negocio n = new Negocio();
         model.addAttribute("negocio", n);
         return ViewRouteHelper.FORMULARIO;
     }
 
     @RequestMapping("/altaNegocio")
-    public String altaNegocio(@ModelAttribute("negocio") NegocioModel model){
+    public String altaNegocio(@ModelAttribute("negocio") Negocio model){
         negocio.insertOrUpdate(model);
         return ViewRouteHelper.ALTANEGOCIO;
     }
@@ -47,5 +48,6 @@ public class NegocioController {
         model.addAttribute("entidad", n);
         return ViewRouteHelper.INFO; 
     }
+
     
 }
