@@ -1,0 +1,9 @@
+body{
+    background-image: url('/../images/background.jpg') !important;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-position: top; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover; /* Resize the background image to cover the entire container */
+}
