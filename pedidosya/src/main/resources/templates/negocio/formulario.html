@@ -1,54 +1,75 @@
 <!DOCTYPE html>
-<html lang="en">
-<head th:replace="layout/plantilla :: head">
-    
+<html lang="es">
+<head>
+    <title>Alta de Negocio</title>
+    <div th:insert="layout/plantilla :: head"></div>
 </head>
 <body>
     <!-- NAVBAR -->
     <nav th:replace="layout/plantilla :: nav"></nav>
     <!-- END NAVBAR --> 
-
+    <br><br>
     <!-- inicio --> 
 	<div class="container">
-		<div class="abs-center">
-			<div class="py-5 ">
-				
-				<h2>Formulario</h2>
-				<p class="lead">Ingrese sus datos</p>
-			
-				<div class="col-md-7 col-lg-8 ">
-					<h4 class="mb-3">Negocio</h4>
-                    <form th:action="@{altaNegocio}" th:object=${negocio} method="POST">
-                        <div class="row g-3">
-                            <div class="col-sm-6">
-                                <label for="firstName" class="form-label">Nombre</label>
-                                <input type="text" th:field="*{nombre}" class="form-control" id="firstName" placeholder="" value="" required>
-                                <div class="invalid-feedback">Valid first name is required.</div>
-                            </div>
+        <div class="row">
+            <div class="d-grid gap-2 mx-auto col-10">
+                <h1>Formulario para el alta de Negocio</h1>
+		        <p class="lead">Ingrese los datos de su negocio para poder comenzar a vender sus productos atraves de la 
+                            aplicacion</p>
+            </div>
+            
+        </div>
+		<div class="row">
+            <form th:action="@{altaNegocio}" th:object=${negocio} method="POST" >
+                
+                <div class="form-group">
+                    <div class="d-grid gap-2 mx-auto col-10">
+                        <div class="col-2">
+                            <label for="firstName" class="form-label">Nombre</label>
                         </div>
+                        <div class="col-12">
+                            <input type="text" th:field="*{nombre}" class="form-control" id="firstName" placeholder="" value="" required>
+                            <div class="invalid-feedback">Valid first name is required.</div>
+                        </div>
+                    </div>
+                </div>
+                <br>
 
-                        <div class="col-3">
+                <div class="form-group">
+                    <div class="d-grid gap-2 mx-auto col-10">
+                        <div class="col-2">
                             <label for="address" class="form-label">Direccion</label>
+                        </div>
+                        <div class="col-12">
                             <input type="text" th:field="*{direccion}" class="form-control" id="address" placeholder="address" required>
                             <div class="invalid-feedback">Please enter your address.</div>
                         </div>
+                    </div>
+                </div>
+                <br>
 
-                        <div class="col-3">
+                <div class="form-group">
+                    <div class="d-grid gap-2 mx-auto col-10">
+                        <div class="col-2">
                             <label for="address" class="form-label">Ciudad</label>
+                        </div>
+                        <div class="col-12">
                             <input type="text" th:field="*{localidad}" class="form-control" id="address" placeholder="city" required>
                             <div class="invalid-feedback">Please enter your city.</div>
                         </div>
-                        <br>
-                        <button class="w-10 btn btn-primary btn-lg" type="submit">Continuar</button>
-                    </form>
+                    </div>
+                </div>
+                <br> <br> <!-- salto de linea -->
+
+                <div class="form-group">
+                    <div class="d-grid gap-2 mx-auto col-4">
+                        <button type="submit" class="btn btn-primary btn-lg btn-block">Continuar</button>
+                    </div>
                 </div>
                 <br>
-			</div>
-		</div>
 
-		
-
-		</div>
+            </form>
+        </div>
 	</div>
 
 	<section th:replace="layout/plantilla :: section"></section>
