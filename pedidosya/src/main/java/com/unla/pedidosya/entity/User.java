@@ -26,6 +26,22 @@ public class User {
     @Column(name = "user_id")
     private long idUser;
 
+    @Column(name = "nombre",length = 100,nullable = false)
+    @NotBlank
+    private String nombre;
+
+    @Column(name = "apellido",length = 100,nullable = false)
+    @NotBlank
+    private String apellido;
+
+    @Column(name = "direccion",length = 100,nullable = false)
+    @NotBlank
+    private String direccion;
+
+    @Column(name = "ciudad",length = 100,nullable = false)
+    @NotBlank
+    private String ciudad;
+
     @Column(name = "username",length = 100,nullable = false)
     @NotBlank
     private String username;
@@ -48,7 +64,12 @@ public class User {
 
     public User(){}
 
-    public User(String username, String password) {
+    public User(@NotBlank String nombre, @NotBlank String apellido, @NotBlank String direccion, @NotBlank String ciudad,
+            @NotBlank String username, @NotBlank @NotNull String password) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.direccion = direccion;
+        this.ciudad = ciudad;
         this.username = username;
         this.password = password;
         this.enabled = true;
@@ -60,6 +81,38 @@ public class User {
 
     public void setIdUser(long idUser) {
         this.idUser = idUser;
+    }
+    
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public String getCiudad() {
+        return ciudad;
+    }
+
+    public void setCiudad(String ciudad) {
+        this.ciudad = ciudad;
     }
 
     public String getUsername() {
@@ -96,8 +149,8 @@ public class User {
 
     @Override
     public String toString() {
-        return "User [enabled=" + enabled + ", idUser=" + idUser + ", password=" + password + ", username=" + username
-                + "]";
+        return "User [apellido=" + apellido + ", ciudad=" + ciudad + ", direccion=" + direccion + ", enabled=" + enabled
+                + ", nombre=" + nombre + ", password=" + password + ", username=" + username + "]";
     }
-
+    
 }

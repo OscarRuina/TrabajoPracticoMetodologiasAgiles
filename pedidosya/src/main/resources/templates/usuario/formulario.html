@@ -21,7 +21,55 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
             <div class="row">
 
-                <form th:action="@{/signup}" th:object="${user}" method="post" >    
+                <form th:action="@{/signup}" th:object="${user}" method="post" > 
+                    <div class="form-group">
+                        <div class="d-grid gap-2 mx-auto col-10">
+                            <div class="col-2">
+                                <label for="nombre" class="form-label">Nombre</label>
+                            </div>
+                            <div class="col-12">
+                                <input type="text" th:field="${user.nombre}" class="form-control" id="nombre" placeholder="nombre" value="" required>
+                                <div class="alert-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}">Name Error</div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <div class="d-grid gap-2 mx-auto col-10">
+                            <div class="col-2">
+                                <label for="apellido" class="form-label">Apellido</label>
+                            </div>
+                            <div class="col-12">
+                                <input type="text" th:field="${user.apellido}" class="form-control" id="username" placeholder="apellido" value="" required>
+                                <div class="alert-danger" th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}">LastName Error</div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <div class="d-grid gap-2 mx-auto col-10">
+                            <div class="col-2">
+                                <label for="direccion" class="form-label">Direccion</label>
+                            </div>
+                            <div class="col-12">
+                                <input type="text" th:field="${user.direccion}" class="form-control" id="username" placeholder="direccion" value="" required>
+                                <div class="alert-danger" th:if="${#fields.hasErrors('direccion')}" th:errors="*{direccion}">Address Error</div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <div class="d-grid gap-2 mx-auto col-10">
+                            <div class="col-2">
+                                <label for="ciudad" class="form-label">Ciudad</label>
+                            </div>
+                            <div class="col-12">
+                                <input type="text" th:field="${user.ciudad}" class="form-control" id="username" placeholder="ciudad" value="" required>
+                                <div class="alert-danger" th:if="${#fields.hasErrors('ciudad')}" th:errors="*{ciudad}">City Error</div>
+                            </div>
+                        </div>
+                    </div>
+                    <br> 
                     <div class="form-group">
                         <div class="d-grid gap-2 mx-auto col-10">
                             <div class="col-2">
@@ -34,7 +82,7 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
                         </div>
                     </div>
                     <br>
-    
+                    
                     <div class="form-group">
                         <div class="d-grid gap-2 mx-auto col-10">
                             <div class="col-2">
