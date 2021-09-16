@@ -1,34 +1,17 @@
 
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
     <head>
-        <meta charset="ISO-8859-1">
-        <title>Iniciar Sesión</title>
-        <!-- link de bootstrap 5-->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-        <!-- FONT AWESOME -->
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
-        <!-- GOOGLE FONTS -->
-        <link href="https://fonts.googleapis.com/css?family=Spicy+Rice" rel="stylesheet">
-        <style type="text/css" media="screen">
-            body{
-                /*comida-medio-vacio*/
-                background-image: url('images/fondo-pizza.jpg');
-                width: 100%;
-                height: 100%;
-                /*position: absolute;*/
-                background-position: top; /* Center the image */
-                background-repeat: no-repeat; /* Do not repeat the image */
-                background-size: cover; /* Resize the background image to cover the entire container */
-                opacity: 0.9;
-                filter: opacity(4px);
-            }
-
-        </style>
+        <title>Login</title>
+        <div th:insert="layout/plantilla :: head"></div>
     </head>
 
     <body>
-        <br><br><br>
+        <!-- NAVBAR -->
+        <nav th:replace="layout/plantilla :: nav"></nav>
+        <!-- END NAVBAR --> 
+        <br>
+        <br>
         <div class="container">
             <div class="row text-center contenido-blur">
                 <div class="d-grid gap-2 mx-auto col-10">
@@ -38,14 +21,14 @@
 
             <div class="row">
 
-                <form  action="#" th:action="@{/login}" th:object="${user}" method="post" >    
+                <form th:action="@{/login}"  method="post" >    
                     <div class="form-group">
                         <div class="d-grid gap-2 mx-auto col-10">
                             <div class="col-2">
-                                <label for="username" class="form-label">Nombre</label>
+                                <label for="username" class="form-label">NombreUsuario</label>
                             </div>
                             <div class="col-12">
-                                <input type="text" th:field="*{username}" class="form-control" id="username" placeholder="nombre" value="" required>
+                                <input type="text" name="username" class="form-control" id="username" placeholder="username" value="" required>
                             </div>
                         </div>
                     </div>
@@ -57,7 +40,7 @@
                                 <label for="password" class="form-label">Contraseña</label>
                             </div>
                             <div class="col-12">
-                                <input type="password" th:field="*{password}" class="form-control" id="password" placeholder="contraseña" required>
+                                <input type="password" name="password" class="form-control" id="password" placeholder="password" required>
                             </div>
                         </div>
                     </div>
@@ -72,7 +55,16 @@
 
                 </form>
             </div>
-        </div>  
+        </div> 
+        <section th:replace="layout/plantilla :: section"></section>
+    <!-- Start Footer -->
+    <footer th:replace="layout/plantilla :: footer"></footer>
+    <!-- End Footer -->
+
+    <!-- JAVASCRIPT CDNS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script> 
     </body>
 </html>
 
