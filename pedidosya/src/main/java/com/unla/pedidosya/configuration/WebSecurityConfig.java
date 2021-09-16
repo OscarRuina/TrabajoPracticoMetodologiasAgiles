@@ -73,8 +73,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                     .usernameParameter("username")
                     .passwordParameter("password")
             .and()
+                .rememberMe().key("uniqueAndSecret").rememberMeParameter("recuerdame").tokenValiditySeconds(86400)
+            .and()
                 .logout()
                     .permitAll()
+                    .deleteCookies("JSESSIONID")
                     .logoutSuccessUrl("/login?logout")
             .and()
                 .exceptionHandling().accessDeniedPage("/403");

@@ -14,6 +14,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "user")
@@ -25,9 +27,12 @@ public class User {
     private long idUser;
 
     @Column(name = "username",length = 100,nullable = false)
+    @NotBlank
     private String username;
 
     @Column(name = "password",length = 128,nullable = false)
+    @NotBlank
+    @NotNull
     private String password;
 
     @Column(name = "enabled")
@@ -39,7 +44,7 @@ public class User {
         joinColumns = @JoinColumn(name = "user_id"),
         inverseJoinColumns = @JoinColumn(name = "role_id")
     )
-    private Set<Role> roles = new HashSet<>();
+    private Set<Roles> roles = new HashSet<>();
 
     public User(){}
 
@@ -81,11 +86,11 @@ public class User {
         this.enabled = enabled;
     }
 
-    public Set<Role> getRoles() {
+    public Set<Roles> getRoles() {
         return roles;
     }
 
-    public void setRoles(Set<Role> roles) {
+    public void setRoles(Set<Roles> roles) {
         this.roles = roles;
     }
 

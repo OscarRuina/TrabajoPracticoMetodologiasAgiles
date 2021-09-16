@@ -1,6 +1,6 @@
-
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
     <head>
         <title>Login</title>
         <div th:insert="layout/plantilla :: head"></div>
@@ -44,8 +44,14 @@
                             </div>
                         </div>
                     </div>
+                    <br><br>
+                    <div class="form-check">
+                        <div class="d-grid gap-2 mx-auto col-4">
+                            <input type="checkbox" class="form-check-imput" name="recuerdame" id="recuerdame">
+                            <label for="remember me" class="form-check-label" style="color: black;">Recordar</label>
+                        </div>
+                    </div>
                     <br> <br>
-    
                     <div class="form-group">
                         <div class="d-grid gap-2 mx-auto col-4">
                             <button type="submit" class="btn btn-primary btn-lg btn-block">Login</button>
@@ -54,6 +60,12 @@
                     <br>
 
                 </form>
+                <div th:if="${param.error}" class="alert alert-danger" role="alert">
+                    Nombre de usuario y Contraseña Invalidas.
+                </div>
+                <div th:if="${param.logout}" class="alert alert-success" role="alert">
+                    Saliste de la Aplicacion correctamente.
+                </div>
             </div>
         </div> 
         <section th:replace="layout/plantilla :: section"></section>

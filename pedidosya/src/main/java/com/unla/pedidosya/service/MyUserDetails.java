@@ -5,7 +5,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
-import com.unla.pedidosya.entity.Role;
+import com.unla.pedidosya.entity.Roles;
 import com.unla.pedidosya.entity.User;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -22,9 +22,9 @@ public class MyUserDetails implements UserDetails{
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        Set<Role> roles = user.getRoles();
+        Set<Roles> roles = user.getRoles();
         List<GrantedAuthority> authorities = new ArrayList<>();
-        for(Role role : roles){
+        for(Roles role : roles){
             authorities.add(new SimpleGrantedAuthority(role.getNombre()));
         }
         return authorities;
