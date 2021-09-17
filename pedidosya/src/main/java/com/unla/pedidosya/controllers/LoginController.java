@@ -57,7 +57,7 @@ public class LoginController {
                 model.addAttribute("formErrorMessage", e.getMessage());
             }
         }
-        return ViewRouteHelper.INDEX;
+        return ViewRouteHelper.CONFIRMACION;
     }
 
 }
