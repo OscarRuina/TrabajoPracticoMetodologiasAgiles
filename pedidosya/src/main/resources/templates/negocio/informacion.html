@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
     <head>
-        <title>Informacion del Negocio</title>
+        <title>Datos del Negocio</title>
         <div th:insert="layout/plantilla :: head"></div>
     </head>
 <body>
@@ -9,19 +9,38 @@
     <nav th:replace="layout/plantilla :: nav"></nav>
     <!-- END NAVBAR --> 
     <br>
-    <h1 class="banner-heading h1 text-secondary display-3 mb-0 pb-5 mx-0 px-0 light-300 typo-space-line"><strong>Negocio</strong></h1>
+    
+    <div class="container">
 
-    <div>
-        <p>Nombre: <span th:text="${entidad.nombre}"></span></p>
-        <p>Direccion: <span th:text="${entidad.direccion}"></span></p>
-        <p>Localidad: <span th:text="${entidad.localidad}"></span></p>
+        <div class="row text-center">
+            <h1 class="banner-heading h1 text-secondary display-3 mb-0 pb-5 mx-0 px-0 light-300 typo-space-line">
+                <strong>Datos del Negocio</strong>
+            </h1>
+        </div>
+
+        <div class="mb-3 row">
+            <label for="nombre" class="col-sm-2 col-form-label">Nombre:</label>
+            <div class="col-sm-10">
+                <input class="form-control" type="text" th:value="${entidad.nombre}" id="nombre" aria-label="nombre" disabled readonly>
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="direccion" class="col-sm-2 col-form-label">Direccion:</label>
+            <div class="col-sm-10">
+                <input class="form-control" type="text" th:value="${entidad.direccion}" id="direccion" aria-label="direccion" disabled readonly>
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="localidad" class="col-sm-2 col-form-label">Localidad:</label>
+            <div class="col-sm-10">
+                <input class="form-control" type="text" th:value="${entidad.localidad}" id="localidad" aria-label="localidad" disabled readonly>
+            </div>
+        </div>
+        <br><br><br>
     </div>
     <!-- ACA IRIA LA LISTA DE PRODUCTOS DE ESTE NEGOCIO-->
 
     
-    
-
-    <section th:replace="layout/plantilla :: section"></section>
     <!-- Start Footer -->
     <footer th:replace="layout/plantilla :: footer"></footer>
     <!-- End Footer -->
