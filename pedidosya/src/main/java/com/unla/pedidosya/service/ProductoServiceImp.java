@@ -2,7 +2,9 @@ package com.unla.pedidosya.service;
 
 import java.util.List;
 
+import com.unla.pedidosya.entity.Negocio;
 import com.unla.pedidosya.entity.Producto;
+import com.unla.pedidosya.repository.INegocioRepository;
 import com.unla.pedidosya.repository.IProductoRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,9 @@ public class ProductoServiceImp implements IProductoService{
 
     @Autowired
     private IProductoRepository producto;
+
+    @Autowired
+    private INegocioRepository negocio;
 
     @Transactional(readOnly = true)
     public List<Producto> getAll(){
@@ -28,7 +33,11 @@ public class ProductoServiceImp implements IProductoService{
     
     @Transactional
     public Producto insertOrUpdate(Producto model){
+        //agregar este producto a un negocio
+        Negocio n = negocio.findById(model.getNegocio().getIdNegocio()).get();
+        n.getProductos().add(model);
         producto.save(model);
+        negocio.save(n);
         return model;
     }
     

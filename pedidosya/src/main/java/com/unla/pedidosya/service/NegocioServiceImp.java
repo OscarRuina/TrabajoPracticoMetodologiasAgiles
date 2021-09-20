@@ -25,6 +25,10 @@ public class NegocioServiceImp implements INegocioService{
         return negocio.findAll();
     }
 
+    @Transactional(readOnly = true)
+    public Negocio getById(long id){
+        return negocio.getById(id);
+    }
 
     //metodo para filtrar por localidad los negocios
     @Transactional(readOnly = true)
@@ -40,7 +44,9 @@ public class NegocioServiceImp implements INegocioService{
 
     @Transactional(readOnly = true)
     public NegocioModel encontrar(NegocioModel model){
-        return converter.entityToModel(negocio.findById(model.getIdNegocio()).orElse(null));
+        Negocio entity = negocio.getById(model.getIdNegocio());
+        NegocioModel entityToModel = converter.entityToModel(entity);
+        return entityToModel;
     }
 
 

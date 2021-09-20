@@ -30,15 +30,19 @@ public class Negocio {
     @Column(name = "localidad",length = 50,nullable = false)
     private String localidad;
 
+    @Column(name = "telefono",nullable = false)
+    private int telefono;
+
     @OneToMany(fetch = FetchType.LAZY , mappedBy = "negocio" , cascade = {CascadeType.PERSIST , CascadeType.MERGE , CascadeType.DETACH , CascadeType.REFRESH})
     private List<Producto> productos;
 
     public Negocio() {}
 
-    public Negocio(String nombre, String direccion, String localidad) {
+    public Negocio(String nombre, String direccion, String localidad,int telefono) {
         this.nombre = nombre;
         this.direccion = direccion;
         this.localidad = localidad;
+        this.telefono = telefono;
     }
 
     public long getIdNegocio() {
@@ -81,10 +85,18 @@ public class Negocio {
         this.productos = productos;
     }
 
+    public int getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(int telefono) {
+        this.telefono = telefono;
+    }
+
     @Override
     public String toString() {
-        return "Negocio [direccion=" + direccion + ", idNegocio=" + idNegocio + ", localidad=" + localidad + ", nombre="
-                + nombre + "]";
+        return "Negocio [direccion=" + direccion + ", localidad=" + localidad + ", nombre=" + nombre + ", telefono="
+                + telefono + "]";
     }
 
 }

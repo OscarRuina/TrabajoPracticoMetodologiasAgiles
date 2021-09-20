@@ -8,15 +8,17 @@ public class NegocioModel {
     private String nombre;
     private String direccion;
     private String localidad;
+    private int telefono;
     private List<ProductoModel> productos;
 
     public NegocioModel(){}
 
-    public NegocioModel(long idNegocio, String nombre, String direccion, String localidad){
+    public NegocioModel(long idNegocio, String nombre, String direccion, String localidad,int telefono){
         this.idNegocio = idNegocio;
         this.nombre = nombre;
         this.direccion = direccion;
         this.localidad = localidad;
+        this.telefono = telefono;
     }
 
     public long getIdNegocio() {
@@ -59,6 +61,12 @@ public class NegocioModel {
         this.productos = productos;
     }
 
-    
+    public int getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(int telefono) {
+        this.telefono = telefono;
+    }
 
 }

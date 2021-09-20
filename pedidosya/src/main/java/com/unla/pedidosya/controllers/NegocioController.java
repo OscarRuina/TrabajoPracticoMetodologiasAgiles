@@ -46,6 +46,9 @@ public class NegocioController {
     public String informacion(NegocioModel n, Model model){
         n = negocio.encontrar(n);
         model.addAttribute("entidad", n);
+        //paso la lista
+        Negocio neg = negocio.getById(n.getIdNegocio());
+        model.addAttribute("productos", neg.getProductos());
         return ViewRouteHelper.INFO; 
     }
 
