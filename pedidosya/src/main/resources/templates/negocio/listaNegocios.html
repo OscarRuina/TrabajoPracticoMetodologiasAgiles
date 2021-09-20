@@ -25,7 +25,8 @@
                   <th>Nombre</th>
                   <th>Direccion</th>
                   <th>Localidad</th>
-                  <th>Ver Info</th>
+                  <th>Telefono</th>
+                  <th>Ver Productos</th>
                 </tr>
               </thead>
               <tbody>
@@ -33,8 +34,9 @@
                       <td th:text="${entidad.nombre}"></td>
                       <td th:text="${entidad.direccion}"></td>
                       <td th:text="${entidad.localidad}"></td>
+                      <td th:text="${entidad.telefono}"></td>
                       <td><a th:href="@{/informacion/} + ${entidad.idNegocio}"
-                          th:text="Info"></a></td>
+                          th:text="Productos"></a></td>
                   </tr>
               </tbody>
             </table>
