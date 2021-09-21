@@ -20,4 +20,7 @@ public class ViewRouteHelper {
     public final static String FORMULARIOPRODUCTO = "producto/formulario";
     public final static String ALTAPRODUCTO = "producto/alta";
     
+    //carrito
+    public final static String CARRITO = "carrito/vistaCarrito";
+    
 }

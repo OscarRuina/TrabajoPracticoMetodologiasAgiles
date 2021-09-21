@@ -24,7 +24,7 @@ public class NegocioRepositoryTest {
     public void testInsertNegocio(){
 
         Negocio save = repo.save(new Negocio("la nueva","av alsina 500",
-        "lomas de zamora"));
+        "lomas de zamora",1144445555));
 
         assertTrue(save.getIdNegocio() > 0 );
 

@@ -42,6 +42,10 @@ public class User {
     @NotBlank
     private String ciudad;
 
+    @Column(name = "telefono",nullable = false)
+    @NotNull
+    private int telefono;
+
     @Column(name = "username",length = 100,nullable = false)
     @NotBlank
     private String username;
@@ -64,12 +68,13 @@ public class User {
 
     public User(){}
 
-    public User(@NotBlank String nombre, @NotBlank String apellido, @NotBlank String direccion, @NotBlank String ciudad,
+    public User(@NotBlank String nombre, @NotBlank String apellido, @NotBlank String direccion, @NotBlank String ciudad,@NotNull int telefono,
             @NotBlank String username, @NotBlank @NotNull String password) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.direccion = direccion;
         this.ciudad = ciudad;
+        this.telefono = telefono;
         this.username = username;
         this.password = password;
         this.enabled = true;
@@ -147,10 +152,18 @@ public class User {
         this.roles = roles;
     }
 
+    public int getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(int telefono) {
+        this.telefono = telefono;
+    }
+
     @Override
     public String toString() {
-        return "User [apellido=" + apellido + ", ciudad=" + ciudad + ", direccion=" + direccion + ", enabled=" + enabled
-                + ", nombre=" + nombre + ", password=" + password + ", username=" + username + "]";
+        return "User [apellido=" + apellido + ", ciudad=" + ciudad + ", direccion=" + direccion + ", nombre=" + nombre
+                + ", telefono=" + telefono + "]";
     }
-    
+
 }

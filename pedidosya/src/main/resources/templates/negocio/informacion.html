@@ -62,6 +62,7 @@
                     <th>Descripcion</th>
                     <th>Tipo</th>
                     <th>Precio</th>
+                    <th>Agregar al Carrito</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -70,6 +71,8 @@
                         <td th:text="${producto.descripcion}"></td>
                         <td th:text="${producto.tipo}"></td>
                         <td th:text="${producto.precio}"></td>
+                        <td><a th:href="@{/agregarCarrito/} + ${producto.idProducto}"
+                            th:text="Agregar"></a></td>
                     </tr>
                 </tbody>
               </table>
