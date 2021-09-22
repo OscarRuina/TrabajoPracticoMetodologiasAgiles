@@ -26,6 +26,7 @@
                     <th>Descripcion</th>
                     <th>Tipo</th>
                     <th>Precio</th>
+                    <th>Agregar al Carrito</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -34,6 +35,8 @@
                         <td th:text="${entidad.descripcion}"></td>
                         <td th:text="${entidad.tipo}"></td>
                         <td th:text="${entidad.precio}"></td>
+                        <td><a th:href="@{/agregarCarrito/} + ${entidad.idProducto}"
+                          th:text="Agregar"></a></td>
                     </tr>
                 </tbody>
               </table>

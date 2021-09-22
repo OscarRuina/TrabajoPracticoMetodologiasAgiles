@@ -40,7 +40,7 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
                                 <label for="apellido" class="form-label">Apellido</label>
                             </div>
                             <div class="col-12">
-                                <input type="text" th:field="${user.apellido}" class="form-control" id="username" placeholder="apellido" value="" required>
+                                <input type="text" th:field="${user.apellido}" class="form-control" id="apellido" placeholder="apellido" value="" required>
                                 <div class="alert-danger" th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}">LastName Error</div>
                             </div>
                         </div>
@@ -52,7 +52,7 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
                                 <label for="direccion" class="form-label">Direccion</label>
                             </div>
                             <div class="col-12">
-                                <input type="text" th:field="${user.direccion}" class="form-control" id="username" placeholder="direccion" value="" required>
+                                <input type="text" th:field="${user.direccion}" class="form-control" id="direccion" placeholder="direccion" value="" required>
                                 <div class="alert-danger" th:if="${#fields.hasErrors('direccion')}" th:errors="*{direccion}">Address Error</div>
                             </div>
                         </div>
@@ -64,8 +64,20 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
                                 <label for="ciudad" class="form-label">Ciudad</label>
                             </div>
                             <div class="col-12">
-                                <input type="text" th:field="${user.ciudad}" class="form-control" id="username" placeholder="ciudad" value="" required>
+                                <input type="text" th:field="${user.ciudad}" class="form-control" id="ciudad" placeholder="ciudad" value="" required>
                                 <div class="alert-danger" th:if="${#fields.hasErrors('ciudad')}" th:errors="*{ciudad}">City Error</div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <div class="d-grid gap-2 mx-auto col-10">
+                            <div class="col-2">
+                                <label for="telefono" class="form-label">Telefono</label>
+                            </div>
+                            <div class="col-12">
+                                <input type="text" th:field="${user.telefono}" class="form-control" id="telefono" placeholder="telefono" value="" required>
+                                <div class="alert-danger" th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}">Phone Error</div>
                             </div>
                         </div>
                     </div>
