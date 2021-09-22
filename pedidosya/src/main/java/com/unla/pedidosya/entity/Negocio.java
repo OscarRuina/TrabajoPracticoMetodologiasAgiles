@@ -33,8 +33,18 @@ public class Negocio {
     @Column(name = "telefono",nullable = false)
     private int telefono;
 
-    @OneToMany(fetch = FetchType.LAZY , mappedBy = "negocio" , cascade = {CascadeType.PERSIST , CascadeType.MERGE , CascadeType.DETACH , CascadeType.REFRESH})
-    private List<Producto> productos;
+    @OneToMany(
+        fetch = FetchType.LAZY,
+        mappedBy = "negocio",
+        cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE,
+            CascadeType.DETACH,
+            CascadeType.REFRESH
+        }
+    )
+    private List<Producto> productos; /* ver si conviene usar un set en vez de list */
+
 
     public Negocio() {}
 

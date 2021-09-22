@@ -1,6 +1,7 @@
 package com.unla.pedidosya.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.unla.pedidosya.converter.NegocioConverter;
 import com.unla.pedidosya.entity.Negocio;
@@ -33,6 +34,7 @@ public class NegocioServiceImp implements INegocioService{
     //metodo para filtrar por localidad los negocios
     @Transactional(readOnly = true)
     public List<Negocio> listaNegocioPorZona(String localidad) {
+        /*return negocio.findByLocalidad(localidad);*/
         return negocio.findByLocalidad(localidad);
     }
 
@@ -47,6 +49,38 @@ public class NegocioServiceImp implements INegocioService{
         Negocio entity = negocio.getById(model.getIdNegocio());
         NegocioModel entityToModel = converter.entityToModel(entity);
         return entityToModel;
+    }
+
+    /* los que se agregaron porque se deben implementar por el INegocioService */
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<Negocio> findById(long id) {
+        // TODO Auto-generated method stub
+        return this.negocio.findById(id);
+    }
+
+
+    @Override
+    @Transactional
+    public Negocio save(Negocio negocio) {
+        // TODO Auto-generated method stub
+        return this.negocio.saveAndFlush(negocio);
+    }
+
+
+    @Override
+    @Transactional(readOnly = true)
+    public Iterable<Negocio> findAll() {
+        // TODO Auto-generated method stub
+        return this.negocio.findAll();
+    }
+
+
+    @Override
+    @Transactional
+    public void deleteById(long id) {
+        // TODO Auto-generated method stub
+        this.negocio.deleteById(id);
     }
 
 
