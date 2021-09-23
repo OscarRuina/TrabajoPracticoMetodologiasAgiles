@@ -36,9 +36,14 @@ xmlns:th="http://www.thymeleaf.org"
                         <a class="nav-link" th:href="@{/signup}"><i class="fas fa-angle-double-right"></i> Eres Nuevo? Ingresa!!</a>
                     </li>
                     <li class="nav-item" th:if="${#authorization.expression('hasAnyRole(''ROLE_VENDEDOR,ROLE_COMPRADOR,ROLE_REPARTIDOR'')')}"  type="hidden">
+                        <!-- Carrito-->
+                        <a class="nav-link" th:href="@{/irAlCarrito}"><i class="bi bi-cart4"></i> Carrito</a>
+                    </li>
+                    <li class="nav-item" th:if="${#authorization.expression('hasAnyRole(''ROLE_VENDEDOR,ROLE_COMPRADOR,ROLE_REPARTIDOR'')')}"  type="hidden">
                         <!-- nombre de usuario logueado-->
                         <div class="text-light" th:inline="text"> [[${#httpServletRequest.remoteUser}]]</div>
                     </li>
+
                     <li class="nav-item" th:if="!${#authorization.expression('hasAnyRole(''ROLE_VENDEDOR,ROLE_COMPRADOR,ROLE_REPARTIDOR'')')}"  type="hidden">
                         <a class="nav-link" th:href="@{/login}"><i class="fas fa-home"></i> Login</a>
                     </li>

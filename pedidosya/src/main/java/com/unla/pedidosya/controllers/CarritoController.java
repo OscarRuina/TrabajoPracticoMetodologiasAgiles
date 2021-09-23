@@ -28,11 +28,18 @@ public class CarritoController {
         try{
  
             carrito.agregarProducto(converter.entityToModel(repo.findById(idProducto).get()));
+            carrito.setPrecioTotal();
             model.addAttribute("carrito", carrito);
             
         }catch(Exception e){
             e.getMessage();
         }
+        return ViewRouteHelper.CARRITO;
+    }
+
+    @GetMapping("irAlCarrito")
+    public String irAlCarrito(Model model){
+        model.addAttribute("carrito", carrito);
         return ViewRouteHelper.CARRITO;
     }
 }
