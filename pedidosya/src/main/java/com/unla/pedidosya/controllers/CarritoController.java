@@ -1,7 +1,9 @@
 package com.unla.pedidosya.controllers;
 
 import com.unla.pedidosya.helpers.ViewRouteHelper;
+import com.unla.pedidosya.model.CarritoModel;
 import com.unla.pedidosya.repository.IProductoRepository;
+import com.unla.pedidosya.converter.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,10 +17,19 @@ public class CarritoController {
     @Autowired
     private IProductoRepository repo;
 
+    @Autowired
+    private ProductoConverter converter;
+
+    /* no se que hago */
+    CarritoModel carrito = new CarritoModel();
+
     @GetMapping("/agregarCarrito/{idProducto}")
-    public String agregarCarrito(@PathVariable(name = "idProducto") long idProducto,Model model){
+    public String agregarCarrito(@PathVariable(name = "idProducto") long idProducto, Model model){
         try{
-            model.addAttribute("carrito", repo.findById(idProducto).get());
+ 
+            carrito.agregarProducto(converter.entityToModel(repo.findById(idProducto).get()));
+            model.addAttribute("carrito", carrito);
+            
         }catch(Exception e){
             e.getMessage();
         }

@@ -55,7 +55,7 @@ public class NegocioServiceImp implements INegocioService{
     @Override
     @Transactional(readOnly = true)
     public Optional<Negocio> findById(long id) {
-        // TODO Auto-generated method stub
+        
         return this.negocio.findById(id);
     }
 
@@ -63,7 +63,7 @@ public class NegocioServiceImp implements INegocioService{
     @Override
     @Transactional
     public Negocio save(Negocio negocio) {
-        // TODO Auto-generated method stub
+        
         return this.negocio.saveAndFlush(negocio);
     }
 
@@ -71,7 +71,7 @@ public class NegocioServiceImp implements INegocioService{
     @Override
     @Transactional(readOnly = true)
     public Iterable<Negocio> findAll() {
-        // TODO Auto-generated method stub
+        
         return this.negocio.findAll();
     }
 
@@ -79,7 +79,7 @@ public class NegocioServiceImp implements INegocioService{
     @Override
     @Transactional
     public void deleteById(long id) {
-        // TODO Auto-generated method stub
+        
         this.negocio.deleteById(id);
     }
 

@@ -1,16 +1,17 @@
 package com.unla.pedidosya.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import com.unla.pedidosya.entity.Producto;
 
 public class CarritoModel {
 
     private long idCarrito;
-    private List<Producto> productos;
+    private List<ProductoModel> productos;
     private float precioTotal;
     
     public CarritoModel() {
+        this.productos = new ArrayList<ProductoModel>();
     }
 
     public long getIdCarrito() {
@@ -21,11 +22,11 @@ public class CarritoModel {
         this.idCarrito = idCarrito;
     }
 
-    public List<Producto> getProductos() {
+    public List<ProductoModel> getProductos() {
         return productos;
     }
 
-    public void setProductos(List<Producto> productos) {
+    public void setProductos(List<ProductoModel> productos) {
         this.productos = productos;
     }
 
@@ -33,8 +34,22 @@ public class CarritoModel {
         return precioTotal;
     }
 
-    public void setPrecioTotal(float precioTotal) {
-        this.precioTotal = precioTotal;
+    public void setPrecioTotal() {
+        this.precioTotal = calcularPrecioTotal();
+    }
+
+    /* agregar producto a la lista */
+    public void agregarProducto(ProductoModel p){
+        this.productos.add(p);
+    }
+
+    /*metodo que calcula el precio total por la lista de productos */
+    private float calcularPrecioTotal(){
+        float total=0;
+        for (ProductoModel producto : productos) {
+            total += producto.getPrecio();
+        }
+        return total;
     }
 
     
