@@ -1,3 +1,10 @@
 package com.unla.pedidosya.service;
 
-public interface INegocioService {}
+
+
+import com.unla.pedidosya.entity.Negocio;
+
+public interface INegocioService extends IGenericService<Negocio>{
+
+
+}

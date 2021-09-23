@@ -17,4 +17,8 @@ public interface INegocioRepository extends JpaRepository<Negocio,Long> {
     @Query(value = "select * from Negocio n where n.localidad like %:localidad%",nativeQuery = true)
     public List<Negocio> findByLocalidad(@Param("localidad")String localidad);
     
+    // para buscar strings usar like + el formato %:atributo% no funciona el ignore case osea sin importar mayusculas
+    /*@Query("select * from Negocio n where upper(n.localidad) like upper(%?1%)")
+    List<Negocio> findByLocalidadIgnoreCase(String localidad);*/
+    
 }

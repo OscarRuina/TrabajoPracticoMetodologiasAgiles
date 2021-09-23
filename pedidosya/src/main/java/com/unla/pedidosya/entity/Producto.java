@@ -3,6 +3,7 @@ package com.unla.pedidosya.entity;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -32,8 +33,14 @@ public class Producto {
     private float precio;
 
     @ManyToOne(cascade = {CascadeType.PERSIST , CascadeType.MERGE , CascadeType.DETACH , CascadeType.REFRESH})
-	@JoinColumn(name = "idNegocio",nullable = false)
+	@JoinColumn(
+        name = "idNegocio",
+        foreignKey = @ForeignKey( name = "FK_NEGOCIO_ID"),
+        nullable = false
+        )
     private Negocio negocio;
+    /* Agregue el foreignkey para ver porque ese creo que establece el nombre que queres que aparezca en
+    la tabla pero aparte porque creo que no haci bien la relacion */
 
     public Producto() {}
 

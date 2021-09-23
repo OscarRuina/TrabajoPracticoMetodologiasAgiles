@@ -1,6 +1,7 @@
 package com.unla.pedidosya.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.unla.pedidosya.entity.Negocio;
 import com.unla.pedidosya.entity.Producto;
@@ -39,6 +40,40 @@ public class ProductoServiceImp implements IProductoService{
         producto.save(model);
         negocio.save(n);
         return model;
+    }
+
+
+
+    /* los que se agregaron porque se deben implementar por el INegocioService */
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<Producto> findById(long id) {
+        
+        return this.producto.findById(id);
+    }
+
+
+    @Override
+    @Transactional
+    public Producto save(Producto negocio) {
+
+        return this.producto.saveAndFlush(negocio);
+    }
+
+
+    @Override
+    @Transactional(readOnly = true)
+    public Iterable<Producto> findAll() {
+
+        return this.producto.findAll();
+    }
+
+
+    @Override
+    @Transactional
+    public void deleteById(long id) {
+
+        this.producto.deleteById(id);
     }
     
 }
