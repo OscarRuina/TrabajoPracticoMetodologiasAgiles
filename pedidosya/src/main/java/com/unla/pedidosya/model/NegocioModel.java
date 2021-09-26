@@ -69,4 +69,18 @@ public class NegocioModel {
         this.telefono = telefono;
     }
 
+
+    @Override
+    public String toString() {
+        return "{" +
+            " idNegocio='" + getIdNegocio() + "'" +
+            ", nombre='" + getNombre() + "'" +
+            ", direccion='" + getDireccion() + "'" +
+            ", localidad='" + getLocalidad() + "'" +
+            ", telefono='" + getTelefono() + "'" +
+            ", productos='" + getProductos() + "'" +
+            "}";
+    }
+
+
 }

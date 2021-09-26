@@ -63,7 +63,7 @@ public class Producto {
         return idProducto;
     }
 
-    protected void setIdProducto(long idProducto) {
+    public void setIdProducto(long idProducto) {
         this.idProducto = idProducto;
     }
 
@@ -109,9 +109,16 @@ public class Producto {
 
     @Override
     public String toString() {
-        return "Negocio [nombre=" + nombre + ", descripcion=" + descripcion + ", tipo=" + tipo + ", precio="
-                + precio + "]";
+        return "{" +
+            " idProducto='" + getIdProducto() + "'" +
+            ", nombre='" + getNombre() + "'" +
+            ", descripcion='" + getDescripcion() + "'" +
+            ", tipo='" + getTipo() + "'" +
+            ", precio='" + getPrecio() + "'" +
+            ", negocio='" + getNegocio() + "'" +
+            "}";
     }
+    
 
 }
 

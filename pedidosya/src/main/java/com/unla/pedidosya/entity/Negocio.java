@@ -59,7 +59,7 @@ public class Negocio {
         return idNegocio;
     }
 
-    protected void setIdNegocio(long idNegocio) {
+    public void setIdNegocio(long idNegocio) {
         this.idNegocio = idNegocio;
     }
 
@@ -105,8 +105,14 @@ public class Negocio {
 
     @Override
     public String toString() {
-        return "Negocio [direccion=" + direccion + ", localidad=" + localidad + ", nombre=" + nombre + ", telefono="
-                + telefono + "]";
+        return "{" +
+            " idNegocio='" + getIdNegocio() + "'" +
+            ", nombre='" + getNombre() + "'" +
+            ", direccion='" + getDireccion() + "'" +
+            ", localidad='" + getLocalidad() + "'" +
+            ", telefono='" + getTelefono() + "'" +
+            ", productos='" + getProductos() + "'" +
+            "}";
     }
 
 }
