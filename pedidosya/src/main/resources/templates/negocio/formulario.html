@@ -20,7 +20,7 @@
             
         </div>
 		<div class="row">
-            <form th:action="@{altaNegocio/} + ${#httpServletRequest.remoteUser}" th:object=${negocio} method="POST" >
+            <form th:action="@{/altaNegocio} " th:object=${negocio} method="POST" >
                 
                 <div class="form-group">
                     <div class="d-grid gap-2 mx-auto col-10">
@@ -69,6 +69,17 @@
                             <input type="text" th:field="*{telefono}" class="form-control" id="address" placeholder="telefono" required>
                             <div class="invalid-feedback">Please enter your Phone.</div>
                         </div>
+                    </div>
+                </div>
+                <br>
+                <div class="form-group" >
+                    <div class="col-2" >
+                        <label for="vendedor" class="form-label">Vendedor</label>
+                        <select th:field=*{vendedor} required class="form-control" id="vendedor" >
+                            <block th:each= "vendedor : ${vendedores}">
+                                <option th:text="${#httpServletRequest.remoteUser}" th:value="${vendedor.idUser}"></option>
+                            <block>
+                        </select>
                     </div>
                 </div>
                 <br> <br> <!-- salto de linea -->

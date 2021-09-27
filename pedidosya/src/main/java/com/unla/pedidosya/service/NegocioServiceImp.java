@@ -5,8 +5,10 @@ import java.util.Optional;
 
 import com.unla.pedidosya.converter.NegocioConverter;
 import com.unla.pedidosya.entity.Negocio;
+import com.unla.pedidosya.entity.User;
 import com.unla.pedidosya.model.NegocioModel;
 import com.unla.pedidosya.repository.INegocioRepository;
+import com.unla.pedidosya.repository.IUserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +22,9 @@ public class NegocioServiceImp implements INegocioService{
 
     @Autowired
     private NegocioConverter converter;
+    
+    @Autowired
+    private IUserRepository repo;
     
     @Transactional(readOnly = true)
     public List<Negocio> getAll(){
@@ -40,7 +45,10 @@ public class NegocioServiceImp implements INegocioService{
 
     @Transactional
     public Negocio insertOrUpdate(Negocio model){
+        User u = repo.findById(model.getVendedor().getIdUser()).get();
+        u.getNegocios().add(model);
         negocio.save(model);
+        repo.save(u);
         return model;
     }
 

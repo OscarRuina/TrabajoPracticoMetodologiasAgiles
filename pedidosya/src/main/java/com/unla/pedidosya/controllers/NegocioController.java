@@ -1,5 +1,7 @@
 package com.unla.pedidosya.controllers;
 
+import java.util.List;
+
 import com.unla.pedidosya.entity.Negocio;
 import com.unla.pedidosya.entity.User;
 import com.unla.pedidosya.helpers.ViewRouteHelper;
@@ -37,17 +39,17 @@ public class NegocioController {
 
     @GetMapping("irAlFormulario/")
     public String irAlFormulario(Model model){
+        List<User> vendedores = repo.findAll();
         Negocio n = new Negocio();
         model.addAttribute("negocio", n);
+        model.addAttribute("vendedores", vendedores);
         return ViewRouteHelper.FORMULARIO;
     }
 
-    @RequestMapping("/altaNegocio/{username}")
-    public String altaNegocio(@ModelAttribute("negocio") Negocio model,@PathVariable(name = "username") String username){
-        User u = repo.findByUsername(username);
-        u.getNegocios().add(model);
-        model.setVendedor(u);
-        negocio.insertOrUpdate(model);
+    @RequestMapping("/altaNegocio")
+    public String altaNegocio(@ModelAttribute("negocio") Negocio model){
+        Negocio save = model;
+        negocio.insertOrUpdate(save);
         return ViewRouteHelper.ALTANEGOCIO;
     }
 
@@ -62,12 +64,9 @@ public class NegocioController {
     }
 
     @GetMapping("/negocios/{username}")
-    public String negocios(@PathVariable(name = "username") String username,Model model){
-        /* busco el user por username
-        agrego al modelo la lista de negocios
-        retorno la lista de negocios*/
-        User u = repo.findByUsername(username);
-        model.addAttribute("entidad", u.getNegocios());
+    public String negocios(@PathVariable(name = "username")String username, Model model){
+        //aca no anda
+        model.addAttribute("entidad",repo.findByUsername(username).getNegocios());
         return ViewRouteHelper.MISNEGOCIOS;
     }
     

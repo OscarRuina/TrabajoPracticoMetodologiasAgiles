@@ -40,7 +40,7 @@ xmlns:th="http://www.thymeleaf.org"
                     </li>
                     <li class="nav-item" th:if="${#authorization.expression('hasRole(''ROLE_COMPRADOR'')')}"  type="hidden">
                         <!-- Carrito solo para comprador-->
-                        <a class="nav-link" th:href="@{/irAlCarrito/} + ${#httpServletRequest.remoteUser}"><i class="bi bi-cart4"></i> Carrito</a>
+                        <a class="nav-link" th:href="@{/irAlCarrito}"><i class="bi bi-cart4"></i> Carrito</a>
                     </li>
                     <li class="nav-item" th:if="${#authorization.expression('hasAnyRole(''ROLE_VENDEDOR,ROLE_COMPRADOR,ROLE_REPARTIDOR'')')}"  type="hidden">
                         <!-- nombre de usuario logueado-->

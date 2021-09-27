@@ -12,16 +12,25 @@ public class NegocioModel {
     private String localidad;
     private int telefono;
     private List<ProductoModel> productos;
-    private User user;
+    private User vendedor;
 
     public NegocioModel(){}
 
-    public NegocioModel(long idNegocio, String nombre, String direccion, String localidad,int telefono){
+    public NegocioModel(long idNegocio, String nombre, String direccion, String localidad,int telefono,User vendedor){
         this.idNegocio = idNegocio;
         this.nombre = nombre;
         this.direccion = direccion;
         this.localidad = localidad;
         this.telefono = telefono;
+        this.vendedor = vendedor;
+    }
+
+    public NegocioModel(String nombre, String direccion, String localidad, int telefono, User vendedor) {
+        this.nombre = nombre;
+        this.direccion = direccion;
+        this.localidad = localidad;
+        this.telefono = telefono;
+        this.vendedor = vendedor;
     }
 
     public long getIdNegocio() {
@@ -72,12 +81,12 @@ public class NegocioModel {
         this.telefono = telefono;
     }
 
-    public User getUser() {
-        return user;
+    public User getVendedor() {
+        return vendedor;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setVendedor(User vendedor) {
+        this.vendedor = vendedor;
     }
 
     
