@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>Lista de Negocios</title>
+    <div th:insert="layout/plantilla :: head"></div>
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav th:replace="layout/plantilla :: nav"></nav>
+    <!-- END NAVBAR --> 
+    <br>
+    <div class="container-fluid">
+      <div class="row text-center">
+        <h2 class="banner-heading h2 text-secondary display-3 mb-0 pb-5 mx-0 px-0 light-300 typo-space-line">
+          <strong>Negocios</strong>
+        </h2>
+      </div>
+
+      <div class="row">
+        <!-- th:if si la lista esta vacia no se muestra -->
+        <div th:if="${listaLocalidad !=null and !listaLocalidad.empty}">
+          <table class="table table-dark table-striped">
+              <thead>
+                <tr>
+                  <th>Nombre</th>
+                  <th>Direccion</th>
+                  <th>Localidad</th>
+                  <th>Telefono</th>
+                  <th>Ver Productos</th>
+                </tr>
+              </thead>
+              <tbody>
+                  <tr th:each="entidad : ${listaLocalidad}">
+                      <td th:text="${entidad.nombre}"></td>
+                      <td th:text="${entidad.direccion}"></td>
+                      <td th:text="${entidad.localidad}"></td>
+                      <td th:text="${entidad.telefono}"></td>
+                      <td><a th:href="@{/informacion/} + ${entidad.idNegocio}"
+                          th:text="Productos"></a></td>
+                  </tr>
+              </tbody>
+            </table>
+        </div>
+        <div class="text-center" th:if="${listaLocalidad == null or listaLocalidad.empty}">
+          No hay Negocios para mostrar
+          <br><br><br>
+        </div>
+
+        <div class="d-grid gap-2 col-6 mx-auto">
+          <a class="btn btn-dark" role="button" href="/">atras</a>
+          <br>
+        </div>
+      </div>
+    </div>
+    
+
+    <!-- <section th:replace="layout/plantilla :: section"></section> -->
+    <!-- Start Footer -->
+    <footer th:replace="layout/plantilla :: footer"></footer>
+    <!-- End Footer -->
+
+    <!-- JAVASCRIPT CDNS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</body>
+</html>

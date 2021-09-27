@@ -2,6 +2,8 @@ package com.unla.pedidosya.model;
 
 import java.util.List;
 
+import com.unla.pedidosya.entity.User;
+
 public class NegocioModel {
     
     private long idNegocio;
@@ -10,6 +12,7 @@ public class NegocioModel {
     private String localidad;
     private int telefono;
     private List<ProductoModel> productos;
+    private User user;
 
     public NegocioModel(){}
 
@@ -69,4 +72,13 @@ public class NegocioModel {
         this.telefono = telefono;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    
 }

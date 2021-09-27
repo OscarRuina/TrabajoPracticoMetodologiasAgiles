@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -65,6 +66,19 @@ public class User {
         inverseJoinColumns = @JoinColumn(name = "role_id")
     )
     private Set<Roles> roles = new HashSet<>();
+
+    //lista de negocios asociados, solo para vendedor
+    @OneToMany(
+        fetch = FetchType.LAZY,
+        mappedBy = "vendedor",
+        cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE,
+            CascadeType.DETACH,
+            CascadeType.REFRESH
+        }
+    )
+    private Set<Negocio> negocios;
 
     public User(){}
 
@@ -158,6 +172,14 @@ public class User {
 
     public void setTelefono(int telefono) {
         this.telefono = telefono;
+    }
+
+    public Set<Negocio> getNegocios() {
+        return negocios;
+    }
+
+    public void setNegocios(Set<Negocio> negocios) {
+        this.negocios = negocios;
     }
 
     @Override

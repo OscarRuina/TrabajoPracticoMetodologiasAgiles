@@ -9,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -45,6 +46,10 @@ public class Negocio {
     )
     private List<Producto> productos; /* ver si conviene usar un set en vez de list */
 
+    @ManyToOne(
+        cascade = {CascadeType.PERSIST , CascadeType.MERGE , CascadeType.DETACH , CascadeType.REFRESH}
+    )
+    private User vendedor;
 
     public Negocio() {}
 
@@ -53,6 +58,14 @@ public class Negocio {
         this.direccion = direccion;
         this.localidad = localidad;
         this.telefono = telefono;
+    }
+
+    public Negocio(String nombre, String direccion, String localidad, int telefono, User vendedor) {
+        this.nombre = nombre;
+        this.direccion = direccion;
+        this.localidad = localidad;
+        this.telefono = telefono;
+        this.vendedor = vendedor;
     }
 
     public long getIdNegocio() {
@@ -101,6 +114,14 @@ public class Negocio {
 
     public void setTelefono(int telefono) {
         this.telefono = telefono;
+    }
+
+    public User getVendedor() {
+        return vendedor;
+    }
+
+    public void setVendedor(User vendedor) {
+        this.vendedor = vendedor;
     }
 
     @Override

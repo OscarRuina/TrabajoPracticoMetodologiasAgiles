@@ -37,7 +37,7 @@ public class CarritoController {
         return ViewRouteHelper.CARRITO;
     }
 
-    @GetMapping("irAlCarrito")
+    @GetMapping("irAlCarrito/{}")
     public String irAlCarrito(Model model){
         model.addAttribute("carrito", carrito);
         return ViewRouteHelper.CARRITO;
