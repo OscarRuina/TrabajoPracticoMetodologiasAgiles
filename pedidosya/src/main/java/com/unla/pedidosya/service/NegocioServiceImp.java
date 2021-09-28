@@ -1,38 +1,35 @@
 package com.unla.pedidosya.service;
 
-import java.util.List;
-import java.util.Optional;
-
 import com.unla.pedidosya.converter.NegocioConverter;
 import com.unla.pedidosya.entity.Negocio;
-import com.unla.pedidosya.entity.User;
 import com.unla.pedidosya.model.NegocioModel;
 import com.unla.pedidosya.repository.INegocioRepository;
 import com.unla.pedidosya.repository.IUserRepository;
-
+import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class NegocioServiceImp implements INegocioService{
+public class NegocioServiceImp implements INegocioService {
 
     @Autowired
     private INegocioRepository negocio;
 
     @Autowired
     private NegocioConverter converter;
-    
+
     @Autowired
     private IUserRepository repo;
-    
+
     @Transactional(readOnly = true)
-    public List<Negocio> getAll(){
+    public List<Negocio> getAll() {
         return negocio.findAll();
     }
 
     @Transactional(readOnly = true)
-    public Negocio getById(long id){
+    public Negocio getById(long id) {
         return negocio.getById(id);
     }
 
@@ -44,16 +41,13 @@ public class NegocioServiceImp implements INegocioService{
     }
 
     @Transactional
-    public Negocio insertOrUpdate(Negocio model){
-        User u = repo.findById(model.getVendedor().getIdUser()).get();
-        u.getNegocios().add(model);
+    public Negocio insertOrUpdate(Negocio model) {
         negocio.save(model);
-        repo.save(u);
         return model;
     }
 
     @Transactional(readOnly = true)
-    public NegocioModel encontrar(NegocioModel model){
+    public NegocioModel encontrar(NegocioModel model) {
         Negocio entity = negocio.getById(model.getIdNegocio());
         NegocioModel entityToModel = converter.entityToModel(entity);
         return entityToModel;
@@ -63,7 +57,7 @@ public class NegocioServiceImp implements INegocioService{
     @Override
     @Transactional(readOnly = true)
     public Optional<Negocio> findById(long id) {
-        
+
         return this.negocio.findById(id);
     }
 
@@ -71,7 +65,7 @@ public class NegocioServiceImp implements INegocioService{
     @Override
     @Transactional
     public Negocio save(Negocio negocio) {
-        
+
         return this.negocio.saveAndFlush(negocio);
     }
 
@@ -79,7 +73,7 @@ public class NegocioServiceImp implements INegocioService{
     @Override
     @Transactional(readOnly = true)
     public Iterable<Negocio> findAll() {
-        
+
         return this.negocio.findAll();
     }
 
@@ -87,7 +81,7 @@ public class NegocioServiceImp implements INegocioService{
     @Override
     @Transactional
     public void deleteById(long id) {
-        
+
         this.negocio.deleteById(id);
     }
 
