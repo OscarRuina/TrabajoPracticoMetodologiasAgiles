@@ -1,5 +1,10 @@
 package com.unla.pedidosya.controllers;
 
+import java.util.List;
+import java.util.Optional;
+
+import com.unla.pedidosya.converter.ProductoConverter;
+
 import com.unla.pedidosya.entity.Negocio;
 import com.unla.pedidosya.entity.Producto;
 import com.unla.pedidosya.helpers.ViewRouteHelper;
@@ -15,6 +20,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 public class ProductoController {
@@ -27,6 +33,11 @@ public class ProductoController {
 
     @Autowired
     private IUserRepository repo;
+    
+    @Autowired
+    private ProductoConverter converter;
+
+    ProductoModel prodAModif = new ProductoModel();
 
     @GetMapping("productosPorTipo")
     public String productosPorTipo(String tipo, Model model) {
@@ -68,4 +79,30 @@ public class ProductoController {
         return ViewRouteHelper.FORMULARIOPRODUCTO;
     }
 
+    @PostMapping("/producto/modif")
+    public String modifProducto(@ModelAttribute("producto") Producto model){
+        model.setIdProducto(prodAModif.getIdProducto());
+        model.getNegocio().setIdNegocio(prodAModif.getNegocio().getIdNegocio());
+        Producto save = model;
+        producto.insertOrUpdate(save);
+        return ViewRouteHelper.ALTAPRODUCTO;
+    }
+
+    @GetMapping("/editarProducto/{idProducto}")
+    public String editarProducto(@PathVariable(name = "idProducto") long idProducto, Model model){
+        ProductoModel p = converter.entityToModel(producto.findById(idProducto).get());
+        prodAModif = p;
+        model.addAttribute("entidad", p);
+        model.addAttribute("producto", new ProductoModel());
+        
+        return ViewRouteHelper.EDITARPRODUCTO; 
+    }
+    /*
+    @GetMapping("/editarProducto/{idProducto}")
+    public String editarProducto(ProductoModel p, Model model){
+        p = producto.encontrar(p);
+        model.addAttribute("entidad", p);
+        return ViewRouteHelper.EDITARPRODUCTO; 
+    }*/
+    
 }
