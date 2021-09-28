@@ -16,12 +16,12 @@ public class ProductoConverter {
 
     public ProductoModel entityToModel(Producto p){
         NegocioModel model = converter.entityToModel(p.getNegocio());
-        return new ProductoModel(p.getIdProducto() ,p.getNombre(), p.getDescripcion(), p.getTipo(), p.getPrecio(),model);
+        return new ProductoModel(p.getIdProducto() ,p.getNombre(), p.getDescripcion(), p.getTipo(), p.getPrecio(), model);
     }
 
     public Producto modelToEntity(ProductoModel p){
         Negocio entity = converter.modelToEntity(p.getNegocio());
-        return new Producto(p.getNombre(), p.getDescripcion(), p.getTipo(), p.getPrecio(),entity);
+        return new Producto(p.getNombre(), p.getDescripcion(), p.getTipo(), p.getPrecio(), entity);
     }
     
 }
