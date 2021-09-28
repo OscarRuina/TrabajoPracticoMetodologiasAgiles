@@ -4,9 +4,10 @@ import com.unla.pedidosya.entity.Negocio;
 import com.unla.pedidosya.entity.Producto;
 import com.unla.pedidosya.helpers.ViewRouteHelper;
 import com.unla.pedidosya.model.ProductoModel;
+import com.unla.pedidosya.repository.IUserRepository;
 import com.unla.pedidosya.service.NegocioServiceImp;
 import com.unla.pedidosya.service.ProductoServiceImp;
-import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +24,9 @@ public class ProductoController {
 
     @Autowired
     private NegocioServiceImp negocio;
+
+    @Autowired
+    private IUserRepository repo;
 
     @GetMapping("productosPorTipo")
     public String productosPorTipo(String tipo, Model model) {
@@ -43,17 +47,16 @@ public class ProductoController {
     }
 
     @GetMapping("/producto/new")
-    public String formularioProducto(Model model) {
-        List<Negocio> negocios = negocio.getAll();
+    public String formularioProducto(HttpServletRequest request, Model model) {
+        String username = request.getRemoteUser();
         model.addAttribute("producto", new ProductoModel());
-        model.addAttribute("negocios", negocios);
+        model.addAttribute("negocios", repo.findByUsername(username).getNegocios());
         return ViewRouteHelper.FORMULARIOPRODUCTO;
     }
 
     @PostMapping("/producto/save")
     public String altaProducto(@ModelAttribute("producto") Producto model) {
-        Producto save = model;
-        producto.insertOrUpdate(save);
+        producto.insertOrUpdate(model);
         return ViewRouteHelper.ALTAPRODUCTO;
     }
 

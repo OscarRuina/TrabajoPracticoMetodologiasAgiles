@@ -66,6 +66,16 @@ public class NegocioController {
         return ViewRouteHelper.INFO;
     }
 
+    @GetMapping("/misproductos/{idNegocio}")
+    public String misProductos(NegocioModel n, Model model) {
+        n = negocio.encontrar(n);
+        model.addAttribute("entidad", n);
+        //paso la lista
+        Negocio neg = negocio.getById(n.getIdNegocio());
+        model.addAttribute("productos", neg.getProductos());
+        return ViewRouteHelper.MISPRODUCTOS;
+    }
+
     @GetMapping("/negocios")
     public String negocios(HttpServletRequest request, Model model) {
         String username = request.getRemoteUser();
