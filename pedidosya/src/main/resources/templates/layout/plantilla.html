@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="es"
-xmlns:th="http://www.thymeleaf.org"
-    xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+      xmlns:th="http://www.thymeleaf.org"
+          xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head th:fragment="head">
+
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -33,6 +34,9 @@ xmlns:th="http://www.thymeleaf.org"
           </button>
           <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
+                  <li class="nav-item" th:if="${#authorization.expression('hasRole(''ROLE_VENDEDOR'')')}" type="hidden">
+                      <a class="nav-link" th:href="@{/negocios}"><i class="fas fa-building"></i> Mis Negocios</a>
+                    </li>
                     <li class="nav-item" th:if="${#authorization.expression('hasRole(''ROLE_VENDEDOR'')')}"  type="hidden">
                         <a class="nav-link" th:href="@{/irAlFormulario}"><i class="fas fa-building" style="color: black;"></i> Registrar tu Negocio</a>
                     </li>
@@ -78,156 +82,174 @@ xmlns:th="http://www.thymeleaf.org"
     </nav>
     <!-- END NAVBAR -->
 
-    <section th:fragment="section">
-        <div class="container-fuild" id="about">
-            <div class="row bg-dark text-white p-5 text-center">
-                <div class="col-sm-6">
-                <!-- <i class="fab fa-youtube fa-10x"></i> -->	
-                </div> 
-                <div class="col-sm-6">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor reprehenderit hic culpa optio debitis repellat aspernatur ea veniam. Quidem dignissimos, explicabo maiores maxime iusto perspiciatis aspernatur cum, non vel? Corporis.</p>
-                </div>
-            </div>
+
+<section th:fragment="section">
+  <div class="container-fuild" id="about">
+    <div class="row bg-dark text-white p-5 text-center">
+      <div class="col-sm-6">
+        <!-- <i class="fab fa-youtube fa-10x"></i> -->
+      </div>
+      <div class="col-sm-6">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor reprehenderit hic culpa
+          optio debitis repellat aspernatur ea veniam. Quidem dignissimos, explicabo maiores maxime
+          iusto perspiciatis aspernatur cum, non vel? Corporis.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Start Footer -->
+<footer class="bg-primary pt-4" th:fragment="footer">
+  <div class="container">
+    <div class="row py-4">
+
+      <div class="col-lg-3 col-12 align-left">
+        <a class="navbar-brand" href="index.html">
+          <i class='bx bx-buildings bx-sm text-light'></i>
+          <span class="text-light h5">Pedido-</span><span
+            class="text-light h5 semi-bold-600">Ahora</span>
+        </a>
+        <p class="text-light my-lg-4 my-2">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+          sed do eiusmod tempor incididunt ut.
+        </p>
+        <ul class="list-inline footer-icons light-300">
+          <li class="list-inline-item m-0">
+            <a class="text-light" href="http://facebook.com/" target="_blank">
+              <i class='bx bxl-facebook-square bx-md'></i>
+            </a>
+          </li>
+          <li class="list-inline-item m-0">
+            <a class="text-light" href="https://www.linkedin.com/" target="_blank">
+              <i class='bx bxl-linkedin-square bx-md'></i>
+            </a>
+          </li>
+          <li class="list-inline-item m-0">
+            <a class="text-light" href="https://www.whatsapp.com/" target="_blank">
+              <i class='bx bxl-whatsapp-square bx-md'></i>
+            </a>
+          </li>
+          <li class="list-inline-item m-0">
+            <a class="text-light" href="https://www.flickr.com/" target="_blank">
+              <i class='bx bxl-flickr-square bx-md'></i>
+            </a>
+          </li>
+          <li class="list-inline-item m-0">
+            <a class="text-light" href="https://www.medium.com/" target="_blank">
+              <i class='bx bxl-medium-square bx-md'></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-lg-3 col-md-4 my-sm-0 mt-4">
+        <h3 class="h4 pb-lg-3 text-light light-300">Nuestro Estudio</h2>
+          <ul class="list-unstyled text-light light-300">
+            <li class="pb-2">
+              <!--<i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light"
+               href="index.html" >Home</a> -->
+              <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a
+                class="text-decoration-none text-light"
+                href="">Home</a>
+            </li>
+            <li class="pb-2">
+              <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a
+                class="text-decoration-none text-light py-1"
+                href="">Nosotros</a>
+            </li>
+            <li class="pb-2">
+              <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a
+                class="text-decoration-none text-light py-1"
+                href="">Trabajos</a>
+            </li>
+            <li class="pb-2">
+              <i class='bx-fw bx bxs-chevron-right bx-xs'></i></i><a
+                class="text-decoration-none text-light py-1"
+                href="">Precios</a>
+            </li>
+            <li class="pb-2">
+              <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a
+                class="text-decoration-none text-light py-1"
+                href="">Contáctanos</a>
+            </li>
+          </ul>
+      </div>
+
+      <div class="col-lg-3 col-md-4 my-sm-0 mt-4">
+        <h2 class="h4 pb-lg-3 text-light light-300">Trabajos</h2>
+        <ul class="list-unstyled text-light light-300">
+          <li class="pb-2">
+            <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a
+              class="text-decoration-none text-light py-1"
+              href="#">Marcas</a>
+          </li>
+          <li class="pb-2">
+            <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a
+              class="text-decoration-none text-light py-1"
+              href="#">Negocios</a>
+          </li>
+          <li class="pb-2">
+            <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a
+              class="text-decoration-none text-light py-1"
+              href="#">Marketing</a>
+          </li>
+          <li class="pb-2">
+            <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a
+              class="text-decoration-none text-light py-1"
+              href="#">Redes Sociales</a>
+          </li>
+          <li class="pb-2">
+            <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a
+              class="text-decoration-none text-light py-1"
+              href="#">Soluciones Digitales</a>
+          </li>
+          <li class="pb-2">
+            <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a
+              class="text-decoration-none text-light py-1"
+              href="#">Gráfica</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-lg-3 col-md-4 my-sm-0 mt-4">
+        <h2 class="h4 pb-lg-3 text-light light-300">Atendemos en:</h2>
+        <ul class="list-unstyled text-light light-300">
+          <li class="pb-2">
+            <i class='bx-fw bx bx-phone bx-xs'></i><a class="text-decoration-none text-light py-1"
+                                                      href="tel:010-020-0340">021-2354-4568</a>
+          </li>
+          <li class="pb-2">
+            <i class='bx-fw bx bx-mail-send bx-xs'></i><a
+              class="text-decoration-none text-light py-1"
+              href="mailto:info@company.com">info@company.com</a>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="w-100 bg-primary py-3">
+    <div class="container">
+      <div class="row pt-2">
+        <div class="col-lg-6 col-sm-12">
+          <p class="text-lg-start text-center text-light light-300">
+            © Copyright 2021 Pedido-Ahora. Todos los derechos reservados.
+          </p>
         </div>
-    </section>
-    <!-- Start Footer -->
-    <footer th:fragment="footer" class="bg-primary pt-4">
-        <div class="container">
-            <div class="row py-4">
-
-                <div class="col-lg-3 col-12 align-left">
-                    <a class="navbar-brand" href="index.html">
-                        <i class='bx bx-buildings bx-sm text-light'></i>
-                        <span class="text-light h5">Pedido-</span><span class="text-light h5 semi-bold-600">Ahora</span>
-                    </a>
-                    <p class="text-light my-lg-4 my-2">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                        sed do eiusmod tempor incididunt ut.
-                    </p>
-                    <ul class="list-inline footer-icons light-300">
-                        <li class="list-inline-item m-0">
-                            <a class="text-light" target="_blank" href="http://facebook.com/">
-                                <i class='bx bxl-facebook-square bx-md'></i>
-                            </a>
-                        </li>
-                        <li class="list-inline-item m-0">
-                            <a class="text-light" target="_blank" href="https://www.linkedin.com/">
-                                <i class='bx bxl-linkedin-square bx-md'></i>
-                            </a>
-                        </li>
-                        <li class="list-inline-item m-0">
-                            <a class="text-light" target="_blank" href="https://www.whatsapp.com/">
-                                <i class='bx bxl-whatsapp-square bx-md'></i>
-                            </a>
-                        </li>
-                        <li class="list-inline-item m-0">
-                            <a class="text-light" target="_blank" href="https://www.flickr.com/">
-                                <i class='bx bxl-flickr-square bx-md'></i>
-                            </a>
-                        </li>
-                        <li class="list-inline-item m-0">
-                            <a class="text-light" target="_blank" href="https://www.medium.com/">
-                                <i class='bx bxl-medium-square bx-md' ></i>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="col-lg-3 col-md-4 my-sm-0 mt-4">
-                    <h3 class="h4 pb-lg-3 text-light light-300">Nuestro Estudio</h2>
-                        <ul class="list-unstyled text-light light-300">
-                            <li class="pb-2">
-                                <!--<i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light" 
-                                 href="index.html" >Home</a> -->
-                                 <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light" 
-                                 href="" >Home</a>
-                            </li>
-                            <li class="pb-2">
-                                <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light py-1" 
-                                href="">Nosotros</a>
-                            </li>
-                            <li class="pb-2">
-                                <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light py-1" 
-                                href="">Trabajos</a>
-                            </li>
-                            <li class="pb-2">
-                                <i class='bx-fw bx bxs-chevron-right bx-xs'></i></i><a class="text-decoration-none text-light py-1" 
-                                href="">Precios</a>
-                            </li>
-                            <li class="pb-2">
-                                <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light py-1" 
-                                href="">Contáctanos</a>
-                            </li>
-                        </ul>
-                </div>
-
-                <div class="col-lg-3 col-md-4 my-sm-0 mt-4">
-                    <h2 class="h4 pb-lg-3 text-light light-300">Trabajos</h2>
-                    <ul class="list-unstyled text-light light-300">
-                        <li class="pb-2">
-                            <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light py-1" 
-                            href="#">Marcas</a>
-                        </li>
-                        <li class="pb-2">
-                            <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light py-1" 
-                            href="#">Negocios</a>
-                        </li>
-                        <li class="pb-2">
-                            <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light py-1" 
-                            href="#">Marketing</a>
-                        </li>
-                        <li class="pb-2">
-                            <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light py-1" 
-                            href="#">Redes Sociales</a>
-                        </li>
-                        <li class="pb-2">
-                            <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light py-1" 
-                            href="#">Soluciones Digitales</a>
-                        </li>
-                        <li class="pb-2">
-                            <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light py-1" 
-                            href="#">Gráfica</a>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="col-lg-3 col-md-4 my-sm-0 mt-4">
-                    <h2 class="h4 pb-lg-3 text-light light-300">Atendemos en:</h2>
-                    <ul class="list-unstyled text-light light-300">
-                        <li class="pb-2">
-                            <i class='bx-fw bx bx-phone bx-xs'></i><a class="text-decoration-none text-light py-1" 
-                            href="tel:010-020-0340">021-2354-4568</a>
-                        </li>
-                        <li class="pb-2">
-                            <i class='bx-fw bx bx-mail-send bx-xs'></i><a class="text-decoration-none text-light py-1"
-                            href="mailto:info@company.com">info@company.com</a>
-                        </li>
-                    </ul>
-                </div>
-
-            </div>
+        <div class="col-lg-6 col-sm-12">
+          <p class="text-lg-end text-center text-light light-300">
+            Diseñado por <a class="text-decoration-none text-light" href="http://localhost:8080/"
+                            rel="sponsored"
+                            target="_blank"><strong>UnlaGrupoH</strong></a>
+          </p>
         </div>
+      </div>
+    </div>
+  </div>
 
-        <div class="w-100 bg-primary py-3">
-            <div class="container">
-                <div class="row pt-2">
-                    <div class="col-lg-6 col-sm-12">
-                        <p class="text-lg-start text-center text-light light-300">
-                            © Copyright 2021 Pedido-Ahora. Todos los derechos reservados.
-                        </p>
-                    </div>
-                    <div class="col-lg-6 col-sm-12">
-                        <p class="text-lg-end text-center text-light light-300">
-                            Diseñado por <a rel="sponsored" class="text-decoration-none text-light" 
-                            href="http://localhost:8080/" target="_blank"><strong>UnlaGrupoH</strong></a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
+</footer>
+<!-- End Footer -->
 
-    </footer>
-    <!-- End Footer -->
 
     <div th:fragment="scripts">
         <!-- JAVASCRIPT CDNS -->

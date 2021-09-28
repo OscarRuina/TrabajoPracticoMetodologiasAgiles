@@ -9,11 +9,11 @@ import org.springframework.stereotype.Component;
 public class NegocioConverter {
 
     public NegocioModel entityToModel(Negocio n){
-        return new NegocioModel(n.getIdNegocio(),n.getNombre(),n.getDireccion(),n.getLocalidad(),n.getTelefono());
+        return new NegocioModel(n.getIdNegocio(),n.getNombre(),n.getDireccion(),n.getLocalidad(),n.getTelefono(),n.getVendedor());
     }
 
     public Negocio modelToEntity(NegocioModel n){
-        return new Negocio(n.getNombre(),n.getDireccion(),n.getLocalidad(),n.getTelefono());
+        return new Negocio(n.getNombre(),n.getDireccion(),n.getLocalidad(),n.getTelefono(),n.getVendedor());
     }
     
 }

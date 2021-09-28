@@ -4,18 +4,21 @@ import java.util.List;
 import java.util.Optional;
 
 import com.unla.pedidosya.converter.ProductoConverter;
+
 import com.unla.pedidosya.entity.Negocio;
 import com.unla.pedidosya.entity.Producto;
 import com.unla.pedidosya.helpers.ViewRouteHelper;
 import com.unla.pedidosya.model.ProductoModel;
+import com.unla.pedidosya.repository.IUserRepository;
 import com.unla.pedidosya.service.NegocioServiceImp;
 import com.unla.pedidosya.service.ProductoServiceImp;
-
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -29,16 +32,18 @@ public class ProductoController {
     private NegocioServiceImp negocio;
 
     @Autowired
+    private IUserRepository repo;
+    
+    @Autowired
     private ProductoConverter converter;
 
     ProductoModel prodAModif = new ProductoModel();
 
     @GetMapping("productosPorTipo")
     public String productosPorTipo(String tipo, Model model) {
-        if(tipo != null){
+        if (tipo != null) {
             model.addAttribute("listaTipo", producto.listaProductosPorTipo(tipo));
-        }
-        else{
+        } else {
             model.addAttribute("listaTipo", producto.getAll());
         }
         return ViewRouteHelper.LISTATIPOCOMIDA;
@@ -46,25 +51,32 @@ public class ProductoController {
 
     @GetMapping("productosALL")
     public String porductosALL(Model model) {
-        
+
         model.addAttribute("listaTipo", producto.getAll());
-        
+
         return ViewRouteHelper.LISTATIPOCOMIDA;
     }
 
     @GetMapping("/producto/new")
-    public String formularioProducto(Model model){
-        List<Negocio> negocios = negocio.getAll();
+    public String formularioProducto(HttpServletRequest request, Model model) {
+        String username = request.getRemoteUser();
         model.addAttribute("producto", new ProductoModel());
-        model.addAttribute("negocios", negocios);
+        model.addAttribute("negocios", repo.findByUsername(username).getNegocios());
         return ViewRouteHelper.FORMULARIOPRODUCTO;
     }
 
     @PostMapping("/producto/save")
-    public String altaProducto(@ModelAttribute("producto") Producto model){
-        Producto save = model;
-        producto.insertOrUpdate(save);
+    public String altaProducto(@ModelAttribute("producto") Producto model) {
+        producto.insertOrUpdate(model);
         return ViewRouteHelper.ALTAPRODUCTO;
+    }
+
+    @GetMapping("/modificar/{idProducto}")
+    public String modificar(@PathVariable(name = "idProducto") long idProducto, Model model) {
+        model.addAttribute("producto", producto.findById(idProducto));
+        Negocio n = producto.findById(idProducto).get().getNegocio();
+        model.addAttribute("negocios", n);
+        return ViewRouteHelper.FORMULARIOPRODUCTO;
     }
 
     @PostMapping("/producto/modif")
@@ -85,7 +97,7 @@ public class ProductoController {
         
         return ViewRouteHelper.EDITARPRODUCTO; 
     }
-/*
+    /*
     @GetMapping("/editarProducto/{idProducto}")
     public String editarProducto(ProductoModel p, Model model){
         p = producto.encontrar(p);

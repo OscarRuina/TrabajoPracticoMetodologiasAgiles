@@ -2,6 +2,8 @@ package com.unla.pedidosya.model;
 
 import java.util.List;
 
+import com.unla.pedidosya.entity.User;
+
 public class NegocioModel {
     
     private long idNegocio;
@@ -10,15 +12,25 @@ public class NegocioModel {
     private String localidad;
     private int telefono;
     private List<ProductoModel> productos;
+    private User vendedor;
 
     public NegocioModel(){}
 
-    public NegocioModel(long idNegocio, String nombre, String direccion, String localidad,int telefono){
+    public NegocioModel(long idNegocio, String nombre, String direccion, String localidad,int telefono,User vendedor){
         this.idNegocio = idNegocio;
         this.nombre = nombre;
         this.direccion = direccion;
         this.localidad = localidad;
         this.telefono = telefono;
+        this.vendedor = vendedor;
+    }
+
+    public NegocioModel(String nombre, String direccion, String localidad, int telefono, User vendedor) {
+        this.nombre = nombre;
+        this.direccion = direccion;
+        this.localidad = localidad;
+        this.telefono = telefono;
+        this.vendedor = vendedor;
     }
 
     public long getIdNegocio() {
@@ -69,6 +81,13 @@ public class NegocioModel {
         this.telefono = telefono;
     }
 
+    public User getVendedor() {
+        return vendedor;
+    }
+
+    public void setVendedor(User vendedor) {
+        this.vendedor = vendedor;
+    }
 
     @Override
     public String toString() {
@@ -81,6 +100,5 @@ public class NegocioModel {
             ", productos='" + getProductos() + "'" +
             "}";
     }
-
 
 }
