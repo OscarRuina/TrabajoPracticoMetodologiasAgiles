@@ -1,21 +1,19 @@
 package com.unla.pedidosya.service;
 
-import java.util.List;
-import java.util.Optional;
-
 import com.unla.pedidosya.converter.ProductoConverter;
 import com.unla.pedidosya.entity.Negocio;
 import com.unla.pedidosya.entity.Producto;
 import com.unla.pedidosya.model.ProductoModel;
 import com.unla.pedidosya.repository.INegocioRepository;
 import com.unla.pedidosya.repository.IProductoRepository;
-
+import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class ProductoServiceImp implements IProductoService{
+public class ProductoServiceImp implements IProductoService {
 
     @Autowired
     private IProductoRepository producto;
@@ -27,25 +25,24 @@ public class ProductoServiceImp implements IProductoService{
     private ProductoConverter converter;
 
     @Transactional(readOnly = true)
-    public List<Producto> getAll(){
+    public List<Producto> getAll() {
         return producto.findAll();
     }
 
     @Transactional(readOnly = true)
-    public Producto getById(long id){
+    public Producto getById(long id) {
         return producto.getById(id);
     }
-    
+
     //metodo para filtrar por localidad los negocios
     @Transactional(readOnly = true)
     public List<Producto> listaProductosPorTipo(String tipo) {
         return producto.findByTipo(tipo);
     }
-    
+
     @Transactional
-    public Producto insertOrUpdate(Producto model){
+    public Producto insertOrUpdate(Producto model) {
         //agregar este producto a un negocio
-        System.out.println(model);
         Negocio n = negocio.findById(model.getNegocio().getIdNegocio()).get();
         n.getProductos().add(model);
         producto.save(model);
@@ -54,12 +51,11 @@ public class ProductoServiceImp implements IProductoService{
     }
 
 
-
     /* los que se agregaron porque se deben implementar por el INegocioService */
     @Override
     @Transactional(readOnly = true)
     public Optional<Producto> findById(long id) {
-        
+
         return this.producto.findById(id);
     }
 
@@ -88,11 +84,11 @@ public class ProductoServiceImp implements IProductoService{
     }
 
     @Transactional(readOnly = true)
-    public ProductoModel encontrar(ProductoModel model){
+    public ProductoModel encontrar(ProductoModel model) {
         Optional<Producto> entity = producto.findById(model.getIdProducto());
         /*Producto entity = producto.getById(model.getIdProducto());*/
         ProductoModel entityToModel = converter.entityToModel(entity.get());
         return entityToModel;
     }
-    
+
 }

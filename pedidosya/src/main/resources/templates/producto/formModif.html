@@ -1,80 +1,91 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <title>Editar Producto</title>
-        <div th:insert="layout/plantilla :: head"></div>
-    </head>
-    
+<head>
+  <title>Editar Producto</title>
+  <div th:insert="layout/plantilla :: head"></div>
+</head>
 
-    <body>
-        <!-- NAVBAR -->
-        <nav th:replace="layout/plantilla :: nav"></nav>
-        <!-- END NAVBAR --> 
 
-        <!-- inicio --> 
-        <div class="container">
-            <div class="abs-center">
-                <div class="py-5 ">
-                    
-                    <h2>Modificar Producto</h2>
-                    <p class="lead">Ingrese los nuevos datos y guarde para continuar</p>
-                
-                    <div class="col-md-7 col-lg-8 ">
-                        <h4 class="mb-3">Producto</h4>
-                        <form th:action="@{/producto/modif}" th:object=${entidad} method="POST">
-                            <div class="row g-3">
-                                <div class="col-sm-6">
-                                    <label for="name" class="form-label">Nombre</label>
-                                    <input type="text" th:field="*{nombre}" class="form-control" id="name" required>
-                                    <div class="invalid-feedback">Valid first name is required.</div>
-                                </div>
-                            </div>
+<body>
+<!-- NAVBAR -->
+<nav th:replace="layout/plantilla :: nav"></nav>
+<!-- END NAVBAR -->
 
-                            <div class="col-2">
-                                <label for="description" class="form-label">Descripcion</label>
-                                <input type="text" th:field="*{descripcion}" class="form-control" id="description" placeholder="descripcion" required>
-                                <div class="invalid-feedback">Please enter your description.</div>
-                            </div>
+<!-- inicio -->
+<div class="container">
+  <div class="abs-center">
+    <div class="py-5 ">
 
-                            <div class="col-2">
-                                <label for="type" class="form-label">Tipo</label>
-                                <input type="text" th:field="*{tipo}" class="form-control" id="type" placeholder="tipo" required>
-                                <div class="invalid-feedback">Please enter your type.</div>
-                            </div>
+      <h2>Modificar Producto</h2>
+      <p class="lead">Ingrese los nuevos datos y guarde para continuar</p>
 
-                            <div class="col-2">
-                                <label for="price" class="form-label">Precio</label>
-                                <input type="number" step="0.1" th:field="*{precio}" class="form-control" id="price" placeholder="precio" required>
-                                <div class="invalid-feedback">Please enter your price.</div>
-                            </div>
-                            
-                            <input  th:field="*{idProducto}" name="" style="display:none;">
-                            <input  th:field="*{Negocio.idNegocio}" name="" style="display:none;">
-                            <input  th:field="*{Negocio.nombre}" name="" style="display:none;">
-                            <input  th:field="*{Negocio.localidad}" name="" style="display:none;">
-                            <input  th:field="*{Negocio.direccion}" name="" style="display:none;">
-                            <input  th:field="*{Negocio.telefono}" name="" style="display:none;">
-
-                            <br>
-                            <button class="w-10 btn btn-primary btn-lg" type="submit">Continuar</button>
-                            <button class="w-10 btn btn-primary btn-lg" type="reset">Reiniciar</button>
-                        </form>
-                    </div>
-                    <br>
-                </div>
+      <div class="col-md-7 col-lg-8 ">
+        <h4 class="mb-3">Producto</h4>
+        <form method="POST" th:action="@{/producto/modif}" th:object=${entidad}>
+          <div class="row g-3">
+            <div class="col-sm-6">
+              <label class="form-label" for="name">Nombre</label>
+              <input class="form-control" id="name" required th:field="*{nombre}" type="text">
+              <div class="invalid-feedback">Valid first name is required.</div>
             </div>
+          </div>
 
-            
+          <div class="col-2">
+            <label class="form-label" for="description">Descripcion</label>
+            <input class="form-control" id="description" placeholder="descripcion" required
+                   th:field="*{descripcion}" type="text">
+            <div class="invalid-feedback">Please enter your description.</div>
+          </div>
 
-            </div>
-        </div>
+          <div class="col-2">
+            <label class="form-label" for="type">Tipo</label>
+            <input class="form-control" id="type" placeholder="tipo" required th:field="*{tipo}"
+                   type="text">
+            <div class="invalid-feedback">Please enter your type.</div>
+          </div>
 
-        <section th:replace="layout/plantilla :: section"></section>
+          <div class="col-2">
+            <label class="form-label" for="price">Precio</label>
+            <input class="form-control" id="price" placeholder="precio" required step="0.1"
+                   th:field="*{precio}" type="number">
+            <div class="invalid-feedback">Please enter your price.</div>
+          </div>
 
-        <!-- Start Footer -->
-        <footer th:replace="layout/plantilla :: footer"></footer>
-        <!-- End Footer -->
+          <input name="" style="display:none;" th:field="*{idProducto}">
+          <input name="" style="display:none;" th:field="*{Negocio.idNegocio}">
+          <input name="" style="display:none;" th:field="*{Negocio.nombre}">
+          <input name="" style="display:none;" th:field="*{Negocio.localidad}">
+          <input name="" style="display:none;" th:field="*{Negocio.direccion}">
+          <input name="" style="display:none;" th:field="*{Negocio.telefono}">
 
-        <div th:insert="layout/plantilla :: scripts"></div>
-    </body>
+          <div class="col-2">
+            <label class="form-label" for="nego">Negocio</label>
+            <select class="form-control" id="nego" required th:field=*{negocio}>
+              <block th:each="neg : ${negocio}">
+                <option th:text="${neg.nombre}" th:value="${neg.idNegocio}"></option>
+                <block>
+            </select>
+          </div>
+
+          <br>
+          <button class="w-10 btn btn-primary btn-lg" type="submit">Continuar</button>
+          <button class="w-10 btn btn-primary btn-lg" type="reset">Reiniciar</button>
+        </form>
+      </div>
+      <br>
+    </div>
+  </div>
+
+
+</div>
+</div>
+
+<section th:replace="layout/plantilla :: section"></section>
+
+<!-- Start Footer -->
+<footer th:replace="layout/plantilla :: footer"></footer>
+<!-- End Footer -->
+
+<div th:insert="layout/plantilla :: scripts"></div>
+</body>
 </html>

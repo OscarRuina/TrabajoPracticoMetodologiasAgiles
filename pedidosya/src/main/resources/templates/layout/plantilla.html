@@ -1,240 +1,289 @@
 <!DOCTYPE html>
 <html lang="es"
-xmlns:th="http://www.thymeleaf.org"
-    xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+      xmlns:th="http://www.thymeleaf.org"
+          xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head th:fragment="head">
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- link de bootstrap 5-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-    <!-- FONT AWESOME -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
-    <!-- GOOGLE FONTS -->
-    <link href="https://fonts.googleapis.com/css?family=Spicy+Rice" rel="stylesheet">
-    <!-- ANIMATE.CSS -->
-    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
-    <! -- CUSTOM CSS -->
-    <!--<link rel="stylesheet" href="assets/css/estilos.css"> -->
-    <link rel="stylesheet" type="text/css" href="../../static/css/estilos.css" th:href="@{/css/login.css}">
-    <!-- add icon link -->
-    <link rel = "icon" th:href ="@{/images/hamburger-solid.svg}" type = "image/x-icon">
-       
+  <meta charset="UTF-8">
+  <meta content="IE=edge" http-equiv="X-UA-Compatible">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <!-- link de bootstrap 5-->
+  <link crossorigin="anonymous"
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We"
+        rel="stylesheet">
+  <!-- FONT AWESOME -->
+  <link crossorigin="anonymous" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+        integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns"
+        rel="stylesheet">
+  <!-- GOOGLE FONTS -->
+  <link href="https://fonts.googleapis.com/css?family=Spicy+Rice" rel="stylesheet">
+  <!-- ANIMATE.CSS -->
+  <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+  <! -- CUSTOM CSS -->
+  <!--<link rel="stylesheet" href="assets/css/estilos.css"> -->
+  <link href="../../static/css/estilos.css" rel="stylesheet" th:href="@{/css/login.css}"
+        type="text/css">
+  <!-- add icon link -->
+  <link rel="icon" th:href="@{/images/hamburger-solid.svg}" type="image/x-icon">
+
 
 </head>
 <body>
-    <!-- NAVBAR -->
-    <nav th:fragment="nav" class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container p-2">
-          <a class="navbar-brand" href="/"><i class="fas fa-hamburger"></i> PedidoAhora</a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item" th:if="${#authorization.expression('hasRole(''ROLE_VENDEDOR'')')}"  type="hidden">
-                        <a class="nav-link" th:href="@{/irAlFormulario}"><i class="fas fa-building" style="color: black;"></i> Registrar tu Negocio</a>
-                    </li>
-                    <li class="nav-item" th:if="!${#authorization.expression('hasAnyRole(''ROLE_VENDEDOR,ROLE_COMPRADOR,ROLE_REPARTIDOR'')')}"  type="hidden">
-                        <a class="nav-link" th:href="@{/signup}"><i class="fas fa-angle-double-right"></i> Eres Nuevo? Ingresa!!</a>
-                    </li>
-                    <li class="nav-item" th:if="${#authorization.expression('hasAnyRole(''ROLE_VENDEDOR,ROLE_COMPRADOR,ROLE_REPARTIDOR'')')}"  type="hidden">
-                        <!-- Carrito-->
-                        <a class="nav-link" th:href="@{/irAlCarrito}"><i class="fas fa-shopping-cart"></i> Carrito</a>
-                    </li>
-    
-                    <!--Login-->
-                    <li class="nav-item" th:if="!${#authorization.expression('hasAnyRole(''ROLE_VENDEDOR,ROLE_COMPRADOR,ROLE_REPARTIDOR'')')}"  type="hidden">
-                        <a class="nav-link" th:href="@{/login}"><i class="fas fa-home"></i> Login</a>
-                    </li>
-                    
-                    <!--Menu desplegable de usuario-->
-                    <li class="nav-item" th:if="${#authorization.expression('hasAnyRole(''ROLE_VENDEDOR,ROLE_COMPRADOR,ROLE_REPARTIDOR'')')}"  type="hidden">
-                        <div class="dropdown">
-                            <!-- nombre de usuario logueado-->
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                [[${#httpServletRequest.remoteUser}]]
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" th:fragment="nav">
+  <div class="container p-2">
+    <a class="navbar-brand" href="/"><i class="fas fa-hamburger"></i> PedidoAhora</a>
+    <button aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"
+            class="navbar-toggler"
+            data-target="#navbarNav" data-toggle="collapse" type="button">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item" th:if="${#authorization.expression('hasRole(''ROLE_VENDEDOR'')')}"
+            type="hidden">
+          <a class="nav-link" th:href="@{/negocios}"><i class="fas fa-building"></i> Mis
+            Negocios</a>
+        </li>
+        <li class="nav-item" th:if="${#authorization.expression('hasRole(''ROLE_VENDEDOR'')')}"
+            type="hidden">
+          <a class="nav-link" th:href="@{/irAlFormulario}"><i class="fas fa-building"
+                                                              style="color: black;"></i> Registrar
+            tu Negocio</a>
+        </li>
+        <li class="nav-item"
+            th:if="!${#authorization.expression('hasAnyRole(''ROLE_VENDEDOR,ROLE_COMPRADOR,ROLE_REPARTIDOR'')')}"
+            type="hidden">
+          <a class="nav-link" th:href="@{/signup}"><i class="fas fa-angle-double-right"></i> Eres
+            Nuevo? Ingresa!!</a>
+        </li>
+        <li class="nav-item"
+            th:if="${#authorization.expression('hasRole(''ROLE_COMPRADOR'')')}"
+            type="hidden">
+          <!-- Carrito-->
+          <a class="nav-link" th:href="@{/irAlCarrito}"><i class="fas fa-shopping-cart"></i> Carrito</a>
+        </li>
 
-                                <!--Cerrar sesion-->
-                                <div class="dropdown-item">
-                                    <form th:action="@{/logout}" method="post">
-                                        <input type="submit" value="Cerrar Sesion"/>
-                                    </form>
-                                </div>
-                                <!--
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <a class="dropdown-item" href="#">Something else here</a>
-                                -->
-                            </div>
-                          </div>
-                    </li>
-                </ul>
+        <!--Login-->
+        <li class="nav-item"
+            th:if="!${#authorization.expression('hasAnyRole(''ROLE_VENDEDOR,ROLE_COMPRADOR,ROLE_REPARTIDOR'')')}"
+            type="hidden">
+          <a class="nav-link" th:href="@{/login}"><i class="fas fa-home"></i> Login</a>
+        </li>
+
+        <!--Menu desplegable de usuario-->
+        <li class="nav-item"
+            th:if="${#authorization.expression('hasAnyRole(''ROLE_VENDEDOR,ROLE_COMPRADOR,ROLE_REPARTIDOR'')')}"
+            type="hidden">
+          <div class="dropdown">
+            <!-- nombre de usuario logueado-->
+            <button aria-expanded="false" aria-haspopup="true"
+                    class="btn btn-secondary dropdown-toggle"
+                    data-toggle="dropdown" id="dropdownMenuButton" type="button">
+              [[${#httpServletRequest.remoteUser}]]
+            </button>
+            <div aria-labelledby="dropdownMenuButton" class="dropdown-menu">
+
+              <!--Cerrar sesion-->
+              <div class="dropdown-item">
+                <form method="post" th:action="@{/logout}">
+                  <input type="submit" value="Cerrar Sesion"/>
+                </form>
+              </div>
+              <!--
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">Something else here</a>
+              -->
+            </div>
           </div>
-        </div>
-    </nav>
-    <!-- END NAVBAR -->
-
-    <section th:fragment="section">
-        <div class="container-fuild" id="about">
-            <div class="row bg-dark text-white p-5 text-center">
-                <div class="col-sm-6">
-                <!-- <i class="fab fa-youtube fa-10x"></i> -->	
-                </div> 
-                <div class="col-sm-6">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor reprehenderit hic culpa optio debitis repellat aspernatur ea veniam. Quidem dignissimos, explicabo maiores maxime iusto perspiciatis aspernatur cum, non vel? Corporis.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Start Footer -->
-    <footer th:fragment="footer" class="bg-primary pt-4">
-        <div class="container">
-            <div class="row py-4">
-
-                <div class="col-lg-3 col-12 align-left">
-                    <a class="navbar-brand" href="index.html">
-                        <i class='bx bx-buildings bx-sm text-light'></i>
-                        <span class="text-light h5">Pedido-</span><span class="text-light h5 semi-bold-600">Ahora</span>
-                    </a>
-                    <p class="text-light my-lg-4 my-2">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                        sed do eiusmod tempor incididunt ut.
-                    </p>
-                    <ul class="list-inline footer-icons light-300">
-                        <li class="list-inline-item m-0">
-                            <a class="text-light" target="_blank" href="http://facebook.com/">
-                                <i class='bx bxl-facebook-square bx-md'></i>
-                            </a>
-                        </li>
-                        <li class="list-inline-item m-0">
-                            <a class="text-light" target="_blank" href="https://www.linkedin.com/">
-                                <i class='bx bxl-linkedin-square bx-md'></i>
-                            </a>
-                        </li>
-                        <li class="list-inline-item m-0">
-                            <a class="text-light" target="_blank" href="https://www.whatsapp.com/">
-                                <i class='bx bxl-whatsapp-square bx-md'></i>
-                            </a>
-                        </li>
-                        <li class="list-inline-item m-0">
-                            <a class="text-light" target="_blank" href="https://www.flickr.com/">
-                                <i class='bx bxl-flickr-square bx-md'></i>
-                            </a>
-                        </li>
-                        <li class="list-inline-item m-0">
-                            <a class="text-light" target="_blank" href="https://www.medium.com/">
-                                <i class='bx bxl-medium-square bx-md' ></i>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="col-lg-3 col-md-4 my-sm-0 mt-4">
-                    <h3 class="h4 pb-lg-3 text-light light-300">Nuestro Estudio</h2>
-                        <ul class="list-unstyled text-light light-300">
-                            <li class="pb-2">
-                                <!--<i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light" 
-                                 href="index.html" >Home</a> -->
-                                 <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light" 
-                                 href="" >Home</a>
-                            </li>
-                            <li class="pb-2">
-                                <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light py-1" 
-                                href="">Nosotros</a>
-                            </li>
-                            <li class="pb-2">
-                                <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light py-1" 
-                                href="">Trabajos</a>
-                            </li>
-                            <li class="pb-2">
-                                <i class='bx-fw bx bxs-chevron-right bx-xs'></i></i><a class="text-decoration-none text-light py-1" 
-                                href="">Precios</a>
-                            </li>
-                            <li class="pb-2">
-                                <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light py-1" 
-                                href="">Contáctanos</a>
-                            </li>
-                        </ul>
-                </div>
-
-                <div class="col-lg-3 col-md-4 my-sm-0 mt-4">
-                    <h2 class="h4 pb-lg-3 text-light light-300">Trabajos</h2>
-                    <ul class="list-unstyled text-light light-300">
-                        <li class="pb-2">
-                            <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light py-1" 
-                            href="#">Marcas</a>
-                        </li>
-                        <li class="pb-2">
-                            <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light py-1" 
-                            href="#">Negocios</a>
-                        </li>
-                        <li class="pb-2">
-                            <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light py-1" 
-                            href="#">Marketing</a>
-                        </li>
-                        <li class="pb-2">
-                            <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light py-1" 
-                            href="#">Redes Sociales</a>
-                        </li>
-                        <li class="pb-2">
-                            <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light py-1" 
-                            href="#">Soluciones Digitales</a>
-                        </li>
-                        <li class="pb-2">
-                            <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light py-1" 
-                            href="#">Gráfica</a>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="col-lg-3 col-md-4 my-sm-0 mt-4">
-                    <h2 class="h4 pb-lg-3 text-light light-300">Atendemos en:</h2>
-                    <ul class="list-unstyled text-light light-300">
-                        <li class="pb-2">
-                            <i class='bx-fw bx bx-phone bx-xs'></i><a class="text-decoration-none text-light py-1" 
-                            href="tel:010-020-0340">021-2354-4568</a>
-                        </li>
-                        <li class="pb-2">
-                            <i class='bx-fw bx bx-mail-send bx-xs'></i><a class="text-decoration-none text-light py-1"
-                            href="mailto:info@company.com">info@company.com</a>
-                        </li>
-                    </ul>
-                </div>
-
-            </div>
-        </div>
-
-        <div class="w-100 bg-primary py-3">
-            <div class="container">
-                <div class="row pt-2">
-                    <div class="col-lg-6 col-sm-12">
-                        <p class="text-lg-start text-center text-light light-300">
-                            © Copyright 2021 Pedido-Ahora. Todos los derechos reservados.
-                        </p>
-                    </div>
-                    <div class="col-lg-6 col-sm-12">
-                        <p class="text-lg-end text-center text-light light-300">
-                            Diseñado por <a rel="sponsored" class="text-decoration-none text-light" 
-                            href="http://localhost:8080/" target="_blank"><strong>UnlaGrupoH</strong></a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </footer>
-    <!-- End Footer -->
-
-    <div th:fragment="scripts">
-        <!-- JAVASCRIPT CDNS -->
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+        </li>
+      </ul>
     </div>
-    
+  </div>
+</nav>
+<!-- END NAVBAR -->
+
+<section th:fragment="section">
+  <div class="container-fuild" id="about">
+    <div class="row bg-dark text-white p-5 text-center">
+      <div class="col-sm-6">
+        <!-- <i class="fab fa-youtube fa-10x"></i> -->
+      </div>
+      <div class="col-sm-6">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor reprehenderit hic culpa
+          optio debitis repellat aspernatur ea veniam. Quidem dignissimos, explicabo maiores maxime
+          iusto perspiciatis aspernatur cum, non vel? Corporis.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Start Footer -->
+<footer class="bg-primary pt-4" th:fragment="footer">
+  <div class="container">
+    <div class="row py-4">
+
+      <div class="col-lg-3 col-12 align-left">
+        <a class="navbar-brand" href="index.html">
+          <i class='bx bx-buildings bx-sm text-light'></i>
+          <span class="text-light h5">Pedido-</span><span
+            class="text-light h5 semi-bold-600">Ahora</span>
+        </a>
+        <p class="text-light my-lg-4 my-2">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+          sed do eiusmod tempor incididunt ut.
+        </p>
+        <ul class="list-inline footer-icons light-300">
+          <li class="list-inline-item m-0">
+            <a class="text-light" href="http://facebook.com/" target="_blank">
+              <i class='bx bxl-facebook-square bx-md'></i>
+            </a>
+          </li>
+          <li class="list-inline-item m-0">
+            <a class="text-light" href="https://www.linkedin.com/" target="_blank">
+              <i class='bx bxl-linkedin-square bx-md'></i>
+            </a>
+          </li>
+          <li class="list-inline-item m-0">
+            <a class="text-light" href="https://www.whatsapp.com/" target="_blank">
+              <i class='bx bxl-whatsapp-square bx-md'></i>
+            </a>
+          </li>
+          <li class="list-inline-item m-0">
+            <a class="text-light" href="https://www.flickr.com/" target="_blank">
+              <i class='bx bxl-flickr-square bx-md'></i>
+            </a>
+          </li>
+          <li class="list-inline-item m-0">
+            <a class="text-light" href="https://www.medium.com/" target="_blank">
+              <i class='bx bxl-medium-square bx-md'></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-lg-3 col-md-4 my-sm-0 mt-4">
+        <h3 class="h4 pb-lg-3 text-light light-300">Nuestro Estudio</h2>
+          <ul class="list-unstyled text-light light-300">
+            <li class="pb-2">
+              <!--<i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light"
+               href="index.html" >Home</a> -->
+              <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a
+                class="text-decoration-none text-light"
+                href="">Home</a>
+            </li>
+            <li class="pb-2">
+              <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a
+                class="text-decoration-none text-light py-1"
+                href="">Nosotros</a>
+            </li>
+            <li class="pb-2">
+              <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a
+                class="text-decoration-none text-light py-1"
+                href="">Trabajos</a>
+            </li>
+            <li class="pb-2">
+              <i class='bx-fw bx bxs-chevron-right bx-xs'></i></i><a
+                class="text-decoration-none text-light py-1"
+                href="">Precios</a>
+            </li>
+            <li class="pb-2">
+              <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a
+                class="text-decoration-none text-light py-1"
+                href="">Contáctanos</a>
+            </li>
+          </ul>
+      </div>
+
+      <div class="col-lg-3 col-md-4 my-sm-0 mt-4">
+        <h2 class="h4 pb-lg-3 text-light light-300">Trabajos</h2>
+        <ul class="list-unstyled text-light light-300">
+          <li class="pb-2">
+            <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a
+              class="text-decoration-none text-light py-1"
+              href="#">Marcas</a>
+          </li>
+          <li class="pb-2">
+            <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a
+              class="text-decoration-none text-light py-1"
+              href="#">Negocios</a>
+          </li>
+          <li class="pb-2">
+            <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a
+              class="text-decoration-none text-light py-1"
+              href="#">Marketing</a>
+          </li>
+          <li class="pb-2">
+            <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a
+              class="text-decoration-none text-light py-1"
+              href="#">Redes Sociales</a>
+          </li>
+          <li class="pb-2">
+            <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a
+              class="text-decoration-none text-light py-1"
+              href="#">Soluciones Digitales</a>
+          </li>
+          <li class="pb-2">
+            <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a
+              class="text-decoration-none text-light py-1"
+              href="#">Gráfica</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-lg-3 col-md-4 my-sm-0 mt-4">
+        <h2 class="h4 pb-lg-3 text-light light-300">Atendemos en:</h2>
+        <ul class="list-unstyled text-light light-300">
+          <li class="pb-2">
+            <i class='bx-fw bx bx-phone bx-xs'></i><a class="text-decoration-none text-light py-1"
+                                                      href="tel:010-020-0340">021-2354-4568</a>
+          </li>
+          <li class="pb-2">
+            <i class='bx-fw bx bx-mail-send bx-xs'></i><a
+              class="text-decoration-none text-light py-1"
+              href="mailto:info@company.com">info@company.com</a>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="w-100 bg-primary py-3">
+    <div class="container">
+      <div class="row pt-2">
+        <div class="col-lg-6 col-sm-12">
+          <p class="text-lg-start text-center text-light light-300">
+            © Copyright 2021 Pedido-Ahora. Todos los derechos reservados.
+          </p>
+        </div>
+        <div class="col-lg-6 col-sm-12">
+          <p class="text-lg-end text-center text-light light-300">
+            Diseñado por <a class="text-decoration-none text-light" href="http://localhost:8080/"
+                            rel="sponsored"
+                            target="_blank"><strong>UnlaGrupoH</strong></a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</footer>
+<!-- End Footer -->
+
+<div th:fragment="scripts">
+  <!-- JAVASCRIPT CDNS -->
+  <script crossorigin="anonymous"
+          integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+          src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script crossorigin="anonymous"
+          integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+          src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+  <script crossorigin="anonymous"
+          integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+          src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</div>
+
 </body>
 </html>

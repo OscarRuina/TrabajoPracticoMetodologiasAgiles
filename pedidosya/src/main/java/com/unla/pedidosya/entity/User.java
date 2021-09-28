@@ -2,7 +2,6 @@ package com.unla.pedidosya.entity;
 
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -20,37 +20,37 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "user")
 public class User {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
     private long idUser;
 
-    @Column(name = "nombre",length = 100,nullable = false)
+    @Column(name = "nombre", length = 100, nullable = false)
     @NotBlank
     private String nombre;
 
-    @Column(name = "apellido",length = 100,nullable = false)
+    @Column(name = "apellido", length = 100, nullable = false)
     @NotBlank
     private String apellido;
 
-    @Column(name = "direccion",length = 100,nullable = false)
+    @Column(name = "direccion", length = 100, nullable = false)
     @NotBlank
     private String direccion;
 
-    @Column(name = "ciudad",length = 100,nullable = false)
+    @Column(name = "ciudad", length = 100, nullable = false)
     @NotBlank
     private String ciudad;
 
-    @Column(name = "telefono",nullable = false)
+    @Column(name = "telefono", nullable = false)
     @NotNull
     private int telefono;
 
-    @Column(name = "username",length = 100,nullable = false)
+    @Column(name = "username", length = 100, nullable = false)
     @NotBlank
     private String username;
 
-    @Column(name = "password",length = 128,nullable = false)
+    @Column(name = "password", length = 128, nullable = false)
     @NotBlank
     @NotNull
     private String password;
@@ -60,15 +60,30 @@ public class User {
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(
-        name = "user_roles",
-        joinColumns = @JoinColumn(name = "user_id"),
-        inverseJoinColumns = @JoinColumn(name = "role_id")
+            name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
     )
     private Set<Roles> roles = new HashSet<>();
 
-    public User(){}
+    //lista de negocios asociados, solo para vendedor
+    @OneToMany(
+            fetch = FetchType.LAZY,
+            mappedBy = "vendedor",
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE,
+                    CascadeType.DETACH,
+                    CascadeType.REFRESH
+            }
+    )
+    private Set<Negocio> negocios;
 
-    public User(@NotBlank String nombre, @NotBlank String apellido, @NotBlank String direccion, @NotBlank String ciudad,@NotNull int telefono,
+    public User() {
+    }
+
+    public User(@NotBlank String nombre, @NotBlank String apellido, @NotBlank String direccion,
+            @NotBlank String ciudad, @NotNull int telefono,
             @NotBlank String username, @NotBlank @NotNull String password) {
         this.nombre = nombre;
         this.apellido = apellido;
@@ -87,7 +102,7 @@ public class User {
     public void setIdUser(long idUser) {
         this.idUser = idUser;
     }
-    
+
     public String getNombre() {
         return nombre;
     }
@@ -160,9 +175,18 @@ public class User {
         this.telefono = telefono;
     }
 
+    public Set<Negocio> getNegocios() {
+        return negocios;
+    }
+
+    public void setNegocios(Set<Negocio> negocios) {
+        this.negocios = negocios;
+    }
+
     @Override
     public String toString() {
-        return "User [apellido=" + apellido + ", ciudad=" + ciudad + ", direccion=" + direccion + ", nombre=" + nombre
+        return "User [apellido=" + apellido + ", ciudad=" + ciudad + ", direccion=" + direccion
+                + ", nombre=" + nombre
                 + ", telefono=" + telefono + "]";
     }
 
