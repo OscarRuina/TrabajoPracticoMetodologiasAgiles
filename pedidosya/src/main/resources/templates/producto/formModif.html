@@ -13,74 +13,128 @@
 
 <!-- inicio -->
 <div class="container">
-  <div class="abs-center">
-    <div class="py-5 ">
-
-      <h2>Modificar Producto</h2>
-      <p class="lead">Ingrese los nuevos datos y guarde para continuar</p>
-
-      <div class="col-md-7 col-lg-8 ">
-        <h4 class="mb-3">Producto</h4>
-        <form method="POST" th:action="@{/producto/modif}" th:object=${entidad}>
-          <div class="row g-3">
-            <div class="col-sm-6">
-              <label class="form-label" for="name">Nombre</label>
-              <input class="form-control" id="name" required th:field="*{nombre}" type="text">
-              <div class="invalid-feedback">Valid first name is required.</div>
-            </div>
-          </div>
-
-          <div class="col-2">
-            <label class="form-label" for="description">Descripcion</label>
-            <input class="form-control" id="description" placeholder="descripcion" required
-                   th:field="*{descripcion}" type="text">
-            <div class="invalid-feedback">Please enter your description.</div>
-          </div>
-
-          <div class="col-2">
-            <label class="form-label" for="type">Tipo</label>
-            <input class="form-control" id="type" placeholder="tipo" required th:field="*{tipo}"
-                   type="text">
-            <div class="invalid-feedback">Please enter your type.</div>
-          </div>
-
-          <div class="col-2">
-            <label class="form-label" for="price">Precio</label>
-            <input class="form-control" id="price" placeholder="precio" required step="0.1"
-                   th:field="*{precio}" type="number">
-            <div class="invalid-feedback">Please enter your price.</div>
-          </div>
-
-          <input name="" style="display:none;" th:field="*{idProducto}">
-          <input name="" style="display:none;" th:field="*{Negocio.idNegocio}">
-          <input name="" style="display:none;" th:field="*{Negocio.nombre}">
-          <input name="" style="display:none;" th:field="*{Negocio.localidad}">
-          <input name="" style="display:none;" th:field="*{Negocio.direccion}">
-          <input name="" style="display:none;" th:field="*{Negocio.telefono}">
-
-          <div class="col-2">
-            <label class="form-label" for="nego">Negocio</label>
-            <select class="form-control" id="nego" required th:field=*{negocio}>
-              <block th:each="neg : ${negocio}">
-                <option th:text="${neg.nombre}" th:value="${neg.idNegocio}"></option>
-                <block>
-            </select>
-          </div>
-
-          <br>
-          <button class="w-10 btn btn-primary btn-lg" type="submit">Continuar</button>
-          <button class="w-10 btn btn-primary btn-lg" type="reset">Reiniciar</button>
-        </form>
-      </div>
-      <br>
+  <br><br>
+  <div class="row">
+    <div class="d-grid gap-2 mx-auto col-10">
+        <h1>Modificar Producto</h1>
+    <p class="lead">Ingrese los nuevos datos y guarde para continuar</p>
     </div>
   </div>
 
+  <!--Formulario-->
+  <div class="row">
+    <form method="POST" th:action="@{/producto/modif}" th:object=${entidad}>
+      
+      <div class="form-group">
+        <div class="d-grid gap-2 mx-auto col-10">
+            <!--aca va el label-->
+            <div class="col-2">
+              <label class="form-label" for="name">Nombre</label>
+            </div>
+            <!-- Aca va el input-->
+            <div class="col-12">
+              <input class="form-control" id="name" required th:field="*{nombre}" type="text">
+              <div class="invalid-feedback">Valid first name is required.</div>
+            </div>
+        </div>
+      </div>
+      <br>
 
-</div>
-</div>
+      <div class="form-group">
+        <div class="d-grid gap-2 mx-auto col-10">
+            <!--aca va el label-->
+            <div class="col-2">
+              <label class="form-label" for="description">Descripcion</label>
+            </div>
+            <!-- Aca va el input-->
+            <div class="col-12">
+              <input class="form-control" id="description" placeholder="descripcion" required
+               th:field="*{descripcion}" type="text">
+              <div class="invalid-feedback">Please enter your description.</div>
+            </div>
+        </div>
+      </div>
+      <br>
 
-<section th:replace="layout/plantilla :: section"></section>
+      <div class="form-group">
+        <div class="d-grid gap-2 mx-auto col-10">
+            <!--aca va el label-->
+            <div class="col-2">
+              <label class="form-label" for="type">Tipo</label>
+            </div>
+            <!-- Aca va el input-->
+            <div class="col-12">
+              <input class="form-control" id="type" placeholder="tipo" required th:field="*{tipo}"
+               type="text">
+              <div class="invalid-feedback">Please enter your type.</div>
+            </div>
+        </div>
+      </div>
+      <br>
+
+      <div class="form-group">
+        <div class="d-grid gap-2 mx-auto col-10">
+            <!--aca va el label-->
+            <div class="col-2">
+              <label class="form-label" for="price">Precio</label>
+            </div>
+            <!-- Aca va el input-->
+            <div class="col-12">
+              <input class="form-control" id="price" placeholder="precio" required step="0.1"
+               th:field="*{precio}" type="number">
+              <div class="invalid-feedback">Please enter your price.</div>
+            </div>
+        </div>
+      </div>
+      <br>
+
+      <input name="" style="display:none;" th:field="*{idProducto}">
+      <input name="" style="display:none;" th:field="*{Negocio.idNegocio}">
+      <input name="" style="display:none;" th:field="*{Negocio.nombre}">
+      <input name="" style="display:none;" th:field="*{Negocio.localidad}">
+      <input name="" style="display:none;" th:field="*{Negocio.direccion}">
+      <input name="" style="display:none;" th:field="*{Negocio.telefono}">
+
+      <!--
+      <div class="col-2">
+        <label class="form-label" for="nego">Negocio</label>
+        <select class="form-control" id="nego" required th:field=*{negocio}>
+          <block th:each="neg : ${negocio}">
+            <option th:text="${neg.nombre}" th:value="${neg.idNegocio}"></option>
+            <block>
+        </select>
+      </div>
+      <br>
+      -->
+
+      <!-- en realidad deberian quedar juntas
+      <br>
+      <div class="d-grid gap-2 mx-auto col-10">
+        <button class="w-10 btn btn-primary btn-lg" type="submit">Continuar</button>
+        <button class="w-10 btn btn-primary btn-lg" type="reset">Reiniciar</button>
+      </div>
+
+      Esto no lo probe aun
+      <div class="row">
+        <div class="d-grid gap-2 mx-auto col-2">
+          <button class="w-10 btn btn-primary btn-lg" type="submit">Continuar</button>
+        </div>
+        <div class="d-grid gap-2 mx-auto col-2">
+          <button class="w-10 btn btn-primary btn-lg" type="reset">Reiniciar</button>
+        </div>
+      </div>
+      
+      -->
+      
+      
+      <button class="w-10 btn btn-primary btn-lg" type="submit">Continuar</button>
+      <button class="w-10 btn btn-primary btn-lg" type="reset">Reiniciar</button>
+      
+
+    </form>
+  </div>
+  <br><br>
+</div>
 
 <!-- Start Footer -->
 <footer th:replace="layout/plantilla :: footer"></footer>

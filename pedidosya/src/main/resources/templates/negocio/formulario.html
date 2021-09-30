@@ -28,7 +28,7 @@
                             <label for="firstName" class="form-label">Nombre</label>
                         </div>
                         <div class="col-12">
-                            <input type="text" th:field="*{nombre}" class="form-control" id="firstName" placeholder="" value="" required>
+                            <input type="text" th:field="*{nombre}" class="form-control" id="firstName" placeholder="Nombre de su negocio" value="" required>
                             <div class="invalid-feedback">Valid first name is required.</div>
                         </div>
                     </div>
@@ -41,7 +41,7 @@
                             <label for="address" class="form-label">Direccion</label>
                         </div>
                         <div class="col-12">
-                            <input type="text" th:field="*{direccion}" class="form-control" id="address" placeholder="address" required>
+                            <input type="text" th:field="*{direccion}" class="form-control" id="address" placeholder="Ej. Calle 123" required>
                             <div class="invalid-feedback">Please enter your address.</div>
                         </div>
                     </div>
@@ -54,7 +54,7 @@
                             <label for="address" class="form-label">Ciudad</label>
                         </div>
                         <div class="col-12">
-                            <input type="text" th:field="*{localidad}" class="form-control" id="address" placeholder="city" required>
+                            <input type="text" th:field="*{localidad}" class="form-control" id="address" placeholder="Ciudad donde se encuentra su negocio" required>
                             <div class="invalid-feedback">Please enter your city.</div>
                         </div>
                     </div>
@@ -66,8 +66,9 @@
                             <label for="telephone" class="form-label">Telefono</label>
                         </div>
                         <div class="col-12">
-                            <input type="text" th:field="*{telefono}" class="form-control" id="address" placeholder="telefono" required>
+                            <input type="text" th:field="*{telefono}" class="form-control" id="address" placeholder="telefono" aria-describedby="phoneHelp" required>
                             <div class="invalid-feedback">Please enter your Phone.</div>
+                            <div id="phoneHelp" class="form-text">Numero de telefono por ej. 1133558899</div>
                         </div>
                     </div>
                 </div>
