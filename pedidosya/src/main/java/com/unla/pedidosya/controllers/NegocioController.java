@@ -45,7 +45,7 @@ public class NegocioController {
 
     @RequestMapping("/altaNegocio")
     public String altaNegocio(@ModelAttribute("negocio") Negocio model,
-            HttpServletRequest request) {
+            HttpServletRequest request, Model m) {
         Negocio save = model;
         String username = request.getRemoteUser();
         User u = repo.findByUsername(username);
@@ -53,7 +53,10 @@ public class NegocioController {
         save.setVendedor(u);
         negocio.insertOrUpdate(save);
         repo.save(u);
-        return ViewRouteHelper.ALTANEGOCIO;
+        m.addAttribute("estado", "EXITO");
+        m.addAttribute("mensaje", "Negocio agregado correctamente");
+        return negocios(request, m);
+        /*return ViewRouteHelper.ALTANEGOCIO;*/
     }
 
     @GetMapping("/informacion/{idNegocio}")

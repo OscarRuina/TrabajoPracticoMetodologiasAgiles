@@ -1,5 +1,6 @@
 package com.unla.pedidosya.controllers;
 
+import com.unla.pedidosya.converter.NegocioConverter;
 import com.unla.pedidosya.converter.ProductoConverter;
 import com.unla.pedidosya.entity.Producto;
 import com.unla.pedidosya.helpers.ViewRouteHelper;
@@ -33,6 +34,8 @@ public class ProductoController {
     private IUserRepository repo;
     @Autowired
     private NegocioController negocioController;
+    @Autowired
+    private NegocioConverter negocioConverter;
 
     @GetMapping("productosPorTipo")
     public String productosPorTipo(String tipo, Model model) {
@@ -61,9 +64,12 @@ public class ProductoController {
     }
 
     @PostMapping("/producto/save")
-    public String altaProducto(@ModelAttribute("producto") Producto model) {
-        producto.insertOrUpdate(model);
-        return ViewRouteHelper.ALTAPRODUCTO;
+    public String altaProducto(@ModelAttribute("producto") Producto m, Model model) {
+        producto.insertOrUpdate(m);
+        model.addAttribute("estado", "EXITO");
+        model.addAttribute("mensaje", "Producto agregado correctamente");
+        return negocioController.misProductos(negocioConverter.entityToModel(m.getNegocio()), model);
+        /*return ViewRouteHelper.ALTAPRODUCTO;*/
     }
 
     @PostMapping("/producto/modif")

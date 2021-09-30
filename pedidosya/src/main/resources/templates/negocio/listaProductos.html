@@ -96,13 +96,14 @@
       <strong>Productos</strong>
     </h2>
   </div>
-  <div class="d-grid gap-2 col-6 mx-auto"
-       th:if="${#authorization.expression('hasRole(''ROLE_VENDEDOR'')')}"
-       type="hidden">
-    <button class="btn btn-dark" type="button"><a th:href="@{/producto/new}">Agregar Producto</a>
-    </button>
+
+  <!-- Boton Atras -->
+  <div class="d-grid gap-2 col-6 mx-auto" 
+  th:if="${#authorization.expression('hasRole(''ROLE_VENDEDOR'')')}" type="hidden">
+    <a class="btn btn-dark" th:href="@{/producto/new}" role="button">Agregar Producto</a>
     <br>
   </div>
+
   <div class="">
     <!-- th:if si la lista esta vacia no se muestra -->
     <div th:if="${productos !=null and !productos.empty}">
@@ -136,8 +137,15 @@
       <br><br><br>
     </div>
 
+    <!-- Boton malo
     <div class="d-grid gap-2 col-6 mx-auto">
       <button class="btn btn-dark" type="button"><a href="/">atras</a></button>
+      <br>
+    </div>-->
+
+    <!-- Boton Atras -->
+    <div class="d-grid gap-2 col-6 mx-auto">
+      <a class="btn btn-dark" href="/" role="button">atras</a>
       <br>
     </div>
 
