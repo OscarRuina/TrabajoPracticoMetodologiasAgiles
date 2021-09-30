@@ -63,6 +63,8 @@ public class NegocioController {
         //paso la lista
         Negocio neg = negocio.getById(n.getIdNegocio());
         model.addAttribute("productos", neg.getProductos());
+        
+        System.out.println("Estado "+ model.getAttribute("estado"));
         return ViewRouteHelper.INFO;
     }
 

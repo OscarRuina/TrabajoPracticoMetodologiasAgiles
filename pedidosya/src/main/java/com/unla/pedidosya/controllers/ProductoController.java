@@ -7,6 +7,9 @@ import com.unla.pedidosya.model.ProductoModel;
 import com.unla.pedidosya.repository.IUserRepository;
 import com.unla.pedidosya.service.NegocioServiceImp;
 import com.unla.pedidosya.service.ProductoServiceImp;
+
+import java.util.Optional;
+
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,6 +31,8 @@ public class ProductoController {
     private ProductoConverter converter;
     @Autowired
     private IUserRepository repo;
+    @Autowired
+    private NegocioController negocioController;
 
     @GetMapping("productosPorTipo")
     public String productosPorTipo(String tipo, Model model) {
@@ -40,7 +45,7 @@ public class ProductoController {
     }
 
     @GetMapping("productosALL")
-    public String porductosALL(Model model) {
+    public String productosALL(Model model) {
 
         model.addAttribute("listaTipo", producto.getAll());
 
@@ -62,12 +67,26 @@ public class ProductoController {
     }
 
     @PostMapping("/producto/modif")
-    public String modifProducto(@ModelAttribute("producto") Producto model) {
+    public String modifProducto(@ModelAttribute("producto") Producto model, Model m){
         model.setIdProducto(prodAModif.getIdProducto());
         model.getNegocio().setIdNegocio(prodAModif.getNegocio().getIdNegocio());
         Producto save = model;
         producto.insertOrUpdate(save);
-        return ViewRouteHelper.ALTAPRODUCTO;
+        m.addAttribute("estado", "EXITO");
+        m.addAttribute("mensaje", "Producto modificado correctamente");
+        return negocioController.misProductos(prodAModif.getNegocio(), m);
+        /*return productosALL(m);*/
+    }
+
+    /**
+    * Returns the viewName to return for coming back to the sender url
+    *
+    * @param request Instance of {@link HttpServletRequest} or use an injected instance
+    * @return Optional with the view name. Recomended to use an alternativa url with
+    * {@link Optional#orElse(Java.lang.Object)}
+    */
+    protected Optional<String> getPreviousPageByRequest(HttpServletRequest request){
+        return Optional.ofNullable(request.getHeader("Referer")).map(requestUrl -> "redirect:" + requestUrl);
     }
 
     @GetMapping("/editarProducto/{idProducto}")
@@ -75,7 +94,7 @@ public class ProductoController {
         ProductoModel p = converter.entityToModel(producto.findById(idProducto).get());
         prodAModif = p;
         model.addAttribute("entidad", p);
-        model.addAttribute("producto", new ProductoModel());
+        /*model.addAttribute("producto", new ProductoModel());*/
         model.addAttribute("negocio", p.getNegocio());
         return ViewRouteHelper.EDITARPRODUCTO;
     }
