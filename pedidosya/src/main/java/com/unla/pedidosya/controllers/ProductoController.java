@@ -45,7 +45,7 @@ public class ProductoController {
     }
 
     @GetMapping("productosALL")
-    public String porductosALL(Model model) {
+    public String productosALL(Model model) {
         
         model.addAttribute("listaTipo", producto.getAll());
         
@@ -66,7 +66,7 @@ public class ProductoController {
         producto.insertOrUpdate(save);
         return ViewRouteHelper.ALTAPRODUCTO;
     }
-
+/* ESTE ES EL QUE ANDA
     @PostMapping("/producto/modif")
     public String modifProducto(@ModelAttribute("producto") Producto model){
         model.setIdProducto(prodAModif.getIdProducto());
@@ -74,14 +74,25 @@ public class ProductoController {
         Producto save = model;
         producto.insertOrUpdate(save);
         return ViewRouteHelper.ALTAPRODUCTO;
+    }*/
+
+    @PostMapping("/producto/modif")
+    public String modifProducto(@ModelAttribute("producto") Producto model, Model m){
+        model.setIdProducto(prodAModif.getIdProducto());
+        model.getNegocio().setIdNegocio(prodAModif.getNegocio().getIdNegocio());
+        Producto save = model;
+        producto.insertOrUpdate(save);
+        m.addAttribute("estado", "EXITO");
+        m.addAttribute("mensaje", "Producto modificado correctamente");
+        return productosALL(m);
     }
+
 
     @GetMapping("/editarProducto/{idProducto}")
     public String editarProducto(@PathVariable(name = "idProducto") long idProducto, Model model){
         ProductoModel p = converter.entityToModel(producto.findById(idProducto).get());
         prodAModif = p;
         model.addAttribute("entidad", p);
-        model.addAttribute("producto", new ProductoModel());
         
         return ViewRouteHelper.EDITARPRODUCTO; 
     }
