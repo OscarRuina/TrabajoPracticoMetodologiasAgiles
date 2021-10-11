@@ -26,7 +26,9 @@
           <th>Descripcion</th>
           <th>Tipo</th>
           <th>Precio</th>
-          <th>Agregar al Carrito</th>
+          <th th:if="${#authorization.expression('hasRole(''ROLE_COMPRADOR'')')}"
+              type="hidden">Agregar al Carrito
+          </th>
         </tr>
         </thead>
         <tbody>
@@ -35,8 +37,9 @@
           <td th:text="${entidad.descripcion}"></td>
           <td th:text="${entidad.tipo}"></td>
           <td th:text="${entidad.precio}"></td>
-          <td><a th:href="@{/agregarCarrito/} + ${entidad.idProducto}"
-                 th:text="Agregar"></a></td>
+          <td th:if="${#authorization.expression('hasRole(''ROLE_COMPRADOR'')')}"
+              type="hidden"><a th:href="@{/agregarCarrito/} + ${entidad.idProducto}"
+                               th:text="Agregar"></a></td>
         </tr>
         </tbody>
       </table>
