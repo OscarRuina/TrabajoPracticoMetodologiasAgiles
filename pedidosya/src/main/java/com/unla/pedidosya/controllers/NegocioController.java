@@ -66,8 +66,8 @@ public class NegocioController {
         //paso la lista
         Negocio neg = negocio.getById(n.getIdNegocio());
         model.addAttribute("productos", neg.getProductos());
-        
-        System.out.println("Estado "+ model.getAttribute("estado"));
+
+        System.out.println("Estado " + model.getAttribute("estado"));
         return ViewRouteHelper.INFO;
     }
 
@@ -79,6 +79,15 @@ public class NegocioController {
         Negocio neg = negocio.getById(n.getIdNegocio());
         model.addAttribute("productos", neg.getProductos());
         return ViewRouteHelper.MISPRODUCTOS;
+    }
+
+    @GetMapping("/mispedidos/{idNegocio}")
+    public String misPedidos(NegocioModel n, Model model) {
+        n = negocio.encontrar(n);
+        model.addAttribute("negocio", n);
+        Negocio neg = negocio.getById(n.getIdNegocio());
+        model.addAttribute("pedidos", neg.getPedidos());
+        return ViewRouteHelper.MISPEDIDOS;
     }
 
     @GetMapping("/negocios")

@@ -53,6 +53,18 @@ public class Negocio {
     @JoinColumn(name = "user_id")
     private User vendedor;
 
+    @OneToMany(
+            fetch = FetchType.LAZY,
+            mappedBy = "negocio",
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE,
+                    CascadeType.DETACH,
+                    CascadeType.REFRESH
+            }
+    )
+    private List<Pedido> pedidos;
+
     public Negocio() {
     }
 
@@ -126,6 +138,14 @@ public class Negocio {
 
     public void setVendedor(User vendedor) {
         this.vendedor = vendedor;
+    }
+
+    public List<Pedido> getPedidos() {
+        return pedidos;
+    }
+
+    public void setPedidos(List<Pedido> pedidos) {
+        this.pedidos = pedidos;
     }
 
     @Override
