@@ -32,20 +32,12 @@ public class Pedido {
     @Column(name = "telefono", nullable = false)
     private int telefono;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH,
-            CascadeType.REFRESH})
-    @JoinColumn(
-            name = "idNegocio",
-            nullable = false
-    )
+    @ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
+    @JoinColumn(name = "idNegocio", nullable = false)
     private Negocio negocio;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "pedido_productos",
-            joinColumns = @JoinColumn(name = "idPedido"),
-            inverseJoinColumns = @JoinColumn(name = "idProducto")
-    )
+    @JoinTable(name = "pedido_productos", joinColumns = @JoinColumn(name = "idPedido"), inverseJoinColumns = @JoinColumn(name = "idProducto"))
     private List<Producto> productos;
 
     @Column(name = "total", nullable = false)
@@ -57,8 +49,7 @@ public class Pedido {
     public Pedido() {
     }
 
-    public Pedido(String nombre, String direccion, int telefono,
-            Negocio negocio, float precioTotal) {
+    public Pedido(String nombre, String direccion, int telefono, Negocio negocio, float precioTotal) {
         this.nombre = nombre;
         this.direccion = direccion;
         this.telefono = telefono;
@@ -133,12 +124,7 @@ public class Pedido {
 
     @Override
     public String toString() {
-        return "Pedido{" +
-                "idPedido=" + idPedido +
-                ", nombre='" + nombre + '\'' +
-                ", direccion='" + direccion + '\'' +
-                ", telefono=" + telefono +
-                ", precioTotal=" + precioTotal +
-                '}';
+        return "Pedido{" + "idPedido=" + idPedido + ", nombre='" + nombre + '\'' + ", direccion='" + direccion + '\''
+                + ", telefono=" + telefono + ", precioTotal=" + precioTotal + '}';
     }
 }
