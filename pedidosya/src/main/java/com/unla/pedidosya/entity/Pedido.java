@@ -38,9 +38,11 @@ public class Pedido {
     @JoinColumn(name = "idNegocio", nullable = false)
     private Negocio negocio;
 
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "pedido", cascade = { CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.DETACH, CascadeType.REFRESH })
     private Set<ItemPedido> itemsPedidos; /* ver si conviene usar un set en vez de list */
+
 
     @Column(name = "total", nullable = false)
     private float precioTotal;
@@ -130,6 +132,7 @@ public class Pedido {
                 + getDireccion() + "'" + ", telefono='" + getTelefono() + "'" + ", negocio='" + getNegocio() + "'"
                 + ", itemsPedidos='" + getItemsPedidos() + "'" + ", precioTotal='" + getPrecioTotal() + "'"
                 + ", listo='" + isListo() + "'" + "}";
+
     }
 
 }
