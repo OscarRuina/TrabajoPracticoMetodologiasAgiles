@@ -26,5 +26,6 @@ public class ViewRouteHelper {
 
     //carrito
     public final static String CARRITO = "carrito/vistaCarrito";
+    public final static String COMPRA = "carrito/compra";
 
 }

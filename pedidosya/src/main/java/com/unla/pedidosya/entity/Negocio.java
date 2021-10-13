@@ -34,35 +34,21 @@ public class Negocio {
     @Column(name = "telefono", nullable = false)
     private int telefono;
 
-    @OneToMany(
-            fetch = FetchType.LAZY,
-            mappedBy = "negocio",
-            cascade = {
-                    CascadeType.PERSIST,
-                    CascadeType.MERGE,
-                    CascadeType.DETACH,
-                    CascadeType.REFRESH
-            }
-    )
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "negocio", cascade = { CascadeType.PERSIST, CascadeType.MERGE,
+            CascadeType.DETACH, CascadeType.REFRESH })
     private List<Producto> productos; /* ver si conviene usar un set en vez de list */
 
     @ManyToOne(
-            cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH,
-                    CascadeType.REFRESH}
+    /*
+     * cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH,
+     * CascadeType.REFRESH}
+     */
     )
     @JoinColumn(name = "user_id")
     private User vendedor;
 
-    @OneToMany(
-            fetch = FetchType.LAZY,
-            mappedBy = "negocio",
-            cascade = {
-                    CascadeType.PERSIST,
-                    CascadeType.MERGE,
-                    CascadeType.DETACH,
-                    CascadeType.REFRESH
-            }
-    )
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "negocio", cascade = { CascadeType.PERSIST, CascadeType.MERGE,
+            CascadeType.DETACH, CascadeType.REFRESH })
     private List<Pedido> pedidos;
 
     public Negocio() {
@@ -75,8 +61,7 @@ public class Negocio {
         this.telefono = telefono;
     }
 
-    public Negocio(String nombre, String direccion, String localidad, int telefono,
-            User vendedor) {
+    public Negocio(String nombre, String direccion, String localidad, int telefono, User vendedor) {
         this.nombre = nombre;
         this.direccion = direccion;
         this.localidad = localidad;
@@ -150,11 +135,9 @@ public class Negocio {
 
     @Override
     public String toString() {
-        return "Negocio{" +
-                "nombre='" + nombre + '\'' +
-                ", direccion='" + direccion + '\'' +
-                ", localidad='" + localidad + '\'' +
-                ", telefono=" + telefono +
-                '}';
+        return "{" + " idNegocio='" + getIdNegocio() + "'" + ", nombre='" + getNombre() + "'" + ", direccion='"
+                + getDireccion() + "'" + ", localidad='" + getLocalidad() + "'" + ", telefono='" + getTelefono() + "'"
+                + ", vendedor='" + getVendedor() + "'" + "}";
     }
+
 }
