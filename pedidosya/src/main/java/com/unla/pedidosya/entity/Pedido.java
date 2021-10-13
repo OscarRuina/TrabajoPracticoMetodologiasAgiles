@@ -1,6 +1,9 @@
 package com.unla.pedidosya.entity;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,9 +12,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -32,22 +34,13 @@ public class Pedido {
     @Column(name = "telefono", nullable = false)
     private int telefono;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH,
-            CascadeType.REFRESH})
-    @JoinColumn(
-            name = "idNegocio",
-            nullable = false
-    )
+    @ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
+    @JoinColumn(name = "idNegocio", nullable = false)
     private Negocio negocio;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH,
-            CascadeType.REFRESH}, fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "pedido_productos",
-            joinColumns = @JoinColumn(name = "idPedido"),
-            inverseJoinColumns = @JoinColumn(name = "idProducto")
-    )
-    private List<Producto> productos;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pedido", cascade = { CascadeType.PERSIST, CascadeType.MERGE,
+            CascadeType.DETACH, CascadeType.REFRESH })
+    private Set<ItemPedido> itemsPedidos; /* ver si conviene usar un set en vez de list */
 
     @Column(name = "total", nullable = false)
     private float precioTotal;
@@ -58,8 +51,7 @@ public class Pedido {
     public Pedido() {
     }
 
-    public Pedido(String nombre, String direccion, int telefono,
-            Negocio negocio, float precioTotal) {
+    public Pedido(String nombre, String direccion, int telefono, Negocio negocio, float precioTotal) {
         this.nombre = nombre;
         this.direccion = direccion;
         this.telefono = telefono;
@@ -108,12 +100,12 @@ public class Pedido {
         this.negocio = negocio;
     }
 
-    public List<Producto> getProductos() {
-        return productos;
+    public Set<ItemPedido> getItemsPedidos() {
+        return this.itemsPedidos;
     }
 
-    public void setProductos(List<Producto> productos) {
-        this.productos = productos;
+    public void setItemsPedidos(Set<ItemPedido> itemsPedidos) {
+        this.itemsPedidos = itemsPedidos;
     }
 
     public float getPrecioTotal() {
@@ -134,12 +126,10 @@ public class Pedido {
 
     @Override
     public String toString() {
-        return "Pedido{" +
-                "idPedido=" + idPedido +
-                ", nombre='" + nombre + '\'' +
-                ", direccion='" + direccion + '\'' +
-                ", telefono=" + telefono +
-                ", precioTotal=" + precioTotal +
-                '}';
+        return "{" + " idPedido='" + getIdPedido() + "'" + ", nombre='" + getNombre() + "'" + ", direccion='"
+                + getDireccion() + "'" + ", telefono='" + getTelefono() + "'" + ", negocio='" + getNegocio() + "'"
+                + ", itemsPedidos='" + getItemsPedidos() + "'" + ", precioTotal='" + getPrecioTotal() + "'"
+                + ", listo='" + isListo() + "'" + "}";
     }
+
 }

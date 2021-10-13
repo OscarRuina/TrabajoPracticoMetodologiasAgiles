@@ -14,14 +14,20 @@ public class ProductoConverter {
     @Autowired
     private NegocioConverter converter;
 
-    public ProductoModel entityToModel(Producto p){
+    public ProductoModel entityToModel(Producto p) {
         NegocioModel model = converter.entityToModel(p.getNegocio());
-        return new ProductoModel(p.getIdProducto() ,p.getNombre(), p.getDescripcion(), p.getTipo(), p.getPrecio(), model);
+        return new ProductoModel(p.getIdProducto(), p.getNombre(), p.getDescripcion(), p.getTipo(), p.getPrecio(),
+                model);
     }
 
-    public Producto modelToEntity(ProductoModel p){
+    public Producto modelToEntity(ProductoModel p) {
         Negocio entity = converter.modelToEntity(p.getNegocio());
         return new Producto(p.getNombre(), p.getDescripcion(), p.getTipo(), p.getPrecio(), entity);
     }
-    
+
+    public Producto modelToEntityID(ProductoModel p) {
+        Negocio entity = converter.modelToEntity(p.getNegocio());
+        return new Producto(p.getIdProducto(), p.getNombre(), p.getDescripcion(), p.getTipo(), p.getPrecio(), entity);
+    }
+
 }
