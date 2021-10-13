@@ -71,7 +71,7 @@ public class CarritoController {
         for (ProductoModel pro : carrito.getProductos()) {
             prods.add(converter.modelToEntity(pro));
         }
-        p.setProductos(prods);
+        //p.setProductos(prods); // problema de duplicacion
         //System.out.println(prods.size());
         //set el precio
         p.setPrecioTotal(carrito.getPrecioTotal());
@@ -80,7 +80,6 @@ public class CarritoController {
         Negocio n = negocioRepo.findByDireccion(
                 prods.get(prods.size() - 1).getNegocio().getDireccion());
         p.setNegocio(n);
-        n.getPedidos().add(p);
         //System.out.println(n.getIdNegocio());
         service.save(p);
         return ViewRouteHelper.COMPRA;
