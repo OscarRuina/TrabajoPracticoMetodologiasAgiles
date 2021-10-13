@@ -1,7 +1,6 @@
 package com.unla.pedidosya.controllers;
 
 import com.unla.pedidosya.converter.ProductoConverter;
-import com.unla.pedidosya.entity.ItemPedido;
 import com.unla.pedidosya.entity.Negocio;
 import com.unla.pedidosya.entity.Pedido;
 import com.unla.pedidosya.entity.Producto;
@@ -14,15 +13,9 @@ import com.unla.pedidosya.repository.IProductoRepository;
 import com.unla.pedidosya.repository.IUserRepository;
 import com.unla.pedidosya.service.PedidoServiceImp;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.orm.jpa.EntityManagerFactoryUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -66,42 +59,28 @@ public class CarritoController {
 
     @GetMapping("carritoConfirmado")
     public String carritoConfirmado(HttpServletRequest request) {
-        // recuperar los datos de carrito, los productos y el total
+        //recuperar los datos de carrito, los productos y el total
         String username = request.getRemoteUser();
         User u = userRepo.findByUsername(username);
         Pedido p = new Pedido();
         p.setNombre(u.getNombre() + " " + u.getApellido());
         p.setDireccion(u.getDireccion());
         p.setTelefono(u.getTelefono());
-        // set los productos
-        Set<ItemPedido> items = new HashSet<>();
-        int contador = 0;
+        //set los productos
+        List<Producto> prods = new ArrayList<Producto>();
         for (ProductoModel pro : carrito.getProductos()) {
-            items.add(new ItemPedido(1, converter.modelToEntityID(pro), p));
-            System.out.println("producto : " + contador + "es :" + pro.toString());
-            contador += 1;
+            prods.add(converter.modelToEntity(pro));
         }
-        p.setItemsPedidos(items);
+        //p.setProductos(prods); // problema de duplicacion
+        //System.out.println(prods.size());
+        //set el precio
         p.setPrecioTotal(carrito.getPrecioTotal());
-
-        // System.out.println(prods.size());
-        // set el precio
-
-        // System.out.println(carrito.getPrecioTotal());
-        // set negocio ( de la lista de productos agarrar el primero y setear el id
-        // negocio
-
-        Negocio ng = negocioRepo
-                .getById(carrito.getProductos().get(carrito.getProductos().size() - 1).getNegocio().getIdNegocio());
-        /*
-         * Negocio n = negocioRepo.findByDireccion(prods.get(prods.size() -
-         * 1).getNegocio().getDireccion());
-         */
-        p.setNegocio(ng);
-        ng.getPedidos().add(p);
-
-        System.out.println("pedido : " + p.toString());
-
+        //System.out.println(carrito.getPrecioTotal());
+        //set negocio ( de la lista de productos agarrar el primero y setear el id negocio
+        Negocio n = negocioRepo.findByDireccion(
+                prods.get(prods.size() - 1).getNegocio().getDireccion());
+        p.setNegocio(n);
+        //System.out.println(n.getIdNegocio());
         service.save(p);
         return ViewRouteHelper.COMPRA;
     }
