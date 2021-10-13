@@ -47,8 +47,8 @@ public class Negocio {
     private List<Producto> productos; /* ver si conviene usar un set en vez de list */
 
     @ManyToOne(
-            cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH,
-                    CascadeType.REFRESH}
+            /*cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH,
+                    CascadeType.REFRESH}*/
     )
     @JoinColumn(name = "user_id")
     private User vendedor;
