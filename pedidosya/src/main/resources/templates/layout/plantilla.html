@@ -62,6 +62,12 @@
             th:if="${#authorization.expression('hasRole(''ROLE_COMPRADOR'')')}"
             type="hidden">
           <!-- Carrito-->
+          <a class="nav-link" th:href="@{/irAPedidos}"> Mis Pedidos</a>
+        </li>
+        <li class="nav-item"
+            th:if="${#authorization.expression('hasRole(''ROLE_COMPRADOR'')')}"
+            type="hidden">
+          <!-- Carrito-->
           <a class="nav-link" th:href="@{/irAlCarrito}"><i class="fas fa-shopping-cart"></i> Carrito</a>
         </li>
 
