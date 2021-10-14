@@ -4,7 +4,6 @@ import com.unla.pedidosya.converter.ProductoConverter;
 import com.unla.pedidosya.entity.ItemPedido;
 import com.unla.pedidosya.entity.Negocio;
 import com.unla.pedidosya.entity.Pedido;
-import com.unla.pedidosya.entity.Producto;
 import com.unla.pedidosya.entity.User;
 import com.unla.pedidosya.helpers.ViewRouteHelper;
 import com.unla.pedidosya.model.CarritoModel;
@@ -13,16 +12,10 @@ import com.unla.pedidosya.repository.INegocioRepository;
 import com.unla.pedidosya.repository.IProductoRepository;
 import com.unla.pedidosya.repository.IUserRepository;
 import com.unla.pedidosya.service.PedidoServiceImp;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.orm.jpa.EntityManagerFactoryUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -65,12 +58,12 @@ public class CarritoController {
     }
 
     @GetMapping("carritoConfirmado")
-    public String carritoConfirmado(HttpServletRequest request) {
+    public String carritoConfirmado(HttpServletRequest request, Model model) {
         // recuperar los datos de carrito, los productos y el total
         String username = request.getRemoteUser();
         User u = userRepo.findByUsername(username);
         Pedido p = new Pedido();
-        p.setNombre(u.getNombre() + " " + u.getApellido());
+        p.setNombre(u.getUsername());
         p.setDireccion(u.getDireccion());
         p.setTelefono(u.getTelefono());
         // set los productos
@@ -92,7 +85,8 @@ public class CarritoController {
         // negocio
 
         Negocio ng = negocioRepo
-                .getById(carrito.getProductos().get(carrito.getProductos().size() - 1).getNegocio().getIdNegocio());
+                .getById(carrito.getProductos().get(carrito.getProductos().size() - 1).getNegocio()
+                        .getIdNegocio());
         /*
          * Negocio n = negocioRepo.findByDireccion(prods.get(prods.size() -
          * 1).getNegocio().getDireccion());
@@ -103,6 +97,10 @@ public class CarritoController {
         System.out.println("pedido : " + p.toString());
 
         service.save(p);
+        model.addAttribute("pedido", p);
+        model.addAttribute("productos", p.getItemsPedidos());
+        model.addAttribute("total", p.getPrecioTotal());
+        carrito = new CarritoModel();
         return ViewRouteHelper.COMPRA;
     }
 }
