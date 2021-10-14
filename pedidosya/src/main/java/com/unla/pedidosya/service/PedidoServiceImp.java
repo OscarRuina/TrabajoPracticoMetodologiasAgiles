@@ -1,7 +1,6 @@
 package com.unla.pedidosya.service;
 
 import java.util.List;
-
 import com.unla.pedidosya.entity.Negocio;
 import com.unla.pedidosya.entity.Pedido;
 import com.unla.pedidosya.repository.INegocioRepository;
@@ -21,10 +20,10 @@ public class PedidoServiceImp implements IPedidoService {
 
     @Transactional
     public Pedido save(Pedido p) {
-        Negocio n = negRepo.findById(p.getNegocio().getIdNegocio()).get();
-        n.getPedidos().add(p);
+        //Negocio n = negRepo.findById(p.getNegocio().getIdNegocio()).get();
+        //n.getPedidos().add(p);
         repo.save(p);
-        negRepo.save(n);
+        //negRepo.save(n);
         return p;
     }
 
