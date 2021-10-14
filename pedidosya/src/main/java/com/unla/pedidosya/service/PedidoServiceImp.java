@@ -1,5 +1,7 @@
 package com.unla.pedidosya.service;
 
+import java.util.List;
+import com.unla.pedidosya.entity.Negocio;
 import com.unla.pedidosya.entity.Pedido;
 import com.unla.pedidosya.repository.INegocioRepository;
 import com.unla.pedidosya.repository.IPedidoRepository;
@@ -25,5 +27,10 @@ public class PedidoServiceImp implements IPedidoService {
         return p;
     }
 
+    // metodo para filtrar por pedidos por usuario
+    @Transactional(readOnly = true)
+    public List<Pedido> listaPedidosPorUsuario(String nombreCompleto) {
+        return repo.findByUser(nombreCompleto);
+    }
 
 }

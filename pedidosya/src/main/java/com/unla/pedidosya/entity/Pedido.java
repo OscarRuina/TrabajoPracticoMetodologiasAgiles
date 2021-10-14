@@ -38,11 +38,9 @@ public class Pedido {
     @JoinColumn(name = "idNegocio", nullable = false)
     private Negocio negocio;
 
-
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "pedido", cascade = { CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.DETACH, CascadeType.REFRESH })
-    private Set<ItemPedido> itemsPedidos; /* ver si conviene usar un set en vez de list */
-
+    private List<ItemPedido> itemsPedidos; /* ver si conviene usar un set en vez de list */
 
     @Column(name = "total", nullable = false)
     private float precioTotal;
@@ -102,11 +100,11 @@ public class Pedido {
         this.negocio = negocio;
     }
 
-    public Set<ItemPedido> getItemsPedidos() {
+    public List<ItemPedido> getItemsPedidos() {
         return this.itemsPedidos;
     }
 
-    public void setItemsPedidos(Set<ItemPedido> itemsPedidos) {
+    public void setItemsPedidos(List<ItemPedido> itemsPedidos) {
         this.itemsPedidos = itemsPedidos;
     }
 

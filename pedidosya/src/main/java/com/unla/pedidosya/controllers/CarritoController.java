@@ -67,13 +67,14 @@ public class CarritoController {
         p.setDireccion(u.getDireccion());
         p.setTelefono(u.getTelefono());
         // set los productos
-        Set<ItemPedido> items = new HashSet<>();
+        List<ItemPedido> items = new ArrayList<>();
         int contador = 0;
         for (ProductoModel pro : carrito.getProductos()) {
             items.add(new ItemPedido(1, converter.modelToEntityID(pro), p));
             System.out.println("producto : " + contador + "es :" + pro.toString());
             contador += 1;
         }
+
         p.setItemsPedidos(items);
         p.setPrecioTotal(carrito.getPrecioTotal());
 
@@ -100,6 +101,7 @@ public class CarritoController {
         model.addAttribute("pedido", p);
         model.addAttribute("productos", p.getItemsPedidos());
         model.addAttribute("total", p.getPrecioTotal());
+        /* Vacio el carrito una vez hecho el pedido */
         carrito = new CarritoModel();
         return ViewRouteHelper.COMPRA;
     }

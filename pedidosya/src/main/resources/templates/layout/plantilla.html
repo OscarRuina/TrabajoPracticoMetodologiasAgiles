@@ -22,10 +22,9 @@
   <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
   <! -- CUSTOM CSS -->
   <!--<link rel="stylesheet" href="assets/css/estilos.css"> -->
-  <link href="../../static/css/estilos.css" rel="stylesheet" th:href="@{/css/login.css}"
-        type="text/css">
+  <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}">
   <!-- add icon link -->
-  <link rel="icon" th:href="@{/images/hamburger-solid.svg}" type="image/x-icon">
+  <link rel="icon" th:href="@{/images/hamburger-solid.png}" type="image/x-icon">
 
 
 </head>
@@ -33,7 +32,7 @@
 <!-- NAVBAR -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark" th:fragment="nav">
   <div class="container p-2">
-    <a class="navbar-brand" href="/"><i class="fas fa-hamburger"></i> PedidoAhora</a>
+    <a class="navbar-brand logo-texto" href="/"><img th:src="@{/images/hamburger-solid.png}" alt="imagen logo" class="logo"> Pedido<span><strong>Ahora</strong></span></a>
     <button aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"
             class="navbar-toggler"
             data-target="#navbarNav" data-toggle="collapse" type="button">
@@ -57,6 +56,12 @@
             type="hidden">
           <a class="nav-link" th:href="@{/signup}"><i class="fas fa-angle-double-right"></i> Eres
             Nuevo? Ingresa!!</a>
+        </li>
+        <li class="nav-item"
+            th:if="${#authorization.expression('hasRole(''ROLE_COMPRADOR'')')}"
+            type="hidden">
+          <!-- Carrito-->
+          <a class="nav-link" th:href="@{/irAPedidos}"> Mis Pedidos</a>
         </li>
         <li class="nav-item"
             th:if="${#authorization.expression('hasRole(''ROLE_COMPRADOR'')')}"
