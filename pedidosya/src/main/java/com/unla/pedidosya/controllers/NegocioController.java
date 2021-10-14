@@ -2,10 +2,13 @@ package com.unla.pedidosya.controllers;
 
 import com.unla.pedidosya.entity.Negocio;
 import com.unla.pedidosya.entity.User;
+import com.unla.pedidosya.entity.Pedido;
 import com.unla.pedidosya.helpers.ViewRouteHelper;
 import com.unla.pedidosya.model.NegocioModel;
+import com.unla.pedidosya.repository.IPedidoRepository;
 import com.unla.pedidosya.repository.IUserRepository;
 import com.unla.pedidosya.service.NegocioServiceImp;
+
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +23,9 @@ public class NegocioController {
 
     @Autowired
     private NegocioServiceImp negocio;
+
+    @Autowired
+    private IPedidoRepository pedidoR;
 
     @Autowired
     private IUserRepository repo;
@@ -44,8 +50,7 @@ public class NegocioController {
     }
 
     @RequestMapping("/altaNegocio")
-    public String altaNegocio(@ModelAttribute("negocio") Negocio model,
-            HttpServletRequest request, Model m) {
+    public String altaNegocio(@ModelAttribute("negocio") Negocio model, HttpServletRequest request, Model m) {
         Negocio save = model;
         String username = request.getRemoteUser();
         User u = repo.findByUsername(username);
@@ -56,14 +61,14 @@ public class NegocioController {
         m.addAttribute("estado", "EXITO");
         m.addAttribute("mensaje", "Negocio agregado correctamente");
         return negocios(request, m);
-        /*return ViewRouteHelper.ALTANEGOCIO;*/
+        /* return ViewRouteHelper.ALTANEGOCIO; */
     }
 
     @GetMapping("/informacion/{idNegocio}")
     public String informacion(NegocioModel n, Model model) {
         n = negocio.encontrar(n);
         model.addAttribute("entidad", n);
-        //paso la lista
+        // paso la lista
         Negocio neg = negocio.getById(n.getIdNegocio());
         model.addAttribute("productos", neg.getProductos());
 
@@ -75,7 +80,7 @@ public class NegocioController {
     public String misProductos(NegocioModel n, Model model) {
         n = negocio.encontrar(n);
         model.addAttribute("entidad", n);
-        //paso la lista
+        // paso la lista
         Negocio neg = negocio.getById(n.getIdNegocio());
         model.addAttribute("productos", neg.getProductos());
         return ViewRouteHelper.MISPRODUCTOS;
@@ -86,7 +91,8 @@ public class NegocioController {
         n = negocio.encontrar(n);
         model.addAttribute("negocio", n);
         Negocio neg = negocio.getById(n.getIdNegocio());
-        model.addAttribute("pedidos", neg.getPedidos());
+        List<Pedido> pedidos = pedidoR.findByNegocio(n.getIdNegocio());
+        model.addAttribute("pedidos", pedidos);
         return ViewRouteHelper.MISPEDIDOS;
     }
 

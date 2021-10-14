@@ -66,39 +66,42 @@
       <a class="nav-link" href="#">Historial</a>
     </li>
   </ul>
-
-  <div class="">
+  
+  <div class="row">
     <!-- th:if si la lista esta vacia no se muestra -->
     <div th:if="${pedidos !=null and !pedidos.empty}">
-      <table class="table table-dark table-striped">
-        <thead>
-        <tr>
-          <th>Pedido</th>
-          <th>Direccion</th>
-          <th>Nombre</th>
-          <th>Total</th>
-          <th>Telefono</th>
-          <th>Listo</th>    
-          <th>Pedido</th>     
-          <th>Cantidad</th>           
-        </tr>
-        </thead>
-        <tbody>
-          <tr th:each="pedido : ${pedidos}">
-            <td th:text="${pedido.idPedido}"></td>
-            <td th:text="${pedido.direccion}"></td>
-            <td th:text="${pedido.nombre}"></td>
-            <td th:text="${pedido.precioTotal}"></td>
-            <td th:text="${pedido.telefono}"></td>
-            <td th:text="${pedido.listo}"></td>
-            <th:block th:each="items : ${pedido.getItemsPedidos()}">
-              <td th:text="${items.getCantidad()}"></td>
-              <td th:text="${items.getProducto().getNombre()}"></td>
-            </th:block>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+      <!--Inicio de Card Group-->
+      <div class="row row-cols-1 row-cols-md-2 g-4">
+        <div th:each="pedido : ${pedidos}">
+          <div class="col">
+            <div class="card">
+              <div class="card-header">
+                Pedido Nro.
+              </div>
+              <div class="card-body">
+                <h5 class="card-title" th:text="${pedido.nombre}"></h5>
+                <p class="card-text" th:text="${pedido.direccion}"></p>
+                <p class="card-text" th:text="${pedido.telefono}"></p>
+                <p class="card-text" ></p>
+              </div>
+              <ul class="list-group list-group-flush">
+                <div th:each="items : ${pedido.getItemsPedidos()}">
+                  <li class="list-group-item"><p><span th:text="${items.getCantidad()}"></span> <span  th:text="${items.getProducto().getNombre()}"></span></p></li>
+                </div>
+                <li class="list-group-item"><p>Total: <span th:text="${pedido.precioTotal}"></span></p></li>
+              </ul>
+              <div class="card-body text-center">
+                <div th:if="${pedido.isListo() == false}"></div>
+                <a href="#" class="btn btn-primary">Marcar como listo</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> <!--Fin de card group-->
+
+    </div><!--Fin de if si hay pedidos que mostrar-->
+    
+    
     <div class="text-center" th:if="${pedidos == null or pedidos.empty}">
       No hay pedidos para mostrar
       <br><br><br>
@@ -110,6 +113,7 @@
       <br>
     </div>-->
 
+    <br><br> <br>
     <!-- Boton Atras -->
     <div class="d-grid gap-2 col-6 mx-auto">
       <a class="btn btn-dark" href="/" role="button">atras</a>

@@ -15,4 +15,8 @@ public interface IPedidoRepository extends JpaRepository<Pedido, Long> {
     // completo
     @Query(value = "select * from Pedido p inner join item_pedido ip on p.id_pedido=ip.id_pedido where p.comprador like %:comprador%", nativeQuery = true)
     public List<Pedido> findByUser(@Param("comprador") String comprador);
+
+    // busco todos los pedidos por el idNegocio
+    @Query(value = "select * from Pedido p where p.id_negocio like %:id_negocio%", nativeQuery = true)
+    public List<Pedido> findByNegocio(@Param("id_negocio") Long id_negocio);
 }

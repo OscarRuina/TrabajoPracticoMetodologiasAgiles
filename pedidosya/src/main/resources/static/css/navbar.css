@@ -1,0 +1,27 @@
+@import url("https://fonts.googleapis.com/css2?family=Lobster&display=swap");
+
+.logo-texto span {
+  font-family: "Lobster", cursive;
+  color: orangered;
+}
+
+.logo {
+  width: 25px;
+  height: 25px;
+  vertical-align: text-bottom;
+  fill: orangered;
+  /*color: orangered;*/
+}
+
+.user button {
+  background: white !important;
+  color: gray !important;
+  border: none !important;
+  padding: 0 !important;
+  font: inherit !important;
+  cursor: pointer !important;
+  outline: inherit !important;
+}
+.user .btn:hover {
+  color: white !important;
+}
