@@ -43,6 +43,13 @@ public class ItemPedido {
         this.pedido = pedido;
     }
 
+    public ItemPedido(long idItemPedido, int cantidad, float subtotal, Producto producto) {
+        this.idItemPedido = idItemPedido;
+        this.cantidad = cantidad;
+        this.subtotal = subtotal;
+        this.producto = producto;
+    }
+
     public long getIdItemPedido() {
         return this.idItemPedido;
     }

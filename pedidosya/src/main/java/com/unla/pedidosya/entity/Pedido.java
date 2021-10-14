@@ -60,6 +60,18 @@ public class Pedido {
         this.listo = false;
     }
 
+
+    public Pedido(long idPedido, String nombre, String direccion, int telefono, Negocio negocio, float precioTotal, boolean listo) {
+        this.idPedido = idPedido;
+        this.nombre = nombre;
+        this.direccion = direccion;
+        this.telefono = telefono;
+        this.negocio = negocio;
+        this.precioTotal = precioTotal;
+        this.listo = listo;
+    }
+
+
     public long getIdPedido() {
         return idPedido;
     }

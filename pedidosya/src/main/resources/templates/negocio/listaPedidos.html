@@ -12,7 +12,7 @@
 
 <div class="container">
 
-  <!-- Notificacion de modificacion o agregar correctamente-->
+  <!-- Notificaciones-->
   <div class="row" th:if="${estado !=null and mensaje !=null}">
     <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
       <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
@@ -57,6 +57,7 @@
       <strong>Pedidos recibidos de </strong><strong th:text="${negocio.nombre}"></strong>
     </h2>
   </div>
+  
 
   <ul class="nav nav-tabs align-center">
     <li class="nav-item">
@@ -82,7 +83,6 @@
                 <h5 class="card-title" th:text="${pedido.nombre}"></h5>
                 <p class="card-text" th:text="${pedido.direccion}"></p>
                 <p class="card-text" th:text="${pedido.telefono}"></p>
-                <p class="card-text" ></p>
               </div>
               <ul class="list-group list-group-flush">
                 <div th:each="items : ${pedido.getItemsPedidos()}">
@@ -92,7 +92,7 @@
               </ul>
               <div class="card-body text-center">
                 <div th:if="${pedido.isListo() == false}"></div>
-                <a href="#" class="btn btn-primary">Marcar como listo</a>
+                <a th:href="@{/marcarListo/} + ${pedido.idPedido}" class="btn btn-primary">Marcar como listo</a>
               </div>
             </div>
           </div>

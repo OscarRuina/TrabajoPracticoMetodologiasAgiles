@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class LoginController {
-    
+
     @Autowired
     private IRolesRepository repo;
 
@@ -30,12 +30,12 @@ public class LoginController {
     private UserServiceImp service;
 
     @PostMapping("/login_success")
-    public String loginSuccess(){
+    public String loginSuccess() {
         return ViewRouteHelper.INDEX;
     }
 
     @GetMapping("/signup")
-    public String signup(Model model){
+    public String signup(Model model) {
         List<Roles> roles = repo.findAll();
 
         model.addAttribute("user", new User());
@@ -45,13 +45,12 @@ public class LoginController {
     }
 
     @PostMapping("/signup")
-    public String registrarUsuario(@Valid @ModelAttribute("user") User user,BindingResult result, ModelMap model){
-        if(result.hasErrors()){
+    public String registrarUsuario(@Valid @ModelAttribute("user") User user, BindingResult result, ModelMap model) {
+        if (result.hasErrors()) {
             model.addAttribute("user", user);
-        }
-        else{
+        } else {
             try {
-                //salvar
+                // salvar
                 service.save(user);
             } catch (Exception e) {
                 model.addAttribute("formErrorMessage", e.getMessage());

@@ -82,7 +82,6 @@
                 <h5 class="card-title" th:text="${pedido.nombre}"></h5>
                 <p class="card-text" th:text="${pedido.direccion}"></p>
                 <p class="card-text" th:text="${pedido.telefono}"></p>
-                <p class="card-text" ></p>
               </div>
               <ul class="list-group list-group-flush">
                 <div th:each="items : ${pedido.getItemsPedidos()}">
@@ -92,7 +91,7 @@
               </ul>
               <div class="card-body text-center">
                 <div th:if="${pedido.isListo() == false}"></div>
-                <a href="#" class="btn btn-primary">Marcar como listo</a>
+                
               </div>
             </div>
           </div>
