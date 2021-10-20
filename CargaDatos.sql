@@ -158,9 +158,9 @@ id_negocio
 ) values
 (7,'cono de helado','helado de vainilla','helado', 100.00,7);
 
-insert into `pedido`(id_pedido, direccion, listo, comprador, total, telefono, id_negocio)
-values (1, "calle 123", false, "Alguien", 300.00, "12324486", 1);
-insert into `pedido`(id_pedido, direccion, listo, comprador, total, telefono, id_negocio)
-values (2, "calle 123", false, "Alguien", 300.00, "12324486", 14);
-insert into `pedido`(id_pedido, direccion, listo, comprador, total, telefono, id_negocio)
-values (3, "calle 123", false, "Alguien", 300.00, "12324486", 12);
+insert into `pedido`(id_pedido, direccion, listo, comprador, total, telefono, id_negocio, en_camino, entregado)
+values (1, "calle 123", false, "Alguien", 300.00, "12324486", 1, false, false);
+insert into `pedido`(id_pedido, direccion, listo, comprador, total, telefono, id_negocio, en_camino, entregado)
+values (2, "calle 123", false, "Alguien", 300.00, "12324486", 14, false, false);
+insert into `pedido`(id_pedido, direccion, listo, comprador, total, telefono, id_negocio, en_camino, entregado)
+values (3, "calle 123", false, "Alguien", 300.00, "12324486", 12, false, false);

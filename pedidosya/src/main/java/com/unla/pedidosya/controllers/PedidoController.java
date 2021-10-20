@@ -1,5 +1,6 @@
 package com.unla.pedidosya.controllers;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,9 +23,22 @@ public class PedidoController {
     private PedidoServiceImp serviceP;
     @Autowired
     private IUserRepository userRepo;
+    @Autowired
+    private NegocioController negcontroller;
 
-    @GetMapping("irAPedidos")
-    public String irAPedidos(HttpServletRequest request, Model model) {
+    /*
+     * @GetMapping("irAPedidos") public String irAPedidos(HttpServletRequest
+     * request, Model model) { String username = request.getRemoteUser(); User u =
+     * userRepo.findByUsername(username);
+     * System.out.println(serviceP.listaPedidosPorUsuario(u.getNombre() + " " +
+     * u.getApellido())); List<Pedido> pedidos =
+     * serviceP.listaPedidosPorUsuario(u.getNombre() + " " + u.getApellido());
+     * model.addAttribute("pedidos", pedidos); return
+     * ViewRouteHelper.MISPEDIDOSUSER; }
+     */
+
+    @GetMapping("/irAPedidos/{tipoPedido}")
+    public String irAPedidos(HttpServletRequest request, String s, Model model) {
         String username = request.getRemoteUser();
         User u = userRepo.findByUsername(username);
         System.out.println(serviceP.listaPedidosPorUsuario(u.getNombre() + " " + u.getApellido()));
@@ -40,9 +54,11 @@ public class PedidoController {
         // paso la lista
         Pedido ped = serviceP.getById(n.getIdPedido());
         ped.setListo(true);
+        ped.setFechaListo(LocalDateTime.now());
         serviceP.save(ped);
         model.addAttribute("estado", "EXITO");
         model.addAttribute("mensaje", "Pedido marcado como Listo");
-        return irAPedidos(request, model);
+        return negcontroller.misPedidosRecibidos(n.getNegocio(), model);
+
     }
 }
