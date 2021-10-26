@@ -12,6 +12,8 @@ import com.unla.pedidosya.repository.INegocioRepository;
 import com.unla.pedidosya.repository.IProductoRepository;
 import com.unla.pedidosya.repository.IUserRepository;
 import com.unla.pedidosya.service.PedidoServiceImp;
+
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -86,15 +88,14 @@ public class CarritoController {
         // negocio
 
         Negocio ng = negocioRepo
-                .getById(carrito.getProductos().get(carrito.getProductos().size() - 1).getNegocio()
-                        .getIdNegocio());
+                .getById(carrito.getProductos().get(carrito.getProductos().size() - 1).getNegocio().getIdNegocio());
         /*
          * Negocio n = negocioRepo.findByDireccion(prods.get(prods.size() -
          * 1).getNegocio().getDireccion());
          */
         p.setNegocio(ng);
         ng.getPedidos().add(p);
-
+        p.setFechaInicio(LocalDateTime.now());
         System.out.println("pedido : " + p.toString());
 
         service.save(p);

@@ -61,12 +61,32 @@
 
   <ul class="nav nav-tabs align-center">
     <li class="nav-item">
-      <a class="nav-link active" aria-current="page" href="#">Recibidos</a>
+      <div th:if="${tipoPedido !=null and tipoPedido == 'recibidos'}">
+        <a class="nav-link active" aria-current="page" th:href="@{/mispedidosrecibidos/} + ${negocio.idNegocio}">Recibidos</a>
+      </div>
+      <div th:if="${tipoPedido != 'recibidos'}">
+        <a class="nav-link" aria-current="page" th:href="@{/mispedidosrecibidos/} + ${negocio.idNegocio}">Recibidos</a>
+      </div>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#">Completados</a>
+      <div th:if="${tipoPedido !=null and tipoPedido == 'completados'}">
+        <a class="nav-link active" th:href="@{/mispedidoscompletados/} + ${negocio.idNegocio}">Completados</a>
+      </div>
+      <div th:if="${tipoPedido != 'completados'}">
+        <a class="nav-link" th:href="@{/mispedidoscompletados/} + ${negocio.idNegocio}">Completados</a>
+      </div>
+    </li>
+    <li class="nav-item">
+      <div th:if="${tipoPedido !=null and tipoPedido == 'entregados'}">
+        <a class="nav-link active" th:href="@{/mispedidosentregados/} + ${negocio.idNegocio}">Entregados</a>
+      </div>
+      <div th:if="${tipoPedido != 'entregados'}">
+        <a class="nav-link" th:href="@{/mispedidosentregados/} + ${negocio.idNegocio}">Entregados</a>
+      </div>
     </li>
   </ul>
+
+  <br>
 
   <div class="row">
     <!-- th:if si la lista esta vacia no se muestra -->
@@ -90,9 +110,14 @@
                 </div>
                 <li class="list-group-item"><p>Total: <span th:text="${pedido.precioTotal}"></span></p></li>
               </ul>
-              <div class="card-body text-center">
-                <div th:if="${pedido.isListo() == false}"></div>
+              <div class="card-body text-center" th:if="${tipoPedido !=null and tipoPedido == 'recibidos'}">
                 <a th:href="@{/marcarListo/} + ${pedido.idPedido}" class="btn btn-primary">Marcar como listo</a>
+              </div>
+              <div class="card-body text-center" th:if="${tipoPedido !=null and tipoPedido == 'entegados'}">
+                <p>Pedido Entregado</p>
+              </div>
+              <div class="card-body text-center" th:if="${tipoPedido !=null and tipoPedido == 'completados'}">
+                <p>Pedido listo</p>
               </div>
             </div>
           </div>
@@ -101,8 +126,9 @@
     </div><!--Fin de if si hay pedidos que mostrar-->
     <br><br>
     <div class="text-center" th:if="${pedidos == null or pedidos.empty}">
+      <br><br><br><br><br>
       No hay pedidos para mostrar
-      <br><br><br>
+      <br><br><br><br>
     </div>
 
     <!-- Boton malo

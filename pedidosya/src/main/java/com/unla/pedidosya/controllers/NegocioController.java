@@ -86,13 +86,45 @@ public class NegocioController {
         return ViewRouteHelper.MISPRODUCTOS;
     }
 
-    @GetMapping("/mispedidos/{idNegocio}")
-    public String misPedidos(NegocioModel n, Model model) {
+    /*
+     * @GetMapping("/mispedidosrecibidos/{idNegocio}") public String
+     * misPedidosRecibidos(NegocioModel n, Model model) { n = negocio.encontrar(n);
+     * model.addAttribute("negocio", n); Negocio neg =
+     * negocio.getById(n.getIdNegocio()); List<Pedido> pedidos =
+     * pedidoR.findByNegocio(n.getIdNegocio()); model.addAttribute("pedidos",
+     * pedidos); return ViewRouteHelper.MISPEDIDOS; }
+     */
+
+    @GetMapping("/mispedidosrecibidos/{idNegocio}")
+    public String misPedidosRecibidos(NegocioModel n, Model model) {
         n = negocio.encontrar(n);
         model.addAttribute("negocio", n);
         Negocio neg = negocio.getById(n.getIdNegocio());
-        List<Pedido> pedidos = pedidoR.findByNegocio(n.getIdNegocio());
+        List<Pedido> pedidos = pedidoR.findByNegocioRecibidos(n.getIdNegocio());
         model.addAttribute("pedidos", pedidos);
+        model.addAttribute("tipoPedido", "recibidos");
+        return ViewRouteHelper.MISPEDIDOS;
+    }
+
+    @GetMapping("/mispedidosentregados/{idNegocio}")
+    public String misPedidosEntregados(NegocioModel n, Model model) {
+        n = negocio.encontrar(n);
+        model.addAttribute("negocio", n);
+        Negocio neg = negocio.getById(n.getIdNegocio());
+        List<Pedido> pedidos = pedidoR.findByNegocioEntregados(n.getIdNegocio());
+        model.addAttribute("pedidos", pedidos);
+        model.addAttribute("tipoPedido", "entregados");
+        return ViewRouteHelper.MISPEDIDOS;
+    }
+
+    @GetMapping("/mispedidoscompletados/{idNegocio}")
+    public String misPedidosCompletados(NegocioModel n, Model model) {
+        n = negocio.encontrar(n);
+        model.addAttribute("negocio", n);
+        Negocio neg = negocio.getById(n.getIdNegocio());
+        List<Pedido> pedidos = pedidoR.findByNegocioCompletados(n.getIdNegocio());
+        model.addAttribute("pedidos", pedidos);
+        model.addAttribute("tipoPedido", "completados");
         return ViewRouteHelper.MISPEDIDOS;
     }
 
