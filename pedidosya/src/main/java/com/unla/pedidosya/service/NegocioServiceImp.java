@@ -33,10 +33,10 @@ public class NegocioServiceImp implements INegocioService {
         return negocio.getById(id);
     }
 
-    //metodo para filtrar por localidad los negocios
+    // metodo para filtrar por localidad los negocios
     @Transactional(readOnly = true)
     public List<Negocio> listaNegocioPorZona(String localidad) {
-        /*return negocio.findByLocalidad(localidad);*/
+        /* return negocio.findByLocalidad(localidad); */
         return negocio.findByLocalidad(localidad);
     }
 
@@ -44,6 +44,7 @@ public class NegocioServiceImp implements INegocioService {
     public Negocio insertOrUpdate(Negocio model) {
         negocio.save(model);
         return model;
+
     }
 
     @Transactional(readOnly = true)
@@ -61,14 +62,12 @@ public class NegocioServiceImp implements INegocioService {
         return this.negocio.findById(id);
     }
 
-
     @Override
     @Transactional
     public Negocio save(Negocio negocio) {
 
         return this.negocio.saveAndFlush(negocio);
     }
-
 
     @Override
     @Transactional(readOnly = true)
@@ -77,13 +76,11 @@ public class NegocioServiceImp implements INegocioService {
         return this.negocio.findAll();
     }
 
-
     @Override
     @Transactional
     public void deleteById(long id) {
 
         this.negocio.deleteById(id);
     }
-
 
 }
