@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <title>Editar Producto</title>
+  <div th:insert="layout/plantilla :: head"></div>
+</head>
+
+
+<body>
+<!-- NAVBAR -->
+<nav th:replace="layout/plantilla :: nav"></nav>
+<!-- END NAVBAR -->
+
+<!-- inicio -->
+<div class="container">
+  <br><br>
+  <div class="row">
+    <div class="d-grid gap-2 mx-auto col-10">
+        <h1>Modificar Negocio</h1>
+    <p class="lead">Ingrese los nuevos datos y guarde para continuar</p>
+    </div>
+  </div>
+
+  <!--Formulario-->
+  <div class="row">
+    <form method="POST" th:action="@{/negocio/modif}" th:object=${entidad}>
+      
+      <div class="form-group">
+        <div class="d-grid gap-2 mx-auto col-10">
+            <!--aca va el label-->
+            <div class="col-2">
+              <label class="form-label" for="name">Nombre</label>
+            </div>
+            <!-- Aca va el input-->
+            <div class="col-12">
+              <input class="form-control" id="name" required th:field="*{nombre}" type="text">
+              <div class="invalid-feedback">Valid first name is required.</div>
+            </div>
+        </div>
+      </div>
+      <br>
+
+      <div class="form-group">
+        <div class="d-grid gap-2 mx-auto col-10">
+            <!--aca va el label-->
+            <div class="col-2">
+              <label class="form-label" for="direccion">Direccion</label>
+            </div>
+            <!-- Aca va el input-->
+            <div class="col-12">
+              <input class="form-control" id="direccion" placeholder="descripcion" required
+               th:field="*{direccion}" type="text">
+              <div class="invalid-feedback">Please enter your direccion.</div>
+            </div>
+        </div>
+      </div>
+      <br>
+
+      <div class="form-group">
+        <div class="d-grid gap-2 mx-auto col-10">
+            <!--aca va el label-->
+            <div class="col-2">
+              <label class="form-label" for="localidad">Tipo</label>
+            </div>
+            <!-- Aca va el input-->
+            <div class="col-12">
+              <input class="form-control" id="localidad" placeholder="localidad" required th:field="*{localidad}"
+               type="text">
+              <div class="invalid-feedback">Please enter your type.</div>
+            </div>
+        </div>
+      </div>
+      <br>
+
+      <div class="form-group">
+        <div class="d-grid gap-2 mx-auto col-10">
+            <!--aca va el label-->
+            <div class="col-2">
+              <label class="form-label" for="telefono">Precio</label>
+            </div>
+            <!-- Aca va el input-->
+            <div class="col-12">
+              <input class="form-control" id="telefono" placeholder="telefono" required
+               th:field="*{telefono}" type="number">
+              <div class="invalid-feedback">Please enter your price.</div>
+            </div>
+        </div>
+      </div>
+      <br>
+
+      <input name="" style="display:none;" th:field="*{idNegocio}">
+      <input name="" style="display:none;" th:field="*{vendedor.idUser}">
+      
+
+      <!--
+      <div class="col-2">
+        <label class="form-label" for="nego">Negocio</label>
+        <select class="form-control" id="nego" required th:field=*{negocio}>
+          <block th:each="neg : ${negocio}">
+            <option th:text="${neg.nombre}" th:value="${neg.idNegocio}"></option>
+            <block>
+        </select>
+      </div>
+      <br>
+      -->
+
+      <!-- en realidad deberian quedar juntas
+      <br>
+      <div class="d-grid gap-2 mx-auto col-10">
+        <button class="w-10 btn btn-primary btn-lg" type="submit">Continuar</button>
+        <button class="w-10 btn btn-primary btn-lg" type="reset">Reiniciar</button>
+      </div>
+
+      Esto no lo probe aun
+      <div class="row">
+        <div class="d-grid gap-2 mx-auto col-2">
+          <button class="w-10 btn btn-primary btn-lg" type="submit">Continuar</button>
+        </div>
+        <div class="d-grid gap-2 mx-auto col-2">
+          <button class="w-10 btn btn-primary btn-lg" type="reset">Reiniciar</button>
+        </div>
+      </div>
+      
+      -->
+      
+      
+      <button class="w-10 btn btn-primary btn-lg" type="submit">Continuar</button>
+      <button class="w-10 btn btn-primary btn-lg" type="reset">Reiniciar</button>
+      
+
+    </form>
+  </div>
+  <br><br>
+</div>
+
+<!-- Start Footer -->
+<footer th:replace="layout/plantilla :: footer"></footer>
+<!-- End Footer -->
+
+<div th:insert="layout/plantilla :: scripts"></div>
+</body>
+</html>

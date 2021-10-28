@@ -18,6 +18,7 @@ public class ViewRouteHelper {
     public final static String MISNEGOCIOS = "negocio/inicio";
     public final static String MISPRODUCTOS = "negocio/listaProductos";
     public final static String MISPEDIDOS = "negocio/listaPedidos";
+    public final static String EDITARNEGOCIO = "negocio/formModifN";
 
     // producto
     public final static String LISTATIPOCOMIDA = "producto/listaProductos";

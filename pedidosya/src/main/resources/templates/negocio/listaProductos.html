@@ -115,7 +115,7 @@
           <th>Tipo</th>
           <th>Precio</th>
           <th th:if="${#authorization.expression('hasRole(''ROLE_VENDEDOR'')')}"
-              type="hidden">Modifcar
+              type="hidden">Acciones
           </th>
         </tr>
         </thead>
@@ -126,8 +126,10 @@
           <td th:text="${producto.tipo}"></td>
           <td th:text="${producto.precio}"></td>
           <td th:if="${#authorization.expression('hasRole(''ROLE_VENDEDOR'')')}"
-              type="hidden"><a th:href="@{/editarProducto/} + ${producto.idProducto}"
-                               th:text="Modificar"></a></td>
+              type="hidden">
+              <a th:href="@{/editarProducto/} + ${producto.idProducto}" th:text="Modificar"></a>
+              <a th:href="@{/eliminarProducto/} + ${producto.idProducto}" th:text="Eliminar"></a>   
+          </td>
         </tr>
         </tbody>
       </table>
