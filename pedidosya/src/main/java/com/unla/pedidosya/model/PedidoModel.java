@@ -2,8 +2,6 @@ package com.unla.pedidosya.model;
 
 import java.util.List;
 
-import com.unla.pedidosya.entity.Negocio;
-
 public class PedidoModel {
     private long idPedido;
     private String nombre;

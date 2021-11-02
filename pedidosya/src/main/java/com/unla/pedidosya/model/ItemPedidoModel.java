@@ -1,8 +1,5 @@
 package com.unla.pedidosya.model;
 
-import com.unla.pedidosya.entity.Pedido;
-import com.unla.pedidosya.entity.Producto;
-
 public class ItemPedidoModel {
 
     private long idItemPedido;

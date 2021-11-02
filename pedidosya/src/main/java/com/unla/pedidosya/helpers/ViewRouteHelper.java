@@ -30,4 +30,8 @@ public class ViewRouteHelper {
     public final static String CARRITO = "carrito/vistaCarrito";
     public final static String COMPRA = "carrito/compra";
 
+    // Pedidos Repartidor
+    public final static String LISTAPEDIDOS = "repartidor/pedidos";
+    public final static String BUSQUEDAPEDIDOS = "repartidor/busqueda";
+
 }

@@ -2,9 +2,11 @@ package com.unla.pedidosya.service;
 
 import com.unla.pedidosya.converter.NegocioConverter;
 import com.unla.pedidosya.entity.Negocio;
+import com.unla.pedidosya.entity.Pedido;
 import com.unla.pedidosya.model.NegocioModel;
 import com.unla.pedidosya.repository.INegocioRepository;
-import com.unla.pedidosya.repository.IUserRepository;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +21,6 @@ public class NegocioServiceImp implements INegocioService {
 
     @Autowired
     private NegocioConverter converter;
-
-    @Autowired
-    private IUserRepository repo;
 
     @Transactional(readOnly = true)
     public List<Negocio> getAll() {
@@ -81,6 +80,20 @@ public class NegocioServiceImp implements INegocioService {
     public void deleteById(long id) {
 
         this.negocio.deleteById(id);
+    }
+
+    @Transactional
+    public List<Pedido> findByLocalidad(String localidad){
+        List<Negocio> n = negocio.findByLocalidad(localidad);
+        List<Pedido> pedidos = new ArrayList<Pedido>();
+        for(Negocio neg: n){
+            for(Pedido p : neg.getPedidos()){
+                if(p.isListo()){
+                    pedidos.add(p);
+                }
+            }
+        }
+        return pedidos;
     }
 
 }

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>Lista de Negocios</title>
+    <div th:insert="layout/plantilla :: head"></div>
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav th:replace="layout/plantilla :: nav"></nav>
+    <!-- END NAVBAR -->
+    <br>
+    <div class="container-fluid">
+
+      <div class="row text-center">
+        <h2 class="banner-heading h2 text-secondary display-3 mb-0 pb-5 mx-0 px-0 light-300 typo-space-line">
+          <strong>Negocios</strong>
+        </h2>
+      </div>
+
+      <div class="row">
+        <!-- th:if si la lista esta vacia no se muestra -->
+        <div th:if="${listaLocalidad !=null and !listaLocalidad.empty}">
+          <table class="table table-dark table-striped">
+              <thead>
+                <tr>
+                  <th>Nombre</th>
+                  <th>Direccion</th>
+                  <th>Telefono</th>
+                  
+                </tr>
+              </thead>
+              <tbody>
+                  <tr th:each="entidad : ${listaLocalidad}">
+                      <td th:text="${entidad.nombre}"></td>
+                      <td th:text="${entidad.direccion}"></td>
+                      <td th:text="${entidad.telefono}"></td>
+                  </tr>
+              </tbody>
+            </table>
+        </div>
+        <div class="text-center" th:if="${listaLocalidad == null or listaLocalidad.empty}">
+          No hay Pedidos para mostrar
+          <br><br><br>
+        </div>
+
+        <div class="d-grid gap-2 col-6 mx-auto">
+          <a class="btn btn-dark" role="button" href="/">atras</a>
+          <br>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- <section th:replace="layout/plantilla :: section"></section> -->
+    <!-- Start Footer -->
+    <footer th:replace="layout/plantilla :: footer"></footer>
+    <!-- End Footer -->
+
+    <div th:insert="layout/plantilla :: scripts"></div>
+
+</body>
+</html>
