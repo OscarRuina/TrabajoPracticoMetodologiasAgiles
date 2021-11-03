@@ -53,6 +53,9 @@ public class Pedido {
     @Column(name = "fechaListo", columnDefinition = "TIMESTAMP")
     LocalDateTime fechaListo;
 
+    @Column(name = "repartidor", nullable = false)
+    private long idRepartidor;
+
     @Column(name = "enCamino", columnDefinition = /* "Decimal(10,2) */ "default false")
     private boolean enCamino;
 
@@ -212,6 +215,14 @@ public class Pedido {
 
     public void setFechaEntregado(LocalDateTime fechaEntregado) {
         this.fechaEntregado = fechaEntregado;
+    }
+
+    public long getRepartidor() {
+        return this.idRepartidor;
+    }
+
+    public void setrepartidor(long idRepartidor) {
+        this.idRepartidor = idRepartidor;
     }
 
     @Override

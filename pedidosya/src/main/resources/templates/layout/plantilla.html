@@ -76,6 +76,11 @@
           <a class="nav-link" th:href="@{/irAlCarrito}"><i class="fas fa-shopping-cart"></i> Carrito</a>
         </li>
         <!--Fin Carrito comprador-->
+
+        <li class="nav-item" th:if="${#authorization.expression('hasRole(''ROLE_REPARTIDOR'')')}" type="hidden">
+          <a class="nav-link" th:href="@{/misPedidosEntregadosR}"> Pedidos Entregados</a>
+        </li>
+
         <li class="nav-item" th:if="${#authorization.expression('hasRole(''ROLE_REPARTIDOR'')')}" type="hidden">
           <a class="nav-link" th:href="@{/busquedaRepartidor}"><i class="fas fa-shopping-cart"></i> BuscarPedidos</a>
         </li>

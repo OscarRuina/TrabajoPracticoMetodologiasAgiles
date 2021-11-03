@@ -37,7 +37,7 @@ public class PedidoController {
      * ViewRouteHelper.MISPEDIDOSUSER; }
      */
 
-    @GetMapping("/irAPedidos/{tipoPedido}")
+    @GetMapping("/irAPedidos")
     public String irAPedidos(HttpServletRequest request, String s, Model model) {
         String username = request.getRemoteUser();
         User u = userRepo.findByUsername(username);
@@ -46,6 +46,18 @@ public class PedidoController {
         model.addAttribute("pedidos", pedidos);
         return ViewRouteHelper.MISPEDIDOSUSER;
     }
+
+    /*
+     * @GetMapping("/irAPedidos/{tipoPedido}") public String
+     * irAPedidos(HttpServletRequest request, String s, Model model) { String
+     * username = request.getRemoteUser(); User u =
+     * userRepo.findByUsername(username);
+     * System.out.println(serviceP.listaPedidosPorUsuario(u.getNombre() + " " +
+     * u.getApellido())); List<Pedido> pedidos =
+     * serviceP.listaPedidosPorUsuario(u.getNombre() + " " + u.getApellido());
+     * model.addAttribute("pedidos", pedidos); return
+     * ViewRouteHelper.MISPEDIDOSUSER; }
+     */
 
     @GetMapping("/marcarListo/{idPedido}")
     public String marcarListo(HttpServletRequest request, PedidoModel n, Model model) {
@@ -61,4 +73,42 @@ public class PedidoController {
         return negcontroller.misPedidosRecibidos(n.getNegocio(), model);
 
     }
+
+    @GetMapping("/marcarEnCamino/{idPedido}")
+    public String marcarEnCamino(HttpServletRequest request, PedidoModel n, Model model) {
+        String username = request.getRemoteUser();
+        User u = userRepo.findByUsername(username);
+
+        n = serviceP.encontrar(n);
+        model.addAttribute("entidad", n);
+        // paso la lista
+        Pedido ped = serviceP.getById(n.getIdPedido());
+        ped.setEnCamino(true);
+        ped.setFechaEnCamino(LocalDateTime.now());
+        ped.setrepartidor(u.getIdUser());
+        serviceP.save(ped);
+        model.addAttribute("estado", "EXITO");
+        model.addAttribute("mensaje", "Pedido Seleccionado");
+        model.addAttribute("pedido", ped);
+
+        return ViewRouteHelper.PEDIDOAENTREGAR;
+    }
+
+    @GetMapping("/marcarEntregado/{idPedido}")
+    public String marcarEntregado(HttpServletRequest request, PedidoModel n, Model model) {
+        String username = request.getRemoteUser();
+        User u = userRepo.findByUsername(username);
+
+        n = serviceP.encontrar(n);
+        model.addAttribute("entidad", n);
+        // paso la lista
+        Pedido ped = serviceP.getById(n.getIdPedido());
+        ped.setEntregado(true);
+        ped.setFechaEntregado(LocalDateTime.now());
+        serviceP.save(ped);
+        model.addAttribute("estado", "EXITO");
+        model.addAttribute("mensaje", "Pedido Entregado");
+        return ViewRouteHelper.BUSQUEDAPEDIDOS;
+    }
+
 }

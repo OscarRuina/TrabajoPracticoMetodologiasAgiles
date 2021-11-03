@@ -83,17 +83,24 @@ public class NegocioServiceImp implements INegocioService {
     }
 
     @Transactional
-    public List<Pedido> findByLocalidad(String localidad){
+    public List<Pedido> findByLocalidad(String localidad) {
         List<Negocio> n = negocio.findByLocalidad(localidad);
         List<Pedido> pedidos = new ArrayList<Pedido>();
-        for(Negocio neg: n){
-            for(Pedido p : neg.getPedidos()){
-                if(p.isListo()){
+        for (Negocio neg : n) {
+            for (Pedido p : neg.getPedidos()) {
+                if (p.isListo()) {
                     pedidos.add(p);
                 }
             }
         }
         return pedidos;
     }
+
+    /*
+     * @Transactional public List<Pedido> findByLocalidad(String localidad){
+     * List<Negocio> n = negocio.findByLocalidad(localidad); List<Pedido> pedidos =
+     * new ArrayList<Pedido>(); for(Negocio neg: n){ for(Pedido p :
+     * neg.getPedidos()){ if(p.isListo()){ pedidos.add(p); } } } return pedidos; }
+     */
 
 }

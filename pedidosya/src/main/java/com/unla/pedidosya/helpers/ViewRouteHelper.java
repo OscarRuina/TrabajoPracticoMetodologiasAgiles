@@ -33,5 +33,7 @@ public class ViewRouteHelper {
     // Pedidos Repartidor
     public final static String LISTAPEDIDOS = "repartidor/pedidos";
     public final static String BUSQUEDAPEDIDOS = "repartidor/busqueda";
+    public final static String PEDIDOAENTREGAR = "repartidor/infoPedido";
+    public final static String MISPEDIDOSENTREGADOSR = "repartidor/misPedidosEntregados";
 
 }

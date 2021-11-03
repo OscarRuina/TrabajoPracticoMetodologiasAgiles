@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.unla.pedidosya.converter.PedidoConverter;
+import com.unla.pedidosya.entity.ItemPedido;
 import com.unla.pedidosya.entity.Pedido;
 import com.unla.pedidosya.model.PedidoModel;
 import com.unla.pedidosya.repository.IPedidoRepository;
@@ -64,6 +65,16 @@ public class PedidoServiceImp implements IPedidoService {
         // TODO Auto-generated method stub
         repo.deleteById(id);
 
+    }
+
+    @Transactional(readOnly = true)
+    public List<Pedido> findPedidosByLocalidad(String localidad) {
+        return repo.findPedidosByLocalidad(localidad);
+    }
+
+    @Transactional(readOnly = true)
+    public List<ItemPedido> findItems(long idPedido) {
+        return repo.findItems(idPedido);
     }
 
 }
