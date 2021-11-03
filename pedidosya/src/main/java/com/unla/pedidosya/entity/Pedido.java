@@ -44,28 +44,28 @@ public class Pedido {
     @Column(name = "total", nullable = false)
     private float precioTotal;
 
-    @Column(name = "fechaInicio", columnDefinition = "TIMESTAMP")
+    @Column(name = "fechaInicio")
     LocalDateTime fechaInicio;
 
-    @Column(name = "listo", columnDefinition = /* "DATETIME */ "default false")
+    @Column(name = "listo")
     private boolean listo;
 
-    @Column(name = "fechaListo", columnDefinition = "TIMESTAMP")
+    @Column(name = "fechaListo")
     LocalDateTime fechaListo;
 
     @Column(name = "repartidor", nullable = false)
     private long idRepartidor;
 
-    @Column(name = "enCamino", columnDefinition = /* "Decimal(10,2) */ "default false")
+    @Column(name = "enCamino")
     private boolean enCamino;
 
-    @Column(name = "fechaEnCamino", columnDefinition = "TIMESTAMP")
+    @Column(name = "fechaEnCamino")
     LocalDateTime fechaEnCamino;
 
-    @Column(name = "entregado", columnDefinition = /* "Decimal(10,2) */ "default false")
+    @Column(name = "entregado")
     private boolean entregado;
 
-    @Column(name = "fechaEntregado", columnDefinition = "TIMESTAMP")
+    @Column(name = "fechaEntregado")
     LocalDateTime fechaEntregado;
 
     public Pedido() {
